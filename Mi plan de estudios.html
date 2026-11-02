@@ -221,6 +221,9 @@ h4{font-size:16.5px;font-weight:600}
 .cmap .pr{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
 .cmap .area{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .cmap-filters{display:flex;flex-wrap:wrap;gap:6px}
+.yt-tip{border:1px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.yt-tip .note{color:var(--ink)}
+.yt-kind{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 
 @media (max-width:760px){
   .search{flex:1 1 200px}
@@ -342,6 +345,25 @@ h4{font-size:16.5px;font-weight:600}
         <h3 class="h-sec" id="paid-h">Cursos de pago en español</h3>
         <p class="note"><strong>DevTalles PRO</strong> cuesta 18 USD al mes o 198 USD al año y da acceso a todo el catálogo. Cada curso suelto cuesta 60 USD, así que con la suscripción sale mucho más barato. Lo mejor es pagar meses sueltos cuando vayas a estudiar en serio una etapa. En <strong>Udemy</strong> no compres a precio completo: espera las ofertas, que son frecuentes.</p>
         <div class="certs" id="sw-paid"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="yt-h">
+        <div class="eyebrow">Gratis en YouTube · separados por para qué sirven</div>
+        <h3 class="h-sec" id="yt-h">Canales educativos</h3>
+        <p class="note">No todos los canales enseñan igual. Los que <strong>explican</strong> te dan el porqué; los de <strong>proyectos</strong> te dan práctica; los de <strong>novedades</strong> te mantienen al día. Combina uno de cada tipo y no te quedes solo en los de proyectos.</p>
+        <div class="yt-tip">
+          <h4>Cómo aprender de verdad con canales de proyectos (como JavaScript Mastery)</h4>
+          <p class="note">Sus proyectos se ven increíbles, pero son de "programa conmigo": copias código sin saber por qué se escribió así. Al terminar sientes que aprendiste, pero no podrías hacerlo solo. Para que sí te sirvan:</p>
+          <ol class="tips">
+            <li><b>Antes de cada parte, intenta tú.</b> Mira qué va a construir, pausa y hazlo por tu cuenta. Luego compara con su solución.</li>
+            <li><b>Lee la documentación de cada librería que use.</b> Si mete Zustand, Clerk o Prisma, lee su guía de inicio. Ahí está la explicación que él se salta.</li>
+            <li><b>Escribe en el código por qué existe cada parte.</b> Si no puedes explicar una línea, búscala o pregúntale a Claude.</li>
+            <li><b>Rehazlo cambiado.</b> Otro diseño, otra función, y el backend en Python con FastAPI. Eso convierte un tutorial en un proyecto tuyo para el portafolio.</li>
+            <li><b>Complementa con alguien que explique.</b> midudev o Fernando Herrera para el mismo tema en español; Web Dev Simplified en inglés.</li>
+          </ol>
+        </div>
+        <div class="cmap-filters filters" id="yt-filters" role="group" aria-label="Filtrar canales"></div>
+        <div class="certs" id="sw-yt"></div>
       </section>
 
       <section class="panel" aria-labelledby="sw-books-h">
@@ -888,6 +910,55 @@ $("sw-free").innerHTML = FREE.map(c => `<div class="cert">
   <p>${esc(c.d)}</p>
   <span class="when">${langTag(c.l)}</span>
   <span class="verdict v-etapa">${esc(c.e)}</span></div>`).join("");
+
+const YT_KIND = {exp:"Explica", proy:"Proyectos", nov:"Novedades"};
+const YT = [
+  {n:"midudev", u:"https://www.youtube.com/@midudev", l:"es", k:["exp","proy"], e:"JavaScript, React, Node, IA", d:"Proyectos completos y además explica cada decisión. Hace directos semanales y retos como el Advent JS. Lo mejor en español para web."},
+  {n:"Fernando Herrera", u:"https://www.youtube.com/results?search_query=Fernando+Herrera+DevTalles", l:"es", k:["exp"], e:"Angular, React, Node, Docker", d:"El de DevTalles. Explica paso a paso y con calma, como profesor. Sus videos gratis son una muestra de sus cursos."},
+  {n:"MoureDev", u:"https://www.youtube.com/@mouredev", l:"es", k:["exp"], e:"Python, Git, móvil", d:"Cursos completos y gratis de Python desde cero, Python para backend con FastAPI, Git y GitHub. Ideal para tus etapas 1, 2 y 5."},
+  {n:"CodelyTV", u:"https://www.youtube.com/@CodelyTV", l:"es", k:["exp"], e:"Arquitectura y buenas prácticas", d:"Arquitectura hexagonal, DDD, testing y código limpio, con debates sobre decisiones reales. Es un adelanto de su plataforma de pago."},
+  {n:"Pelado Nerd", u:"https://www.youtube.com/@PeladoNerd", l:"es", k:["exp"], e:"Docker, Kubernetes, DevOps", d:"DevOps en español explicado con humor y demos: Docker, Kubernetes, CI/CD y nube."},
+  {n:"Hola Mundo", u:"https://www.youtube.com/results?search_query=Hola+Mundo+Nicolas+Schurmann", l:"es", k:["exp"], e:"Fundamentos y carrera", d:"Nicolás Schürmann. Explica conceptos (JavaScript, bases de datos, patrones) y habla de cómo es trabajar como desarrollador."},
+  {n:"Fazt Code", u:"https://www.youtube.com/@FaztCode", l:"es", k:["proy"], e:"Proyectos full stack", d:"Muchísimos proyectos en español con Python, Django, Flask, Node y React. Explica más que JavaScript Mastery, aunque va rápido."},
+  {n:"DotCSV", u:"https://www.youtube.com/@DotCSV", l:"es", k:["nov","exp"], e:"Inteligencia artificial", d:"Carlos Santana. Explica cómo funciona la IA y las novedades del sector, en español y con mucho rigor."},
+  {n:"S4vitar", u:"https://www.youtube.com/@s4vitar", l:"es", k:["exp"], e:"Ciberseguridad", d:"Hacking ético en directo, resolviendo máquinas paso a paso. Para la especialidad de seguridad."},
+  {n:"freeCodeCamp en español", u:"https://www.youtube.com/results?search_query=freeCodeCamp+Espa%C3%B1ol", l:"es", k:["exp"], e:"Cursos completos", d:"Cursos largos y gratis de Python, JavaScript, SQL y más, de varias horas cada uno."},
+  {n:"JavaScript Mastery", u:"https://www.youtube.com/@javascriptmastery", l:"en", k:["proy"], e:"React, Next.js, proyectos", d:"Proyectos que se ven profesionales: clones, dashboards, apps con IA. El problema: programa sin explicar el porqué. Úsalo con el método de arriba.", w:"Te gustaba: sigue usándolo, pero no como única fuente."},
+  {n:"Corey Schafer", u:"https://www.youtube.com/@coreyms", l:"en", k:["exp"], e:"Python, Django, Flask", d:"Los tutoriales de Python más claros que hay. Su serie de Django es un clásico. Inglés fácil de seguir."},
+  {n:"ArjanCodes", u:"https://www.youtube.com/@ArjanCodes", l:"en", k:["exp"], e:"Diseño de software en Python", d:"Cómo escribir Python bien diseñado: SOLID, patrones, tipado y refactorización. Justo tu etapa 4."},
+  {n:"Tech With Tim", u:"https://www.youtube.com/@TechWithTim", l:"en", k:["proy","exp"], e:"Proyectos en Python", d:"Proyectos en Python (APIs, bots, IA, automatización) explicados mientras los construye. El JavaScript Mastery de Python, pero explicando."},
+  {n:"Web Dev Simplified", u:"https://www.youtube.com/@WebDevSimplified", l:"en", k:["exp"], e:"JavaScript y React", d:"Kyle explica un concepto por video, claro y corto. El complemento perfecto de JavaScript Mastery."},
+  {n:"Traversy Media", u:"https://www.youtube.com/@TraversyMedia", l:"en", k:["proy","exp"], e:"Web full stack", d:"Cursos intensivos y proyectos de web explicados con calma."},
+  {n:"TechWorld with Nana", u:"https://www.youtube.com/@TechWorldwithNana", l:"en", k:["exp"], e:"DevOps", d:"Docker, Kubernetes, CI/CD y Terraform con diagramas muy claros. La mejor de DevOps en inglés."},
+  {n:"Hussein Nasser", u:"https://www.youtube.com/@hnasr", l:"en", k:["exp"], e:"Backend y bases de datos", d:"Cómo funcionan por dentro los servidores, las bases de datos y los protocolos. Para backend avanzado."},
+  {n:"ByteByteGo", u:"https://www.youtube.com/@ByteByteGo", l:"en", k:["exp"], e:"Diseño de sistemas", d:"Diseño de sistemas en videos cortos y animados."},
+  {n:"CS50", u:"https://www.youtube.com/@cs50", l:"sub", k:["exp"], e:"Fundamentos", d:"Todas las clases de Harvard grabadas. David Malan es de los mejores profesores que hay."},
+  {n:"Andrej Karpathy", u:"https://www.youtube.com/@AndrejKarpathy", l:"en", k:["exp"], e:"IA y LLMs", d:"Construye redes neuronales y un GPT desde cero, línea por línea. Exigente, pero entiendes de verdad."},
+  {n:"3Blue1Brown", u:"https://www.youtube.com/@3blue1brown", l:"sub", k:["exp"], e:"Matemática y redes neuronales", d:"Álgebra lineal, cálculo y redes neuronales con animaciones. Varios videos tienen doblaje al español."},
+  {n:"StatQuest", u:"https://www.youtube.com/@statquest", l:"en", k:["exp"], e:"Estadística y ML", d:"Estadística y machine learning explicados paso a paso, sin saltarse nada."},
+  {n:"Fireship", u:"https://www.youtube.com/@Fireship", l:"en", k:["nov"], e:"Novedades", d:"Tecnologías explicadas en 100 segundos y noticias del sector. Para conocer herramientas, no para aprenderlas a fondo."}
+];
+(function renderYT(){
+  const card = c => `<div class="cert" data-k="${c.k.join(" ")}">
+    <div class="cert-top"><h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4>${langTag(c.l)}</div>
+    <div class="yt-kind">${c.k.map(k => `<span class="verdict ${k === "exp" ? "v-si" : k === "proy" ? "v-op" : "v-etapa"}">${YT_KIND[k]}</span>`).join("")}</div>
+    <p>${esc(c.d)}</p>
+    ${c.w ? `<span class="when">${esc(c.w)}</span>` : ""}
+    <span class="verdict v-etapa">${esc(c.e)}</span></div>`;
+  $("sw-yt").innerHTML = YT.map(card).join("");
+  const f = $("yt-filters");
+  const opts = [["all","Todos"],["es","En español"],["exp","Explican"],["proy","Proyectos"],["nov","Novedades"]];
+  f.innerHTML = opts.map(([k, v], i) => `<button type="button" data-k="${k}" aria-pressed="${i === 0}">${v}</button>`).join("");
+  f.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    f.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    const k = b.dataset.k;
+    $("sw-yt").querySelectorAll(".cert").forEach((el, i) => {
+      el.hidden = !(k === "all" || (k === "es" ? YT[i].l === "es" : YT[i].k.includes(k)));
+    });
+  });
+})();
 
 $("sw-plat").innerHTML = PLAT.map(c => `<div class="cert">
   <div class="cert-top"><h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4><span class="price">${esc(c.p)}</span></div>

@@ -2,7 +2,7 @@
 
 **Mi plan de estudios** es una página web de un solo archivo con cuatro pestañas:
 
-- **Ruta de Software**: las mallas de Cibertec, IDAT y Tecsup en una sola ruta autodidacta con Python, más temas extra que piden en el trabajo (system design, CI/CD, Terraform, observabilidad, portafolio, entrevistas). Incluye plataformas gratuitas y de pago, certificaciones y libros.
+- **Ruta de Software**: las mallas de Cibertec, IDAT y Tecsup en una sola ruta autodidacta con Python, más temas extra que piden en el trabajo (system design, CI/CD, Terraform, observabilidad, portafolio, entrevistas). Incluye plataformas gratuitas y de pago, 24 canales de YouTube, certificaciones y libros.
 - **Especialidades**: nueve rutas para después de la base (DevOps/SRE, Nube, Backend Python, Datos, IA aplicada, Ciberseguridad, QA, Móvil y Producto/liderazgo técnico), cada una con trabajos, requisitos, duración, certificaciones en orden y pasos con recursos. Incluye un mapa de unas 35 certificaciones con precio y veredicto.
 - **Maestría UTP**: Gerencia de TI y Transformación Digital, curso por curso, con conceptos clave y preguntas de repaso.
 - **Publicidad UCSM**: los 10 ciclos de la carrera para repasar.
