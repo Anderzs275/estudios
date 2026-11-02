@@ -1,0 +1,927 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mi plan de estudios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: un solo documento con tres pestañas (ruta de software, maestría, carrera); cada pestaña es una tabla de temas por etapa o ciclo, con su propio color y su propio avance */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#141C26; --muted:#5B6777; --line:#DCE2EA;
+  --acc-sw:#1E5BD8; --acc-sw-soft:#E3ECFD;
+  --acc-ma:#6A3FD1; --acc-ma-soft:#EEE8FC;
+  --acc-pu:#B42A60; --acc-pu-soft:#FBE6EE;
+  --accent:var(--acc-sw); --accent-soft:var(--acc-sw-soft);
+  --covered:#4F6E22; --covered-soft:#EAF2DE;
+  --practice:#8A5A12; --practice-soft:#F8EEDC;
+  --no:#8A3B3B; --no-soft:#F6E5E3;
+  --es:#0F7A63; --en:#6A4FC2;
+  --cib:#1E5BD8; --idat:#B4421F; --tec:#0F7A63;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F141B; --surface:#161E28; --ink:#E7EDF3; --muted:#97A5B4; --line:#26323F;
+  --acc-sw:#7AA5FF; --acc-sw-soft:#1B2C4A;
+  --acc-ma:#B49BFF; --acc-ma-soft:#2A2147;
+  --acc-pu:#FF8DB7; --acc-pu-soft:#3A1A28;
+  --covered:#A9C978; --covered-soft:#1E2A16;
+  --practice:#E4B56A; --practice-soft:#2E2414;
+  --no:#F0A3A0; --no-soft:#331C1C;
+  --es:#5FD1B4; --en:#B7A4FF;
+  --cib:#7AA5FF; --idat:#F2946F; --tec:#5FD1B4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F141B; --surface:#161E28; --ink:#E7EDF3; --muted:#97A5B4; --line:#26323F;
+  --acc-sw:#7AA5FF; --acc-sw-soft:#1B2C4A;
+  --acc-ma:#B49BFF; --acc-ma-soft:#2A2147;
+  --acc-pu:#FF8DB7; --acc-pu-soft:#3A1A28;
+  --covered:#A9C978; --covered-soft:#1E2A16;
+  --practice:#E4B56A; --practice-soft:#2E2414;
+  --no:#F0A3A0; --no-soft:#331C1C;
+  --es:#5FD1B4; --en:#B7A4FF;
+  --cib:#7AA5FF; --idat:#F2946F; --tec:#5FD1B4; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:36px 64px;display:flex;flex-direction:column;gap:20px}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.ptitle{font-size:clamp(24px,3.6vw,34px);font-weight:800;line-height:1.1;letter-spacing:-.01em}
+.h-sec{font-size:22px;font-weight:800}
+h4{font-size:16.5px;font-weight:600}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:68ch;color:var(--muted);margin:0}
+.note{font-size:14px;color:var(--muted);margin:0;max-width:80ch}
+.note strong{color:var(--ink)}
+.top{display:flex;flex-direction:column;gap:12px}
+
+/* Pestañas */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tab{--accent:var(--acc-sw);--accent-soft:var(--acc-sw-soft);display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;text-align:left;font:600 14px/1.3 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+.tab[data-t="maestria"]{--accent:var(--acc-ma);--accent-soft:var(--acc-ma-soft)}
+.tab[data-t="publicidad"]{--accent:var(--acc-pu);--accent-soft:var(--acc-pu-soft)}
+.tab .tlabel{display:flex;align-items:center;gap:7px}
+.tab .tlabel::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tab .tpct{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+.tab:hover{border-color:var(--accent)}
+.tab[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.tab[aria-selected="true"] .tpct{color:var(--accent)}
+
+[data-panel="maestria"]{--accent:var(--acc-ma);--accent-soft:var(--acc-ma-soft)}
+[data-panel="publicidad"]{--accent:var(--acc-pu);--accent-soft:var(--acc-pu-soft)}
+.tabpanel{display:flex;flex-direction:column;gap:36px;padding-top:16px}
+.intro{display:flex;flex-direction:column;gap:12px}
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:4px}
+.stat{display:flex;flex-direction:column}
+.stat b{font-family:var(--f-display);font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;max-width:520px}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+
+/* Ruta de software: mallas, columna vertebral, certificaciones */
+.section{display:flex;flex-direction:column;gap:12px}
+.schools{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.school{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.school .who{display:flex;align-items:center;gap:8px}
+.school dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:4px 0 0;font-size:13.5px}
+.school dt{color:var(--muted)}
+.school dd{margin:0;min-width:0}
+.inst{display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.04em;border-radius:4px;padding:1px 6px;border:1px solid currentColor;white-space:nowrap}
+.inst.c{color:var(--cib)} .inst.i{color:var(--idat)} .inst.t{color:var(--tec)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.spine ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;counter-reset:s}
+.spine li{counter-increment:s;display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
+.spine li::before{content:"Paso " counter(s);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.spine li b{font-weight:600}
+.spine li span{font-size:13px;color:var(--muted)}
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.cert{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cert-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.price{font-family:var(--f-display);font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.v-si{background:var(--covered-soft);color:var(--covered)}
+.v-op{background:var(--practice-soft);color:var(--practice)}
+.v-no{background:var(--no-soft);color:var(--no)}
+.v-etapa{background:var(--accent-soft);color:var(--accent)}
+.cert p{margin:0;font-size:14px;color:var(--muted)}
+.cert .when{font-size:13px;color:var(--ink)}
+.plink{text-decoration:none}
+.plink:hover{text-decoration:underline}
+.budget{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding-top:12px;border-top:1px solid var(--line)}
+.budget b{font-family:var(--f-display);font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* Controles de la ruta */
+.controls{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between;position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--tabbar-h,78px));z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line)}
+.chips,.filters{display:flex;flex-wrap:wrap;gap:6px}
+.chips a{font-family:var(--f-mono);font-size:12px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:var(--surface)}
+.chips a:hover{border-color:var(--accent);color:var(--accent)}
+.filters button{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+/* Etapas, bloques y ciclos */
+.stages{display:flex;flex-direction:column;gap:44px}
+.stage{display:flex;flex-direction:column;gap:12px;scroll-margin-top:calc(var(--tabbar-h,78px) + 90px)}
+.stage-head{display:flex;align-items:baseline;gap:6px 16px}
+.stage-head .num{font-family:var(--f-display);font-weight:800;font-size:44px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.stage-head p{margin:4px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
+.table{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.thead,.row{display:grid;gap:20px;padding:14px 18px}
+.route .thead,.route .row{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) minmax(0,1.5fr)}
+.review .thead,.review .row{grid-template-columns:minmax(0,.9fr) minmax(0,1.7fr) minmax(0,1.2fr)}
+.thead{font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.row{border-top:1px solid var(--line);align-items:start}
+.thead + .row{border-top:0}
+.cell{min-width:0;display:flex;flex-direction:column;gap:8px}
+.cname{display:flex;gap:10px;align-items:flex-start;font-weight:600}
+.cname input{margin-top:4px;width:16px;height:16px;accent-color:var(--accent);flex:none}
+.route .row.done .cname{text-decoration:line-through;color:var(--muted)}
+.review .row.done .cname span{color:var(--covered)}
+.what{color:var(--muted);font-size:14px;margin:0}
+.src{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.src li{display:flex;gap:8px;align-items:baseline}
+.src li span:last-child{min-width:0}
+.status{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-left:26px}
+.st-suplir{background:var(--accent-soft);color:var(--accent)}
+.st-ya{background:var(--covered-soft);color:var(--covered)}
+.st-practica{background:var(--practice-soft);color:var(--practice)}
+.res{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.res li{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font-size:14px}
+.res a{font-weight:500;text-decoration:none}
+.res a:hover{text-decoration:underline}
+.res .what{font-size:13.5px}
+.tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;padding:1px 6px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.tag.es{color:var(--es);border-color:currentColor}
+.tag.en{color:var(--en);border-color:currentColor}
+.plain{font-size:14px;margin:0}
+.know{margin:0;font-size:14px}
+.keys{display:flex;flex-wrap:wrap;gap:5px}
+.keys span{font-family:var(--f-mono);font-size:11px;padding:2px 7px;border-radius:5px;background:var(--accent-soft);color:var(--accent)}
+.ask{margin:0;font-size:14px;color:var(--muted);font-style:italic}
+.tie{font-size:13px;color:var(--covered);margin:0}
+.book{margin:0;font-size:13.5px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.booklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.booklist li{font-size:14px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.tips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:14.5px;max-width:80ch}
+.tips b{font-weight:600}
+.panel.focus{border-color:var(--accent)}
+
+@media (max-width:760px){
+  .thead{display:none}
+  .route .row,.review .row{grid-template-columns:1fr;gap:10px}
+  .row .cell:not(:first-child){padding-left:26px}
+  .controls{position:static}
+  .tab{padding:8px 10px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Software · Maestría · Publicidad</div>
+    <h1>Mi plan de estudios</h1>
+    <p class="lede">Todo en un solo lugar: la ruta para aprender Ingeniería de Software por tu cuenta, el repaso de tu maestría en la UTP y el de tu carrera de Publicidad en la UCSM. Cada pestaña guarda su propio avance en este navegador.</p>
+  </header>
+
+  <div class="tabbar" id="tabbar" role="tablist" aria-label="Secciones del plan">
+    <button type="button" class="tab" role="tab" id="tab-software" data-t="software" aria-controls="panel-software" aria-selected="true"><span class="tlabel">Ruta de Software</span><span class="tpct" id="tp-software">Avance 0%</span></button>
+    <button type="button" class="tab" role="tab" id="tab-maestria" data-t="maestria" aria-controls="panel-maestria" aria-selected="false" tabindex="-1"><span class="tlabel">Maestría UTP</span><span class="tpct" id="tp-maestria">Avance 0%</span></button>
+    <button type="button" class="tab" role="tab" id="tab-publicidad" data-t="publicidad" aria-controls="panel-publicidad" aria-selected="false" tabindex="-1"><span class="tlabel">Publicidad UCSM</span><span class="tpct" id="tp-publicidad">Avance 0%</span></button>
+  </div>
+
+  <main id="panels">
+    <!-- ============ RUTA DE SOFTWARE ============ -->
+    <section class="tabpanel" id="panel-software" role="tabpanel" aria-labelledby="tab-software" data-panel="software">
+      <div class="intro">
+        <div class="eyebrow">Cibertec + IDAT + Tecsup · una sola ruta autodidacta con Python</div>
+        <h2 class="ptitle">Ruta de Software</h2>
+        <p class="lede">Las tres mallas juntas, agrupadas por tema. Cada fila dice qué se aprende, en qué curso de cada instituto se enseña y con qué recurso online lo reemplazas. Marca cada tema al terminarlo.</p>
+        <div class="stats">
+          <div class="stat"><b id="sw-total">0</b><span>temas en total</span></div>
+          <div class="stat"><b id="sw-suplir">0</b><span>por estudiar online</span></div>
+          <div class="stat"><b id="sw-ya">0</b><span>ya cubiertos o prácticas</span></div>
+          <div class="stat"><b id="sw-pct">0%</b><span>completado</span></div>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="sw-bar"></i></div>
+      </div>
+
+      <section class="section" aria-labelledby="schools-h">
+        <h3 class="h-sec" id="schools-h">Las tres mallas</h3>
+        <div class="schools">
+          <div class="school">
+            <div class="who"><span class="inst c">CIB</span><h4>Cibertec</h4></div>
+            <dl><dt>Carrera</dt><dd>Ingeniería de Software, 100% virtual</dd><dt>Duración</dt><dd>10 ciclos · 3 años 4 meses</dd><dt>Grado</dt><dd>Bachiller Profesional</dd></dl>
+          </div>
+          <div class="school">
+            <div class="who"><span class="inst i">IDAT</span><h4>IDAT</h4></div>
+            <dl><dt>Carrera</dt><dd>Desarrollo de Sistemas Front-End y Back-End</dd><dt>Duración</dt><dd>8 ciclos · menos de 3 años · 200 créditos</dd><dt>Grado</dt><dd>Bachiller Profesional (salidas intermedias a los 4 y 6 ciclos)</dd></dl>
+          </div>
+          <div class="school">
+            <div class="who"><span class="inst t">TEC</span><h4>Tecsup</h4></div>
+            <dl><dt>Carrera</dt><dd>Diseño y Desarrollo de Software (hay campus en Arequipa)</dd><dt>Duración</dt><dd>6 ciclos · 3 años · 131 créditos</dd><dt>Grado</dt><dd>Bachiller Técnico</dd></dl>
+          </div>
+        </div>
+        <p class="note">Cibertec es la más profunda en cloud, IA y arquitectura. IDAT pone más peso en interfaces, innovación e inglés. Tecsup es más corta, con énfasis en aplicaciones empresariales e integración, y su grado es técnico, un escalón por debajo del bachiller profesional.</p>
+      </section>
+
+      <section class="panel spine" aria-labelledby="spine-h">
+        <div class="eyebrow">El orden que sostiene todo</div>
+        <h3 class="h-sec" id="spine-h">Columna vertebral en Python</h3>
+        <ol>
+          <li><b>NetAcad Python Essentials 1</b><span>Español · gratis · prepara la certificación PCEP</span></li>
+          <li><b>NetAcad Python Essentials 2</b><span>Español · gratis · POO, excepciones, archivos</span></li>
+          <li><b>Helsinki Python MOOC</b><span>Inglés · gratis · 14 partes, ~280 h</span></li>
+          <li><b>Full Stack Open</b><span>Español · gratis · web, APIs, testing, móvil</span></li>
+          <li><b>AWS Cloud Practitioner</b><span>Curso gratis · examen 100 USD</span></li>
+          <li><b>DevOps with Docker y Kubernetes</b><span>Inglés · gratis · Helsinki</span></li>
+          <li><b>Machine Learning de Andrew Ng</b><span>Coursera · subtítulos en español</span></li>
+        </ol>
+        <p class="note"><strong>Python en vez de Java:</strong> para freelance, automatización e IA es la mejor elección. Bancos y grandes corporativos en Perú todavía piden mucho Java; si algún día apuntas ahí, lo aprendes en un par de meses porque la POO es la misma.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="certs-h">
+        <div class="eyebrow">Precios de examen en dólares, se cobran en moneda local más impuestos</div>
+        <h3 class="h-sec" id="certs-h">Certificaciones de pago: cuáles valen la plata</h3>
+        <p class="note">Los cursos de NetAcad (IT Essentials, redes, Linux, Python) son gratis. Lo que se paga es el examen de certificación. Los paquetes que venden por redes sociales te dan el curso en NetAcad, no la certificación. Para un desarrollador freelance, pocas valen la pena.</p>
+        <div class="certs" id="sw-certs"></div>
+        <div class="budget">
+          <span class="eyebrow">Inversión recomendada</span>
+          <b>159 USD</b>
+          <span class="note">PCEP + AWS Cloud Practitioner. Lo demás, solo si vas a postular a empresas grandes.</span>
+        </div>
+      </section>
+
+      <section class="panel focus" aria-labelledby="plat-h">
+        <div class="eyebrow">Suscripciones y academias · ordenadas por lo que te falta, no por lo que ya sabes</div>
+        <h3 class="h-sec" id="plat-h">Plataformas de pago</h3>
+        <p class="note">Tu lista original pesa mucho hacia frontend, móvil y seguridad, que es donde ya estás fuerte o donde no te urge. Las marcadas <strong>Sí vale</strong> son las que cubren el hueco real: arquitectura, testing, algoritmos y bases de datos. No te suscribas a varias a la vez: paga una, termina lo que viniste a buscar y cancela. Los precios sin cifra son los que no pude verificar hoy, confírmalos en la web antes de pagar.</p>
+        <div class="certs" id="sw-plat"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="paid-h">
+        <div class="eyebrow">Si prefieres video en español y con un profe que explica</div>
+        <h3 class="h-sec" id="paid-h">Cursos de pago en español</h3>
+        <p class="note"><strong>DevTalles PRO</strong> cuesta 18 USD al mes o 198 USD al año y da acceso a todo el catálogo. Cada curso suelto cuesta 60 USD, así que con la suscripción sale mucho más barato. Lo mejor es pagar meses sueltos cuando vayas a estudiar en serio una etapa. En <strong>Udemy</strong> no compres a precio completo: espera las ofertas, que son frecuentes.</p>
+        <div class="certs" id="sw-paid"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="sw-books-h">
+        <div class="eyebrow">Para leer en paralelo</div>
+        <h3 class="h-sec" id="sw-books-h">Libros de la ruta</h3>
+        <p class="note">Los títulos van en español cuando hay edición en español; los demás, en su idioma original.</p>
+        <div class="certs" id="sw-books"></div>
+      </section>
+
+      <div class="controls">
+        <nav class="chips" id="sw-chips" aria-label="Ir a etapa"></nav>
+        <div class="filters" id="sw-filters" role="group" aria-label="Filtrar temas">
+          <button type="button" data-f="all" aria-pressed="true">Todos</button>
+          <button type="button" data-f="suplir" aria-pressed="false">Por estudiar</button>
+          <button type="button" data-f="ya" aria-pressed="false">Ya cubiertos</button>
+          <button type="button" data-f="practica" aria-pressed="false">Prácticas</button>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><span class="inst c">CIB</span> Cibertec</span>
+        <span><span class="inst i">IDAT</span> IDAT</span>
+        <span><span class="inst t">TEC</span> Tecsup</span>
+        <span><span class="tag es">ES</span> en español</span>
+        <span><span class="tag en">EN</span> en inglés</span>
+        <span><span class="tag en">EN·sub</span> con subtítulos en español</span>
+        <span><span class="tag">Pago</span> tiene costo</span>
+      </div>
+
+      <div class="stages" id="sw-stages"></div>
+
+      <p class="note">Mallas tomadas de los brochures de Cibertec, IDAT y Tecsup; las tres se reservan cambios. Precios de exámenes verificados en octubre de 2026 y sujetos a cambio.</p>
+    </section>
+
+    <!-- ============ MAESTRÍA UTP ============ -->
+    <section class="tabpanel" id="panel-maestria" role="tabpanel" aria-labelledby="tab-maestria" data-panel="maestria" hidden>
+      <div class="intro">
+        <div class="eyebrow">UTP · Escuela de Postgrado · noviembre 2024 a marzo 2027</div>
+        <h2 class="ptitle">Maestría en Gerencia de TI y Transformación Digital</h2>
+        <p class="lede">Los cursos ordenados en los cuatro bloques de las certificaciones progresivas. Para cada uno: lo que ya deberías dominar, los conceptos clave y una pregunta para comprobarlo. Marca los que podrías explicar sin apuntes.</p>
+        <div class="stats">
+          <div class="stat"><b id="ma-total">0</b><span>cursos</span></div>
+          <div class="stat"><b id="ma-done">0</b><span>los domino</span></div>
+          <div class="stat"><b id="ma-pct">0%</b><span>dominio</span></div>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="ma-bar"></i></div>
+        <p class="note"><strong>Ojo:</strong> el brochure muestra los cursos sueltos, sin orden de ciclo. Los agrupé por tema según los nombres de las cuatro certificaciones, así que el orden real en que los llevas puede variar.</p>
+      </div>
+      <section class="panel focus" aria-labelledby="ux-h">
+        <div class="eyebrow">Tu próximo curso en la maestría</div>
+        <h3 class="h-sec" id="ux-h">UX/UI Design: donde más puedes destacar</h3>
+        <p class="note">Llegas con ventaja porque ya trabajas como diseñador UX/UI. Aprovecha el curso para salir con algo concreto, no solo con la nota.</p>
+        <ul class="tips">
+          <li><b>Usa un caso real.</b> Presenta como trabajo del curso el caso de estudio de Donar o el rediseño de Unno; te queda listo para el portafolio.</li>
+          <li><b>Habla en idioma de gerencia.</b> Une cada decisión de diseño a una métrica de negocio: conversión, abandono de carrito o NPS. Eso es lo que la maestría espera de un gerente de TI.</li>
+          <li><b>Muestra el proceso, no solo las pantallas.</b> Entrevistas, pruebas de usabilidad y mapas de experiencia pesan más en una maestría de gestión que el acabado visual.</li>
+        </ul>
+        <ul class="booklist">
+          <li><span class="tag">Libro</span><span>No me hagas pensar · Steve Krug</span></li>
+          <li><span class="tag">Libro</span><span>La psicología de los objetos cotidianos · Don Norman</span></li>
+          <li><span class="tag">Libro</span><span>Laws of UX · Jon Yablonski</span></li>
+          <li><span class="tag">Libro</span><span>Refactoring UI · Adam Wathan y Steve Schoger</span></li>
+          <li><span class="tag">Libro</span><span>Inspired · Marty Cagan</span></li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="ma-certs-h">
+        <div class="eyebrow">Precios de examen en dólares, varían por país</div>
+        <h3 class="h-sec" id="ma-certs-h">Certificaciones que suman con tu maestría</h3>
+        <p class="note">Ordenadas de más a menos útil para tu perfil: diseñador y desarrollador freelance con maestría en gerencia de TI.</p>
+        <div class="certs" id="ma-certs"></div>
+        <div class="budget">
+          <span class="eyebrow">Inversión recomendada</span>
+          <b>200 USD</b>
+          <span class="note">Google Analytics y Google Ads (gratis) + PSPO I. Lo demás, según si vas a buscar empleo en una empresa grande.</span>
+        </div>
+      </section>
+
+      <div class="stages" id="ma-blocks"></div>
+    </section>
+
+    <!-- ============ PUBLICIDAD UCSM ============ -->
+    <section class="tabpanel" id="panel-publicidad" role="tabpanel" aria-labelledby="tab-publicidad" data-panel="publicidad" hidden>
+      <div class="intro">
+        <div class="eyebrow">UCSM · Facultad de Ciencias Sociales y Humanidades · malla vigente desde 2026</div>
+        <h2 class="ptitle">Publicidad y Multimedia</h2>
+        <p class="lede">Los 10 ciclos de la carrera, curso por curso: lo que deberías saber, los conceptos clave y una pregunta para repasar. Marca los que podrías explicar sin apuntes.</p>
+        <div class="stats">
+          <div class="stat"><b id="pu-total">0</b><span>cursos</span></div>
+          <div class="stat"><b id="pu-done">0</b><span>los domino</span></div>
+          <div class="stat"><b id="pu-pct">0%</b><span>dominio</span></div>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="pu-bar"></i></div>
+        <p class="note"><strong>Ojo:</strong> es la malla vigente desde 2026. Si estudiaste con una malla anterior, algunos nombres o cursos pueden ser distintos, pero los temas de fondo son los mismos.</p>
+      </div>
+      <section class="panel" aria-labelledby="pu-books-h">
+        <div class="eyebrow">Para repasar leyendo</div>
+        <h3 class="h-sec" id="pu-books-h">Libros clásicos de la carrera</h3>
+        <p class="note">Los títulos van en español cuando hay edición en español; los demás, en su idioma original.</p>
+        <div class="certs" id="pu-books"></div>
+      </section>
+
+      <div class="stages" id="pu-cycles"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const load = k => { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch(e) { return {}; } };
+const persist = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} };
+const pad = n => String(n).padStart(2, "0");
+const $ = id => document.getElementById(id);
+
+/* ================= RUTA DE SOFTWARE ================= */
+const R = {
+  netacad:["NetAcad (Cisco)","https://www.netacad.com"],
+  helsinki:["Helsinki Python MOOC","https://programming-26.mooc.fi"],
+  fso:["Full Stack Open","https://fullstackopen.com/es/"],
+  mdn:["MDN · Aprende desarrollo web","https://developer.mozilla.org/es/docs/Learn"],
+  eoai:["Elements of AI","https://www.elementsofai.com"],
+  cs50x:["CS50x de Harvard","https://cs50.harvard.edu/x/"],
+  cs50sql:["CS50 SQL","https://cs50.harvard.edu/sql/"],
+  cs50ai:["CS50 AI con Python","https://cs50.harvard.edu/ai/"],
+  sqlbolt:["SQLBolt","https://sqlbolt.com"],
+  techwrite:["Google Technical Writing","https://developers.google.com/tech-writing"],
+  pythonds:["Problem Solving with Algorithms and Data Structures using Python","https://runestone.academy/ns/books/published/pythonds/index.html"],
+  khan:["Khan Academy","https://es.khanacademy.org"],
+  progit:["Libro Pro Git","https://git-scm.com/book/es/v2"],
+  missing:["MIT Missing Semester","https://missing.csail.mit.edu"],
+  coursera:["Coursera","https://www.coursera.org"],
+  pg:["PostgreSQL Tutorial","https://www.postgresqltutorial.com"],
+  refguru:["Refactoring.Guru","https://refactoring.guru/es"],
+  mongo:["MongoDB University","https://learn.mongodb.com"],
+  djgirls:["Tutorial Django Girls","https://tutorial.djangogirls.org/es/"],
+  fastapi:["Documentación FastAPI","https://fastapi.tiangolo.com/es/"],
+  csb:["Cyber Security Base (Helsinki)","https://cybersecuritybase.mooc.fi"],
+  portswigger:["PortSwigger Web Security Academy","https://portswigger.net/web-security"],
+  kaggle:["Kaggle Learn","https://www.kaggle.com/learn"],
+  powerbi:["Microsoft Learn · Power BI","https://learn.microsoft.com/es-es/training/powerplatform/power-bi"],
+  expo:["Documentación de Expo","https://docs.expo.dev"],
+  pytest:["Documentación de pytest","https://docs.pytest.org"],
+  aws:["AWS Skill Builder","https://skillbuilder.aws"],
+  dezoom:["Data Engineering Zoomcamp","https://github.com/DataTalksClub/data-engineering-zoomcamp"],
+  mlopszoom:["MLOps Zoomcamp","https://github.com/DataTalksClub/mlops-zoomcamp"],
+  k8s:["DevOps with Kubernetes (Helsinki)","https://devopswithkubernetes.com"],
+  docker:["DevOps with Docker (Helsinki)","https://devopswithdocker.com"],
+  mitocw:["MIT OpenCourseWare","https://ocw.mit.edu"],
+  dlai:["DeepLearning.AI · cursos cortos","https://www.deeplearning.ai/short-courses/"],
+  ethics:["Ethics of AI (Helsinki)","https://ethics-of-ai.mooc.fi"],
+  thm:["TryHackMe","https://tryhackme.com"],
+  scrum:["Guía de Scrum","https://scrumguides.org"],
+  bbc:["BBC Learning English","https://www.bbc.co.uk/learningenglish"],
+  efset:["EF SET · test de inglés gratis","https://www.efset.org"]
+};
+
+const CERTS = [
+  {n:"PCEP · Python Institute", p:"59 USD", v:"si", d:"Barata y sale directo de NetAcad Python Essentials 1. Valida tu base de Python en el CV.", w:"Al terminar la etapa 1."},
+  {n:"AWS Certified Cloud Practitioner", p:"100 USD", v:"si", d:"La de mejor relación precio y valor. La nube la piden en casi todo empleo, y al aprobar obtienes 50% de descuento en el siguiente examen de AWS.", w:"Al terminar la etapa 8."},
+  {n:"PCAP · Python Institute", p:"295 USD", v:"op", d:"Útil si postulas a empresas que filtran por certificados. Para clientes freelance pesa más tu portafolio.", w:"Después de NetAcad Python Essentials 2, si buscas empleo."},
+  {n:"PSM I · Scrum.org", p:"200 USD", v:"op", d:"Bancos y corporativos la valoran. La guía de Scrum es gratis y el examen no exige curso previo.", w:"Solo si apuntas a trabajar en empresa grande."},
+  {n:"CCNA · Cisco", p:"~300 USD", v:"no", d:"Es para administrar redes y routers. Un desarrollador no la necesita: con el primer curso del CCNA o Networking Basics, gratis en NetAcad, tienes lo suficiente.", w:"Solo si cambias a redes o infraestructura."},
+  {n:"IT Essentials → CompTIA A+", p:"Dos exámenes", v:"no", d:"El curso de NetAcad es gratis y sirve para entender hardware, pero la certificación A+ está pensada para soporte técnico.", w:"Haz el curso si quieres; no pagues el examen."}
+];
+
+const DT = "https://cursos.devtalles.com/pages/todos-los-cursos";
+const PAID = [
+  {n:"Python: Fundamentos hasta los detalles", by:"DevTalles · Fernando Herrera", u:DT, e:"Etapas 1 y 2", d:"Alternativa en video a NetAcad y Helsinki si prefieres que te expliquen."},
+  {n:"Python TOTAL con IA", by:"Udemy · Federico Garay · 36 h · 4,8★", u:"https://www.udemy.com/course/python-total/", e:"Etapas 1 y 2", d:"Muy práctico: un proyecto por día, POO, decoradores, testing y APIs de IA."},
+  {n:"Universidad Python", by:"Udemy · Global Mentoring · 114 h · 4,6★", u:"https://www.udemy.com/course/universidad-python-desde-cero-hasta-experto-django-flask-rest-web/", e:"Etapas 2, 3 y 5", d:"Enorme: Python, bases de datos, Django, Flask y FastAPI en uno. Úsalo como consulta, no de corrido."},
+  {n:"SQL de cero con PostgreSQL", by:"DevTalles", u:DT, e:"Etapa 3", d:"Cubre SQL y bases avanzadas en español, con el mismo motor que usarás en tus proyectos."},
+  {n:"Patrones de Diseño · Principios SOLID y Clean Code", by:"DevTalles · dos cursos", u:DT, e:"Etapa 4", d:"Lo mismo que Refactoring.Guru, explicado en video con ejemplos de código."},
+  {n:"Django · FastAPI", by:"DevTalles · dos cursos", u:DT, e:"Etapa 5", d:"El backend en Python de tu ruta, en español y con proyectos completos."},
+  {n:"React Native Expo", by:"DevTalles", u:DT, e:"Etapa 6", d:"Apps móviles con lo que ya sabes de React."},
+  {n:"Docker · GIT + GitHub", by:"DevTalles · dos cursos", u:DT, e:"Etapas 1 y 8", d:"Para cuando la documentación en inglés de Docker te cueste."},
+  {n:"Python + n8n · n8n + MCP", by:"DevTalles · 9 y 60 USD", u:DT, e:"Etapa 5", d:"Lleva tus automatizaciones de clientes a otro nivel con Python y agentes de IA."},
+  {n:"Python: IA aplicada · IA para Developers (Claude API, RAG y Agentes)", by:"DevTalles · dos cursos", u:DT, e:"Etapa 9", d:"La parte de IA en producción, en español y orientada a construir productos."}
+];
+
+const PR_SRC = [["c","Experiencia Formativa I a VII"],["i","Efsrt 1 a 4"],["t","Experiencias formativas en empresas"]];
+const S = [
+ {t:"Bases: lógica, programación y computadoras", d:"Lo que las tres carreras enseñan en el primer año. Empieza aquí.", items:[
+  {n:"Lógica y fundamentos de programación", w:"Variables, condicionales, bucles, funciones, pseudocódigo y cómo descomponer un problema.", s:[["c","Introducción a la Algoritmia · Razonamiento y Análisis de Problemas"],["i","Fundamentos de Programación"],["t","Fundamentos de Programación"]], r:[["netacad","Python Essentials 1","es"],["helsinki","Partes 1–4","en"],["cs50x","Semanas 0–2","sub"]]},
+  {n:"Matemática para software", w:"Lógica proposicional, conjuntos, funciones, sistemas numéricos y cálculo básico.", s:[["c","Matemática Aplicada a la Tecnología"],["i","Fundamentos Lógico-Matemáticos · Solución de Problemas Matemáticos"],["t","Ciencias Básicas Aplicadas · Cálculo y Estadística"]], r:[["khan","Álgebra, lógica y precálculo","es"]]},
+  {n:"Cómo funciona la web", w:"Cliente-servidor, HTTP, DNS, hosting y navegadores.", s:[["c","Arquitectura de Entornos Web"],["i","Desarrollo Web"]], r:[["fso","Parte 0","es"],["mdn","","es"]]},
+  {n:"Hardware y soporte técnico", w:"Componentes de una computadora, instalación y diagnóstico.", s:[["i","Soporte de TI"],["t","Arquitectura de Computadoras"]], r:[["netacad","IT Essentials, curso gratis y opcional","es"]]},
+  {n:"Git, terminal y productividad", w:"Control de versiones, línea de comandos y herramientas del día a día.", s:[["c","Herramientas Digitales para la Productividad"],["i","Herramientas Ofimáticas para la Investigación"],["t","Informática Aplicada en TI"]], r:[["progit","","es"],["missing","","en"]]},
+  {n:"Fundamentos de IA", w:"Qué es la IA, qué puede y no puede hacer, nociones de ML.", s:[["c","Fundamentos de la Inteligencia Artificial"],["i","Seminario sobre Tecnología e IA"]], r:[["eoai","Introduction to AI","es"]]}
+ ]},
+ {t:"Programación en serio con Python", d:"Donde Cibertec usa Java, tú usas Python.", items:[
+  {n:"Programación orientada a objetos", w:"Clases, objetos, encapsulamiento, herencia, polimorfismo y SOLID.", s:[["c","POO I y II"],["i","Programación Orientada a Objetos"],["t","Programación Orientada a Objetos"]], r:[["netacad","Python Essentials 2","es"],["helsinki","Partes 8–10","en"]]},
+  {n:"Programación avanzada", w:"Módulos, archivos, excepciones, iteradores, generadores, decoradores y tipado.", s:[["c","Lenguaje de Programación I y II · Gestión de Datos Dinámicos"]], r:[["helsinki","Partes 6–7 y 10–12","en"]]},
+  {n:"Estructuras de datos y algoritmos", w:"Listas, pilas, colas, árboles, grafos, búsqueda, ordenamiento y Big O.", s:[["c","Algoritmos y Estructura de Datos"],["t","Estructuras de Datos y Algoritmos"]], r:[["helsinki","Partes 5–7","en"],["pythonds","libro gratis","en"]]},
+  {n:"Sistemas operativos y Linux", w:"Procesos, memoria, permisos y manejo de servidores Linux.", s:[["t","Sistemas Operativos"]], r:[["netacad","NDG Linux Essentials","es"],["missing","","en"]]},
+  {n:"Redes", w:"TCP/IP, direccionamiento, subredes y conectividad.", s:[["c","Infraestructura de Redes y Conectividad"],["i","Redes Informáticas"]], r:[["netacad","CCNA: Introducción a las redes, o Networking Basics","es"]], x:"Con el primer curso del CCNA basta para un desarrollador. Los otros dos son para administrar redes."}
+ ]},
+ {t:"Bases de datos", d:"Las tres mallas le dan dos o tres cursos a este bloque.", items:[
+  {n:"Bases de datos relacionales y SQL", w:"Modelo relacional, SQL, normalización y diagramas entidad-relación.", s:[["c","Base de Datos"],["i","Diseño de Base de Datos Relacionales"],["t","Base de Datos"]], r:[["cs50sql","","sub"],["sqlbolt","práctica interactiva","en"]]},
+  {n:"Bases de datos avanzadas", w:"Consultas complejas, vistas, procedimientos almacenados, índices y transacciones.", s:[["c","Base de Datos Avanzado I"],["i","Programación de Base de Datos"],["t","Base de Datos Avanzado"]], r:[["pg","","en"]]},
+  {n:"Bases NoSQL", w:"MongoDB, modelado de documentos y cuándo usar NoSQL.", s:[["c","Base de Datos Avanzado II"],["i","Bases de Datos no Relacionales"]], r:[["mongo","","en"]]}
+ ]},
+ {t:"Diseño y arquitectura de software", d:"Pensar el sistema antes de programarlo.", items:[
+  {n:"Requerimientos y análisis de sistemas", w:"Levantar requisitos, casos de uso y diagramas UML.", s:[["c","Análisis y Diseño de Sistemas I"],["i","Análisis y Diseño de Sistemas Orientados a Objetos"],["t","Ingeniería de Requerimientos y Diseño de Software"]], r:[["coursera","Software Design and Architecture, U. de Alberta (modo auditor gratis)","en"]]},
+  {n:"Patrones de diseño", w:"Patrones creacionales, estructurales y de comportamiento.", s:[["c","Análisis y Diseño de Sistemas II"],["i","Patrones de Diseño de Software"]], r:[["refguru","","es"]]},
+  {n:"Interfaces y diseño centrado en el usuario", k:"ya", w:"Construir interfaces, prototipar y diseñar a partir de las personas.", s:[["i","Desarrollo de Interfaces 1, 2 y 3 · Productos Centrados en el Usuario · Innovación Centrada en Personas"],["t","Diseño de Interfaces de Programación"]], p:"Es tu terreno: vienes de UX/UI y ya construyes front con React."},
+  {n:"Arquitectura de software y sistemas distribuidos", w:"Escalabilidad, rendimiento, replicación, consistencia y tolerancia a fallos.", s:[["c","Arquitectura de Software y Atributos de Calidad · Diseño de Sistemas Distribuidos"]], r:[["coursera","Software Design and Architecture","en"],["mitocw","6.5840 Distributed Systems","en"]], x:"Libro de referencia: Designing Data-Intensive Applications (de pago)."}
+ ]},
+ {t:"Web, APIs y backend", d:"El corazón de las tres carreras y de tu trabajo diario.", items:[
+  {n:"Front-end web", w:"HTML, CSS, JavaScript y un framework moderno.", s:[["c","Desarrollo de Entornos Web"],["t","Desarrollo de Aplicaciones en Internet · Desarrollo de Aplicaciones Web · Web Avanzado"]], r:[["fso","Partes 1, 2 y 7, como repaso: ya dominas React y TS","es"]]},
+  {n:"Backend en Python", w:"Servidor, modelos, autenticación y lógica de negocio con Django.", s:[["c","Desarrollo de Aplicaciones Web I y II"],["i","Desarrollo de los Componentes del Negocio"],["t","Desarrollo de Aplicaciones Empresariales y Avanzado"]], r:[["djgirls","","es"]]},
+  {n:"APIs y servicios web", w:"APIs REST, JSON, JWT y GraphQL.", s:[["c","Desarrollo de Servicios Web I y II"],["i","Desarrollo de Servicios Web"]], r:[["fastapi","","es"],["fso","Partes 3 y 8","es"]]},
+  {n:"Integración de sistemas empresariales", k:"ya", w:"Conectar sistemas, APIs y automatizaciones.", s:[["c","Integración Tecnológica"],["i","Efsrt 2: integración de capas"],["t","Integración de Sistemas Empresariales y Avanzado"]], p:"Ya lo haces con n8n, Odoo y WhatsApp para tus clientes."}
+ ]},
+ {t:"Aplicaciones móviles", d:"Dos cursos o más en cada malla.", items:[
+  {n:"Apps móviles multiplataforma", w:"Una app para Android e iOS: estado, navegación, notificaciones y publicación en tiendas.", s:[["c","Desarrollo de Aplicaciones Móviles I y II"],["i","Desarrollo de Aplicaciones Móviles 1 y 2"],["t","Programación en Móviles · Multiplataforma · Avanzado"]], r:[["fso","Parte 10, React Native","es"],["expo","","en"]]}
+ ]},
+ {t:"Calidad y seguridad", d:"Lo que separa un sistema que funciona de uno que aguanta en producción.", items:[
+  {n:"Pruebas y calidad de software", w:"Pruebas unitarias, de integración y end-to-end; mejora continua.", s:[["c","Pruebas de Software"],["i","Calidad de Software"],["t","Construcción y Pruebas de Software · Mejora Continua en el Diseño"]], r:[["pytest","","en"],["fso","Parte 5","es"]]},
+  {n:"Seguridad de aplicaciones", w:"OWASP Top 10: inyección SQL, XSS, autenticación segura.", s:[["c","Seguridad de Aplicaciones"],["i","Ciberseguridad · Desarrollo de Aplicaciones Seguras"]], r:[["csb","Securing Software","en"],["portswigger","laboratorios prácticos","en"]]},
+  {n:"Seguridad de plataformas y auditoría", w:"Seguridad de servidores, redes y nube; auditoría de TI.", s:[["c","Seguridad de Plataformas"],["i","Seguridad y Auditoría de TI"]], r:[["csb","Advanced Topics","en"],["thm","","en"]]},
+  {n:"Gestión de servicios de TI", w:"ITIL: incidencias, soporte y niveles de servicio.", s:[["c","Gestión de Servicios de TI"],["t","Gestión de Servicio de Software"]], p:"Basta con entender ITIL a nivel de conceptos con videos introductorios gratis. No pagues la certificación."}
+ ]},
+ {t:"Nube y DevOps", d:"Desplegar, automatizar y escalar.", items:[
+  {n:"Computación en la nube", w:"Servidores, almacenamiento, bases gestionadas y serverless.", s:[["c","Soluciones Cloud Computing"],["i","Computación en la Nube · Desarrollo de Aplicaciones en la Nube"],["t","Desarrollo de Soluciones en la Nube"]], r:[["aws","Cloud Practitioner Essentials","sub"]], x:"Aquí sí vale pagar el examen: 100 USD."},
+  {n:"DevOps y contenedores", w:"Docker, CI/CD, logs y métricas.", s:[["c","DevOps, Contenedores y Observabilidad"],["i","Devops: Fundamentos"]], r:[["docker","","en"],["fso","Parte 11, CI/CD","es"]], x:"Canal de YouTube Pelado Nerd para Docker en español."},
+  {n:"Kubernetes y cloud native", w:"Microservicios, orquestación y escalado automático.", s:[["c","Despliegue de Aplicaciones Cloud Native"]], r:[["k8s","","en"]]}
+ ]},
+ {t:"Datos e inteligencia artificial", d:"El bloque donde Cibertec va más lejos que las otras dos.", items:[
+  {n:"Análisis de datos e inteligencia de negocios", w:"pandas, visualización, dashboards y métricas de negocio.", s:[["c","Analítica de Datos para Nuevos Negocios"],["i","Introducción a la Ciencia de Datos"],["t","Inteligencia de Negocios"]], r:[["kaggle","Pandas y Data Visualization","en"],["powerbi","","es"]]},
+  {n:"Procesamiento de datos", w:"Pipelines ETL e integración de fuentes.", s:[["c","Procesamiento e Integración de Datos"]], r:[["dezoom","","en"]]},
+  {n:"Estadística y matemática discreta", w:"Probabilidad, inferencia, grafos, combinatoria e inducción.", s:[["c","Cálculo Discreto · Cálculo Inferencial"],["t","Aplicaciones del Cálculo y Estadística"]], r:[["khan","Estadística y probabilidad","es"],["mitocw","6.042J Mathematics for Computer Science","en"]]},
+  {n:"Inteligencia artificial y machine learning", w:"Regresión, clasificación, redes neuronales y scikit-learn.", s:[["c","Inteligencia Artificial · Machine Learning"],["i","Inteligencia Artificial"],["t","Tecnologías Emergentes"]], r:[["coursera","Machine Learning Specialization, Andrew Ng","sub"],["cs50ai","","sub"]]},
+  {n:"IA en producción", w:"APIs de modelos de lenguaje, RAG, agentes y MLOps.", s:[["c","Integración de Servicios de IA · Despliegue y Monitoreo de Modelos"]], r:[["dlai","","en"],["mlopszoom","","en"]]},
+  {n:"Ética de la IA y gobierno de datos", w:"Privacidad, sesgos, responsabilidad y regulación.", s:[["c","Gobierno de Datos y Ética en IA"],["i","Investigación, Ética y Responsabilidad Ciudadana"]], r:[["ethics","","en"]]}
+ ]},
+ {t:"Idioma, gestión y formación general", d:"Casi todo esto ya lo tienes. La excepción es el inglés.", items:[
+  {n:"Inglés técnico", w:"Leer documentación, escribir en inglés y comunicarte con equipos y clientes de fuera.", s:[["i","Fundamentos del Inglés · Inglés para el Trabajo"]], r:[["bbc","","en"],["efset","mide tu nivel","en"]], x:"Es tu vacío más importante: la mitad de los mejores recursos de esta ruta están en inglés."},
+  {n:"Gestión de proyectos y metodologías ágiles", w:"Scrum, Kanban, cronogramas y riesgos.", s:[["c","Gestión de Proyectos de TI"],["i","Gestión de Proyectos · Gestión de Proyectos Ágiles"]], r:[["scrum","en español","es"],["coursera","Certificado Google Project Management","es",1]]},
+  {n:"Proyecto integrador", w:"Una aplicación completa de principio a fin.", s:[["c","Proyecto Integrador"],["i","Efsrt 3 y 4: proyectos de aplicación e innovación empresarial"]], p:"Construye Pukllay o ComeYa: web, API, móvil, pruebas y despliegue."},
+  {n:"Negocio, innovación y emprendimiento", k:"ya", w:"Gestión empresarial, marketing, investigación de mercado y startups.", s:[["c","Gestión Empresarial · Innovación y Emprendimiento · Transformación Digital"],["i","Innovación y Transformación Digital · Gestión Estratégica de la Innovación · seminarios"],["t","Investigación de Mercado · Marketing · Startup Venture Project · Emprendimiento · Proyectos de Innovación"]], p:"Lo cubren tu maestría en transformación digital y tu curso de Start Ups con ComeYa."},
+  {n:"Comunicación y habilidades blandas", k:"ya", w:"Redacción, expresión oral, liderazgo y desarrollo profesional.", s:[["c","Redacción Técnica · Comunicación Profesional · Posicionamiento · Liderazgo"],["i","Lectura y Escritura · Lectura Crítica · Habilidades Intra e Interpersonales · Desarrollo Profesional"],["t","Expresión Oral y Escrita · Producción de Textos · Desarrollo Personal · Consultoría · Sociedad y Desarrollo Sostenible"]], p:"Lo cubren tu formación en publicidad, la maestría y el trato con clientes. Para escritura técnica: Google Technical Writing, gratis."},
+  {n:"Investigación y tesis", k:"ya", w:"Metodología de investigación y desarrollo de tesis.", s:[["c","Investigación Aplicada I a IV"],["t","Investigación e Innovación Tecnológica"]], p:"Lo cubren tu tesis en UCSM y la maestría."},
+  {n:"Prácticas preprofesionales", k:"practica", w:"Experiencia de trabajo real en cada ciclo.", s:PR_SRC, p:"Tu trabajo freelance cuenta como práctica real. Documenta un proyecto por etapa como caso en tu portafolio."}
+ ]}
+];
+
+const SW_KEY = "ruta-software-v2";
+const swDone = load(SW_KEY);
+const INST = {c:"CIB", i:"IDAT", t:"TEC"};
+const langTag = l => l === "es" ? '<span class="tag es">ES</span>' : l === "sub" ? '<span class="tag en">EN·sub</span>' : '<span class="tag en">EN</span>';
+const statusLbl = {suplir:"Por estudiar", ya:"Ya cubierto", practica:"Práctica"};
+const vLbl = {si:"Sí vale", op:"Opcional", no:"No para ti"};
+
+const certCard = c => `<div class="cert">
+  <div class="cert-top"><h4>${esc(c.n)}</h4><span class="price">${esc(c.p)}</span></div>
+  <span class="verdict v-${c.v}">${vLbl[c.v]}</span>
+  <p>${esc(c.d)}</p><span class="when">${esc(c.w)}</span></div>`;
+const bookCard = b => `<div class="cert">
+  <h4>${b.u ? `<a class="plink" href="${b.u}" target="_blank" rel="noopener">${esc(b.t)}</a>` : esc(b.t)}</h4>
+  <span class="when">${esc(b.a)}</span>
+  <span class="verdict v-etapa">${esc(b.e)}</span>
+  <p>${esc(b.d)}</p></div>`;
+$("sw-certs").innerHTML = CERTS.map(certCard).join("");
+
+$("sw-paid").innerHTML = PAID.map(c => `<div class="cert">
+  <h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4>
+  <span class="when">${esc(c.by)}</span>
+  <span class="verdict v-etapa">${esc(c.e)}</span>
+  <p>${esc(c.d)}</p></div>`).join("");
+
+const PLAT = [
+  {n:"CodelyTV", u:"https://codely.com", p:"Suscripción", v:"si", e:"Etapas 4, 5 y 9",
+   d:"Arquitectura hexagonal, DDD, CQRS, SOLID, testing, microservicios e infraestructura, en español y con repos públicos de ejemplo en TypeScript, PHP, Java y Go. Es exactamente el hueco que deja ser autodidacta: sabes escribir código, pero nadie te enseñó a estructurar una app que crece.",
+   w:"La más importante de esta lista para ti, y no estaba en la tuya."},
+  {n:"Cursos de Desarrollo Web", u:"https://www.cursosdesarrolloweb.es", p:"150 € al año", v:"si", e:"Etapas 3, 4 y 5",
+   d:"Más de 289 cursos en español de Laravel, PHP, JavaScript, Livewire, Filament, Tailwind, bases de datos, testing y deployment. Pago único anual, sin cargos automáticos, con 10 días de garantía si no has visto ningún curso.",
+   w:"Es literalmente el stack de Artemisa: Laravel más Filament."},
+  {n:"DevTalles", u:"https://cursos.devtalles.com/pages/todos-los-cursos", p:"18 USD/mes · 198 USD/año", v:"si", e:"Toda la ruta",
+   d:"Fernando Herrera. El catálogo más amplio en español con profe que explica paso a paso: Python, SQL con PostgreSQL, patrones de diseño, SOLID, Docker, Git, Django, FastAPI, NestJS, React Native y n8n con IA.",
+   w:"Paga meses sueltos cuando ataques una etapa, no el año entero de golpe."},
+  {n:"Platzi", u:"https://platzi.com", p:"Suscripción anual", v:"op", e:"Etapas 2, 3 y 8",
+   d:"El catálogo más grande de LatAm en español. Sirve para lo que las otras cubren mal: algoritmos y estructuras de datos, bases de datos, cloud e inglés técnico. La calidad varía mucho de curso a curso.",
+   w:"Útil por amplitud, no por profundidad. Revisa reseñas del curso puntual antes de entrar."},
+  {n:"EDteam", u:"https://ed.team", p:"Suscripción", v:"op", e:"Etapas 2 y 3",
+   d:"Álvaro Felipe. Español latino, con rutas serias de algoritmos, bases de datos y backend. Menos marketing y más fundamentos que la mayoría.",
+   w:"Alternativa a Platzi si lo que buscas es justo algoritmos y bases de datos."},
+  {n:"midudev", u:"https://midu.dev", p:"Por curso", v:"op", e:"Ya lo dominas",
+   d:"Miguel Ángel Durán. React, JavaScript moderno, Next.js y TypeScript. Calidad altísima y muchísimo contenido gratis en YouTube y Twitch.",
+   w:"Es tu zona de confort. Mira lo gratis, pero no pagues: no te mueve la aguja."},
+  {n:"MoureDev", u:"https://moure.dev", p:"Por curso", v:"op", e:"Etapas 1 y 6",
+   d:"Brais Moure. Python desde cero, Swift, Kotlin y Flutter. Su curso de Python es de los mejores en español para arrancar, y lo móvil te serviría si Pukllay avanza.",
+   w:"Entra por Python o por móvil, no por el catálogo completo."},
+  {n:"Hack4u", u:"https://hack4u.io", p:"Por curso", v:"no", e:"Después de la ruta",
+   d:"s4vitar. Linux, pentesting y hacking ético con muchísima profundidad. Probablemente la mejor academia de ciberseguridad en español.",
+   w:"No por ahora. Es una especialización, no una base, y tú estás llenando bases."},
+  {n:"Boot.dev", u:"https://boot.dev", p:"Suscripción", v:"op", e:"Etapa 2",
+   d:"Algoritmos, estructuras de datos y backend en Go y Python, resolviendo ejercicios en vez de ver video. El formato que mejor fija los fundamentos.",
+   w:"Solo en inglés. Con nivel A2 va a costar, pero el código es universal."}
+];
+$("sw-plat").innerHTML = PLAT.map(c => `<div class="cert">
+  <div class="cert-top"><h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4><span class="price">${esc(c.p)}</span></div>
+  <span class="verdict v-${c.v}">${vLbl[c.v]}</span>
+  <p>${esc(c.d)}</p>
+  <span class="when">${esc(c.w)}</span>
+  <span class="verdict v-etapa">${esc(c.e)}</span></div>`).join("");
+
+const SW_BOOKS = [
+  {t:"Curso intensivo de Python", a:"Eric Matthes", e:"Etapas 1 y 2", d:"El libro de Python más recomendado para empezar, con tres proyectos completos."},
+  {t:"Automate the Boring Stuff with Python", a:"Al Sweigart · gratis en línea", u:"https://automatetheboringstuff.com", e:"Automatización", d:"Python para automatizar tareas reales: archivos, Excel, web y correos. Encaja con lo que haces con n8n."},
+  {t:"Grokking Algorithms", a:"Aditya Bhargava", e:"Etapa 2", d:"Algoritmos y estructuras de datos explicados con dibujos. El más fácil de leer del tema."},
+  {t:"El programador pragmático", a:"David Thomas y Andrew Hunt", e:"Toda la ruta", d:"Hábitos y criterio de un buen desarrollador. Se lee por capítulos sueltos."},
+  {t:"Código limpio", a:"Robert C. Martin", e:"Etapa 4", d:"Cómo escribir código legible. Tómalo como guía, no como reglas absolutas."},
+  {t:"Fundamentals of Software Architecture", a:"Mark Richards y Neal Ford", e:"Etapa 4", d:"Estilos de arquitectura y cómo decidir entre ellos."},
+  {t:"Designing Data-Intensive Applications", a:"Martin Kleppmann", e:"Etapas 4 y 9", d:"La referencia sobre bases de datos y sistemas distribuidos. Déjalo para el final de la ruta."}
+];
+$("sw-books").innerHTML = SW_BOOKS.map(bookCard).join("");
+
+(function renderRoute(){
+  let html = "", chips = "";
+  S.forEach((st, i) => {
+    const n = i + 1;
+    chips += `<a href="#etapa-${n}" title="${esc(st.t)}">E${pad(n)}</a>`;
+    html += `<section class="stage" id="etapa-${n}" aria-labelledby="sw-h-${n}">
+      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">Etapa</div><h3 class="h-sec" id="sw-h-${n}">${esc(st.t)}</h3><p>${esc(st.d)}</p></div></div>
+      <div class="table route"><div class="thead"><span>Tema</span><span>Qué aprendes y dónde se enseña</span><span>Cómo lo suples</span></div>`;
+    st.items.forEach((it, j) => {
+      const k = it.k || "suplir", id = `e${n}-${j}`;
+      const src = '<ul class="src">' + it.s.map(([inst, names]) => `<li><span class="inst ${inst}">${INST[inst]}</span><span>${esc(names)}</span></li>`).join("") + '</ul>';
+      const how = it.r
+        ? '<ul class="res">' + it.r.map(([key, det, l, paid]) => `<li><a href="${R[key][1]}" target="_blank" rel="noopener">${esc(R[key][0])}</a>${det ? `<span class="what">${esc(det)}</span>` : ""}${langTag(l)}${paid ? '<span class="tag">Pago</span>' : ''}</li>`).join("") + (it.x ? `<li class="what">${esc(it.x)}</li>` : "") + '</ul>'
+        : `<p class="plain">${esc(it.p)}</p>`;
+      html += `<div class="row${swDone[id] ? " done" : ""}" data-k="${k}" data-id="${id}">
+        <div class="cell"><label class="cname"><input type="checkbox" id="${id}"${swDone[id] ? " checked" : ""}><span>${esc(it.n)}</span></label><span class="status st-${k}">${statusLbl[k]}</span></div>
+        <div class="cell"><p class="what">${esc(it.w)}</p>${src}</div>
+        <div class="cell">${how}</div></div>`;
+    });
+    html += `</div></section>`;
+  });
+  $("sw-chips").innerHTML = chips;
+  $("sw-stages").innerHTML = html;
+})();
+
+function swStats(){
+  const rows = [...document.querySelectorAll("#sw-stages .row")];
+  const total = rows.length;
+  const sup = rows.filter(r => r.dataset.k === "suplir").length;
+  const d = rows.filter(r => swDone[r.dataset.id]).length;
+  const pct = total ? Math.round(d / total * 100) : 0;
+  $("sw-total").textContent = total;
+  $("sw-suplir").textContent = sup;
+  $("sw-ya").textContent = total - sup;
+  $("sw-pct").textContent = pct + "%";
+  $("sw-bar").style.width = pct + "%";
+  $("tp-software").textContent = "Avance " + pct + "%";
+}
+
+document.querySelectorAll("#sw-filters button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#sw-filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  const f = b.dataset.f;
+  document.querySelectorAll("#sw-stages .row").forEach(r => { r.hidden = !(f === "all" || r.dataset.k === f); });
+  document.querySelectorAll("#sw-stages .stage").forEach(s => { s.hidden = !s.querySelector(".row:not([hidden])"); });
+}));
+
+/* ================= MAESTRÍA UTP ================= */
+const MA = [
+ {t:"Transformación Digital y Estrategia Empresarial", d:"La base: por qué las empresas se transforman y cómo se decide hacia dónde.", items:[
+  {n:"Entorno Competitivo y Transformación Digital", k:"Por qué la tecnología cambia industrias enteras y cómo analizar el entorno antes de transformar.", c:["Cinco fuerzas de Porter","PESTEL","Disrupción","Madurez digital"], q:"¿Cómo afectó la tecnología a la competencia en la industria de tus clientes de ropa interior?"},
+  {n:"Transformación Digital", k:"Transformar es cambiar el modelo de negocio, la cultura y los procesos, no solo digitalizar papeles.", c:["Digitización vs digitalización vs TD","Modelos de madurez","Cultura digital"], q:"¿Cuál es la diferencia entre digitalizar un proceso y transformar un negocio?"},
+  {n:"Gestión Estratégica", k:"Formular misión, objetivos y estrategia, y bajarla a indicadores.", c:["FODA","Balanced Scorecard","Ventaja competitiva","Mapa estratégico"], q:"¿Podrías armar el mapa estratégico de una pyme en una hoja?"},
+  {n:"Gestión Empresarial", k:"Cómo funciona una empresa por dentro: áreas, finanzas básicas y toma de decisiones.", c:["Cadena de valor","Estados financieros básicos","ROI","Flujo de caja"], q:"¿Sabes calcular el ROI de un proyecto digital que propones a un cliente?"},
+  {n:"Tecnologías Digitales", k:"Panorama de tecnologías que habilitan la transformación y cuándo conviene cada una.", c:["Cloud","IoT","Blockchain","RPA","APIs"], q:"¿Qué tecnología recomendarías a un retailer pequeño y por qué?"},
+  {n:"Customer Centric", k:"Poner al cliente en el centro: conocerlo, mapear su experiencia y medirla.", c:["Customer journey","Buyer persona","NPS","CX"], q:"¿Podrías dibujar el customer journey de una tienda Shopify que hayas hecho?", tie:"Conecta con tu experiencia en UX."}
+ ]},
+ {t:"E-Business, Gestión Ágil y Transformación de Procesos", d:"Vender por medios digitales y trabajar de forma ágil sobre procesos rediseñados.", items:[
+  {n:"E-Business & Digital Media", k:"Modelos de comercio electrónico y marketing digital: canales, embudos y métricas.", c:["B2B, B2C, D2C","Marketplace","Embudo de conversión","CAC y LTV"], q:"¿Qué métricas le mostrarías a un cliente para demostrar que su tienda online funciona?", tie:"Es tu día a día con Shopify y WooCommerce."},
+  {n:"E-Business Governance", k:"Gobierno de TI: quién decide, cómo se controla y cómo se alinea TI con el negocio.", c:["COBIT","ITIL","Gobierno vs gestión","Riesgo TI"], q:"¿En qué se diferencia el gobierno de TI de la gestión de TI?"},
+  {n:"Rediseño de Procesos", k:"Modelar procesos actuales, encontrar cuellos de botella y diseñar el proceso futuro.", c:["BPMN","AS-IS / TO-BE","Lean","Automatización"], q:"¿Podrías modelar en BPMN el flujo de pedidos por WhatsApp que automatizas?", tie:"Lo practicas con n8n y Odoo."},
+  {n:"Aplicación de Metodologías Ágiles", k:"Trabajar en iteraciones cortas, con roles, eventos y artefactos definidos.", c:["Scrum","Kanban","Sprint","Product backlog","Historias de usuario"], q:"¿Cuáles son los roles y eventos de Scrum y para qué sirve cada uno?"},
+  {n:"Innovación y Agilidad", k:"Escalar la agilidad a la organización y crear condiciones para innovar.", c:["Agilidad organizacional","SAFe","Experimentación","MVP"], q:"¿Qué cambia cuando la agilidad sale del equipo de TI y llega a toda la empresa?"},
+  {n:"Digital Project Management", k:"Dirigir proyectos digitales: alcance, tiempo, costo, riesgos e interesados.", c:["PMBOK","Enfoque híbrido","Gestión de riesgos","Stakeholders"], q:"¿Cuándo usarías un enfoque predictivo y cuándo uno ágil?"},
+  {n:"Ecosistema Móvil y Virtual", k:"El móvil como canal principal: apps, web móvil, pagos y realidad virtual o aumentada.", c:["App vs PWA","Mobile first","Billeteras digitales","AR / VR"], q:"¿Recomendarías una app nativa o una PWA para ComeYa? ¿Por qué?"}
+ ]},
+ {t:"Modelos de Negocio Digitales y Gestión del Cambio", d:"Diseñar negocios nuevos y lograr que las personas adopten el cambio.", items:[
+  {n:"Business Model Canvas", k:"Describir un modelo de negocio en nueve bloques y validarlo.", c:["9 bloques","Propuesta de valor","Value Proposition Canvas"], q:"¿Puedes llenar el canvas de ComeYa de memoria?"},
+  {n:"Start-ups y Emprendimiento", k:"Validar ideas rápido, encontrar encaje producto-mercado y financiarse.", c:["Lean Startup","Producto mínimo viable","Product-market fit","Rondas de inversión"], q:"¿Cuál es el MVP más pequeño que podrías lanzar de Pukllay?", tie:"Lo aplicaste en tu curso de Start Ups con ComeYa."},
+  {n:"Innovación y Design Thinking", k:"Resolver problemas partiendo de las personas: empatizar, definir, idear, prototipar y probar.", c:["5 etapas","Mapa de empatía","Prototipado rápido"], q:"¿Cómo llevarías un taller de Design Thinking con un cliente?", tie:"Muy cerca de tu formación en UX."},
+  {n:"Hub de Innovación", k:"Cómo las empresas organizan la innovación: laboratorios, aceleradoras e innovación abierta.", c:["Innovación abierta","Corporate venturing","Laboratorios de innovación"], q:"¿Qué ventaja tiene una empresa grande al trabajar con startups en vez de innovar sola?"},
+  {n:"UX/UI Design", k:"Diseño de experiencia e interfaces aplicado a la transformación digital.", c:["Investigación de usuarios","Wireframes","Usabilidad","Design systems"], q:"Este curso es tu terreno.", tie:"Ya lo dominas por tu trabajo."},
+  {n:"Change Management", k:"Gestionar la resistencia y acompañar a las personas durante la transformación.", c:["Kotter 8 pasos","ADKAR","Curva del cambio","Resistencia"], q:"¿Cuáles son los 8 pasos de Kotter y cuál suele fallar más?"},
+  {n:"LEGO® Serious Play®", k:"Metodología para que equipos piensen y decidan construyendo modelos con LEGO.", c:["Facilitación","Pensamiento visual","Construcción colectiva"], q:"¿En qué tipo de reunión la usarías?"},
+  {n:"Negociación Efectiva", k:"Prepararte y negociar buscando acuerdos que convengan a ambas partes.", c:["Harvard (Getting to Yes)","BATNA / MAAN","Intereses vs posiciones"], q:"¿Cuál es tu MAAN cuando negocias un precio con un cliente?"},
+  {n:"Presentaciones de Alto Impacto", k:"Estructurar y contar una propuesta para que un comité la apruebe.", c:["Storytelling","Pirámide de Minto","Pitch"], q:"¿Podrías presentar tu plan de transformación digital en 5 minutos?"},
+  {n:"Soft Skills", k:"Liderazgo, comunicación y trabajo en equipo para dirigir cambios.", c:["Liderazgo","Inteligencia emocional","Feedback"], q:"¿Cómo das feedback negativo sin romper la relación?"}
+ ]},
+ {t:"Planificación Estratégica de TI y Transformación Digital", d:"El cierre: arquitectura, datos, IA, legal y el plan final de transformación.", items:[
+  {n:"Modelos de Arquitectura Tecnológica", k:"Describir cómo se alinean negocio, datos, aplicaciones y tecnología en una organización.", c:["TOGAF","Arquitectura empresarial","ArchiMate","Capas de arquitectura"], q:"¿Cuáles son las cuatro capas de arquitectura empresarial de TOGAF?"},
+  {n:"Big Data & Cloud Computing", k:"Qué es big data, cómo se procesa y qué modelos de nube existen.", c:["5 V del big data","IaaS, PaaS, SaaS","Nube pública, privada e híbrida","Data lake"], q:"¿Qué diferencia hay entre IaaS, PaaS y SaaS, con un ejemplo de cada uno?", tie:"Lo refuerzas en la etapa 8 de tu ruta de software."},
+  {n:"Business Intelligence & Analytics", k:"Convertir datos en decisiones: almacenes de datos, dashboards y KPIs.", c:["Data warehouse","ETL","Dashboards","KPI","Analítica descriptiva a prescriptiva"], q:"¿Qué cuatro tipos de analítica existen y en qué se diferencian?"},
+  {n:"Machine Learning & Artificial Intelligence", k:"Qué problemas resuelve la IA en el negocio y cómo se lleva a un caso de uso real.", c:["Aprendizaje supervisado","IA generativa","Casos de uso","Ética y sesgos"], q:"¿Qué caso de uso de IA le propondrías a uno de tus clientes?"},
+  {n:"Aspectos Legales TI", k:"Marco legal de la tecnología en Perú: datos personales, contratos y propiedad intelectual.", c:["Ley 29733","Contratos de software","Propiedad intelectual","Firma digital"], q:"¿Qué obliga la Ley 29733 a una tienda online que recoge datos de clientes?", tie:"Lo aplicaste con la política de privacidad de Unno."},
+  {n:"Gestión de Resultados y OKRs", k:"Definir objetivos ambiciosos y resultados clave medibles, y darles seguimiento.", c:["OKR","KPI vs OKR","Ciclos trimestrales"], q:"¿Podrías escribir tres OKRs para tu negocio freelance?"},
+  {n:"Digital Management", k:"Dirigir un área o empresa digital: estructura, talento y métricas.", c:["Rol del CDO y CIO","Organización digital","Talento digital"], q:"¿Qué diferencia hay entre el rol de un CIO y el de un CDO?"},
+  {n:"Simulador Business Management", k:"Tomar decisiones de gestión en un entorno simulado y ver sus consecuencias.", c:["Toma de decisiones","Trade-offs","Análisis de resultados"], q:"¿Qué decisión del simulador cambiarías si lo volvieras a jugar?"},
+  {n:"Plan de Transformación Digital I y II", k:"El trabajo final: diagnóstico, visión, iniciativas, hoja de ruta, presupuesto y gobierno del plan.", c:["Diagnóstico de madurez","Hoja de ruta","Portafolio de iniciativas","Business case"], q:"¿Tienes elegida la empresa y el diagnóstico para tu plan?"},
+  {n:"Integración", k:"Juntar todo lo aprendido en una propuesta coherente.", c:["Síntesis","Sustentación"], q:"¿Podrías explicar cómo se conectan estrategia, procesos, tecnología y cambio en tu plan?"}
+ ]}
+];
+
+/* ================= PUBLICIDAD UCSM ================= */
+const PU = [
+ {t:"Bases creativas y gráficas", d:"Creatividad, marketing y las primeras herramientas de diseño.", items:[
+  {n:"Creatividad", k:"Técnicas para generar ideas y romper el pensamiento lineal.", c:["Brainstorming","SCAMPER","Pensamiento lateral","Insight"], q:"¿Qué es un insight y cómo se diferencia de un dato?"},
+  {n:"Estética de los Discursos", k:"Cómo la forma (imagen, texto, sonido) construye sentido y persuade.", c:["Semiótica","Retórica visual","Denotación y connotación"], q:"¿Qué connota una pieza publicitaria más allá de lo que muestra?"},
+  {n:"Fundamentos de Marketing", k:"Conceptos base del marketing y cómo una marca llega al mercado.", c:["4P / 7P","Mercado meta","Necesidad vs deseo","Propuesta de valor"], q:"¿Cuáles son las 4P aplicadas a una marca de ropa interior?", tie:"Lo usas con tus clientes de ropa interior."},
+  {n:"Fundamentos Multimedia", k:"Tipos de medios y cómo se combinan: texto, imagen, audio, video, interacción.", c:["Formatos","Resolución","Compresión","Interactividad"], q:"¿Diferencia entre imagen vectorial y de mapa de bits?"},
+  {n:"Graficadores", k:"Manejo de software gráfico para crear y editar piezas.", c:["Illustrator","Photoshop","Capas","Vectores"], q:"¿Cuándo usas Illustrator y cuándo Photoshop?"},
+  {n:"Redacción Académica", k:"Escribir textos académicos con estructura y citas.", c:["APA","Párrafo argumentativo","Citado"], q:"¿Cómo citas una fuente en APA 7?", tie:"Te sirve para la tesis."}
+ ]},
+ {t:"Diseño, fotografía y medios", d:"Composición visual, fotografía y los primeros conceptos de publicidad y medios digitales.", items:[
+  {n:"Argumentación y Pensamiento Crítico", k:"Construir y evaluar argumentos, detectar falacias.", c:["Premisas","Falacias","Evidencia"], q:"¿Qué falacia es la más usada en publicidad engañosa?"},
+  {n:"Cultura e Identidad", k:"Identidad peruana y cultural y su relación con la comunicación.", c:["Interculturalidad","Identidad nacional","Patrimonio"], q:"¿Cómo se usa la identidad cultural en campañas peruanas?", tie:"Conecta con Pukllay y el quechua."},
+  {n:"Diseño Gráfico I", k:"Fundamentos de composición visual.", c:["Gestalt","Retícula","Jerarquía","Color"], q:"¿Cuáles son las leyes de la Gestalt?"},
+  {n:"Fundamentos de la Publicidad", k:"Qué es la publicidad, su historia, actores y proceso.", c:["Anunciante, agencia y medio","Brief","Concepto creativo"], q:"¿Qué debe tener un buen brief?"},
+  {n:"Gestión de Medios Digitales", k:"Planificar y administrar presencia en medios digitales.", c:["Owned, paid, earned media","Calendario editorial","Comunidad"], q:"¿Diferencia entre medios propios, pagados y ganados?"},
+  {n:"Lenguaje y Técnica Fotográfica", k:"Exposición, encuadre y composición en fotografía.", c:["Triángulo de exposición","Planos","Regla de tercios"], q:"¿Cómo se relacionan apertura, velocidad e ISO?"}
+ ]},
+ {t:"Tipografía, sonido e investigación", d:"Diseño avanzado, sonido, fotografía publicitaria e investigación del público.", items:[
+  {n:"Diseño Gráfico II", k:"Tipografía y sistemas gráficos.", c:["Familias tipográficas","Kerning e interlineado","Sistemas visuales"], q:"¿Cómo combinas dos tipografías?"},
+  {n:"Diseño Sonoro", k:"Sonido como recurso narrativo y de marca.", c:["Locución","Música","Efectos","Sound branding"], q:"¿Qué es un sound logo?"},
+  {n:"Fotografía Publicitaria", k:"Fotografía de producto y de moda con fines comerciales.", c:["Iluminación de estudio","Bodegón","Retoque"], q:"¿Cómo iluminarías una prenda de lencería para e-commerce?", tie:"Directo para tus clientes de ropa interior."},
+  {n:"Guion y Narrativa Multimedia", k:"Escribir historias para formatos audiovisuales e interactivos.", c:["Estructura en 3 actos","Guion técnico","Storyboard"], q:"¿Diferencia entre guion literario y técnico?"},
+  {n:"Innovación y Emprendimiento", k:"Generar y validar ideas de negocio.", c:["Lean Canvas","MVP","Validación"], q:"¿Cómo validarías Pukllay antes de programarla?"},
+  {n:"Investigación Publicitaria", k:"Métodos para investigar al público y medir campañas.", c:["Cualitativa vs cuantitativa","Focus group","Encuesta","Pretest"], q:"¿Cuándo conviene un focus group y cuándo una encuesta?"}
+ ]},
+ {t:"Consumidor y usabilidad", d:"Por qué compra la gente, identidad visual, usabilidad y producción audiovisual.", items:[
+  {n:"Comportamiento del Consumidor", k:"Por qué y cómo decide comprar la gente.", c:["Proceso de decisión","Motivación","Sesgos","Pirámide de Maslow"], q:"¿Cuáles son las etapas del proceso de decisión de compra?"},
+  {n:"Desarrollo Personal y Social", k:"Habilidades personales y de convivencia.", c:["Autoconocimiento","Trabajo en equipo"], q:"¿Cuáles son tus fortalezas como comunicador?"},
+  {n:"Diseño Gráfico III", k:"Identidad visual y piezas aplicadas.", c:["Identidad corporativa","Manual de marca","Aplicaciones"], q:"¿Qué debe incluir un manual de marca?"},
+  {n:"Economía y Globalización", k:"Conceptos económicos y efectos de la globalización.", c:["Oferta y demanda","Inflación","Comercio internacional"], q:"¿Cómo afecta el tipo de cambio a un e-commerce peruano?"},
+  {n:"Generación de Proyectos Audiovisuales", k:"Concebir y planificar una pieza audiovisual.", c:["Preproducción","Presupuesto","Plan de rodaje"], q:"¿Qué incluye la preproducción de un spot?"},
+  {n:"Usabilidad", k:"Evaluar qué tan fácil de usar es una interfaz.", c:["Heurísticas de Nielsen","Test de usabilidad","Carga cognitiva"], q:"¿Cuáles son las 10 heurísticas de Nielsen?", tie:"Base de tu trabajo en UX."}
+ ]},
+ {t:"UX/UI y posicionamiento", d:"Experiencia de usuario, segmentación y posicionamiento, e inteligencia artificial aplicada.", items:[
+  {n:"Diseño de Señalética y Lettering", k:"Sistemas de orientación y letras dibujadas a mano.", c:["Wayfinding","Pictogramas","Lettering"], q:"¿Qué hace que un sistema de señalética funcione?"},
+  {n:"Diseño Gráfico IV", k:"Proyectos gráficos integrales.", c:["Campañas gráficas","Packaging","Sistemas visuales"], q:"¿Qué condiciona el diseño de un empaque?"},
+  {n:"Estrategias de Segmentación y Posicionamiento", k:"Dividir el mercado y ocupar un lugar en la mente del público.", c:["Segmentación","Target","Mapa de posicionamiento","Ries y Trout"], q:"¿Cómo posicionarías Heiss frente a Ganymedes?"},
+  {n:"Inteligencia Artificial Aplicada", k:"Uso de IA en comunicación, diseño y producción.", c:["IA generativa","Prompts","Ética y derechos"], q:"¿Qué riesgos tiene usar imágenes generadas por IA en una campaña?"},
+  {n:"Realización de Proyectos Audiovisuales", k:"Producción: rodaje, cámara, luz y sonido.", c:["Planos y movimientos","Iluminación","Dirección"], q:"¿Qué es la regla de los 180 grados?"},
+  {n:"Storytelling y Creatividad Digital", k:"Contar historias de marca en formatos digitales.", c:["Viaje del héroe","Contenido de marca","Formatos sociales"], q:"¿Cómo contarías la historia de una marca en 30 segundos?"},
+  {n:"UX UI", k:"Diseño de experiencia e interfaces digitales.", c:["Investigación","Wireframes","Prototipos","Design system"], q:"Es tu especialidad.", tie:"Ya lo dominas."}
+ ]},
+ {t:"Branding y marketing estratégico", d:"Marca, diseño editorial, marketing estratégico y postproducción.", items:[
+  {n:"Aplicaciones Multimedia", k:"Productos digitales interactivos.", c:["Prototipado","Interacción","Web y apps"], q:"¿Qué hace interactivo a un producto multimedia?", tie:"Conecta con tu trabajo de desarrollo."},
+  {n:"Branding", k:"Construir y gestionar marcas.", c:["Brand equity","Arquitectura de marca","Personalidad de marca"], q:"¿Qué es el brand equity y cómo se mide?"},
+  {n:"Diseño Editorial", k:"Diseño de publicaciones.", c:["Retícula editorial","Jerarquía tipográfica","Maquetación"], q:"¿Cómo armas la retícula de una revista?"},
+  {n:"Inglés Técnico", k:"Vocabulario técnico de publicidad y diseño en inglés.", c:["Terminología","Lectura técnica"], q:"¿Puedes leer un brief en inglés?", tie:"También es tu vacío principal en la ruta de software."},
+  {n:"Marketing Estratégico", k:"Planificar el marketing a largo plazo.", c:["Análisis FODA","Matriz BCG","Ansoff","Plan de marketing"], q:"¿Qué es la matriz de Ansoff?"},
+  {n:"Narrativas Fotográficas", k:"Contar historias con series de fotografías.", c:["Fotoensayo","Secuencia","Edición fotográfica"], q:"¿Cómo se construye un fotoensayo?"},
+  {n:"Postproducción de Proyectos Audiovisuales", k:"Edición, color y sonido final.", c:["Montaje","Corrección de color","Mezcla de audio"], q:"¿Diferencia entre corrección y gradación de color?"}
+ ]},
+ {t:"Campañas, animación e inmersivos", d:"Primeras campañas, animación, gamificación y productos de realidad virtual o aumentada.", items:[
+  {n:"Análisis de la Narrativa Audiovisual", k:"Leer críticamente piezas audiovisuales.", c:["Puesta en escena","Montaje","Punto de vista"], q:"¿Cómo analizarías un spot plano por plano?"},
+  {n:"Animación 2D y 3D", k:"Principios de animación y producción.", c:["12 principios de Disney","Keyframes","Modelado 3D"], q:"¿Cuáles son los 12 principios de la animación?"},
+  {n:"Campañas Publicitarias I", k:"Diseñar una campaña de principio a fin.", c:["Brief","Concepto","Estrategia creativa","Piezas"], q:"¿Cómo pasas de un brief a un concepto creativo?"},
+  {n:"Doctrina Social de la Iglesia", k:"Principios sociales de la Iglesia Católica.", c:["Dignidad humana","Bien común","Solidaridad"], q:"¿Cuáles son sus principios básicos?"},
+  {n:"Gamificación", k:"Usar mecánicas de juego fuera de los juegos.", c:["Puntos, insignias, rankings","Motivación intrínseca","Octalysis"], q:"¿Cómo gamificarías Pukllay sin que se vuelva una copia de Duolingo?", tie:"Clave para Pukllay."},
+  {n:"Gestión de Eventos y Publicidad Corporativa", k:"Planificar eventos y comunicación institucional.", c:["BTL","Activaciones","Comunicación corporativa"], q:"¿Diferencia entre ATL y BTL?"},
+  {n:"Productos Inmersivos (en inglés)", k:"Experiencias de realidad virtual, aumentada y mixta.", c:["AR","VR","Experiencias 360"], q:"¿Cuándo tiene sentido una experiencia AR para una marca?", tie:"Conecta con tu trabajo en Unreal."}
+ ]},
+ {t:"Agencia y publicidad digital", d:"Cómo funciona una agencia, comercio electrónico y anuncios en plataformas digitales.", items:[
+  {n:"Agencia Publicitaria", k:"Cómo funciona una agencia: áreas, roles y modelo de negocio.", c:["Cuentas, creatividad, medios","Fee vs comisión","Pitch"], q:"¿Qué hace un ejecutivo de cuentas?"},
+  {n:"Campañas Publicitarias II", k:"Campañas integrales y multicanal.", c:["IMC","360°","Plan de medios"], q:"¿Qué es la comunicación integrada de marketing?"},
+  {n:"Comercio Electrónico", k:"Vender online: plataformas, pagos, logística y conversión.", c:["Shopify","Embudo","Tasa de conversión","Carrito abandonado"], q:"Es tu día a día.", tie:"Ya lo dominas por tu trabajo con Shopify."},
+  {n:"Filosofía y Ética", k:"Fundamentos éticos aplicados a la profesión.", c:["Ética profesional","Publicidad responsable","Autorregulación"], q:"¿Qué hace que un anuncio sea poco ético?"},
+  {n:"Plataformas de Publicidad Digital", k:"Comprar y optimizar anuncios en plataformas digitales.", c:["Meta Ads","Google Ads","Pixel","CPC, CPM, ROAS"], q:"¿Qué diferencia hay entre CPC, CPM y ROAS?"},
+  {n:"Producción Audiovisual en Medios Digitales", k:"Video para redes y plataformas digitales.", c:["Formato vertical","Reels y TikTok","Primeros 3 segundos"], q:"¿Por qué importan los primeros 3 segundos de un reel?"}
+ ]},
+ {t:"Marketing social, retail y prácticas", d:"Campañas sociales y electorales, punto de venta, producto multimedia y prácticas.", items:[
+  {n:"Campañas Electorales", k:"Comunicación política y campañas de candidatos.", c:["Marketing político","Mensaje","Segmentación del electorado"], q:"¿En qué se diferencia una campaña electoral de una comercial?"},
+  {n:"Marketing Social", k:"Usar marketing para cambiar conductas por el bien común.", c:["Cambio de comportamiento","Causa","Campañas de bien público"], q:"¿Cómo harías una campaña de donación de sangre?", tie:"Conecta con tu proyecto Donar."},
+  {n:"Prácticas Preprofesionales I", k:"Experiencia real en empresa o agencia.", c:["Experiencia laboral"], q:"Tu trabajo freelance es tu experiencia."},
+  {n:"Producto Multimedia", k:"Desarrollar un producto multimedia completo.", c:["Concepto","Prototipo","Producto final"], q:"¿Pukllay podría ser tu producto multimedia?"},
+  {n:"Retail y Merchandising", k:"Comunicación en el punto de venta.", c:["Visual merchandising","POP","Planograma"], q:"¿Qué es material POP?"},
+  {n:"Taller Integral de Producción Audiovisual", k:"Proyecto audiovisual completo de inicio a fin.", c:["Pre, pro y postproducción"], q:"¿Podrías dirigir un spot completo solo?"}
+ ]},
+ {t:"Gestión, métricas e investigación", d:"Gestión de proyectos e innovación, analítica digital y trabajo de investigación.", items:[
+  {n:"Gestión de Innovación", k:"Organizar la innovación en una empresa o agencia.", c:["Embudo de innovación","Design Thinking","Portafolio"], q:"¿Cómo se prioriza una idea innovadora?", tie:"Se cruza con tu maestría."},
+  {n:"Gestión de Proyectos Publicitarios", k:"Planificar y controlar proyectos de comunicación.", c:["Cronograma","Presupuesto","Scrum en agencias"], q:"¿Cómo controlas el presupuesto de una campaña?", tie:"Se cruza con tu maestría."},
+  {n:"Métricas y Analítica Digital", k:"Medir resultados digitales y tomar decisiones.", c:["Google Analytics 4","KPI","Atribución","Embudo"], q:"¿Qué KPI usarías para medir una tienda Shopify?"},
+  {n:"Prácticas Preprofesionales II", k:"Segunda etapa de experiencia laboral.", c:["Experiencia laboral"], q:"Tus clientes freelance cuentan."},
+  {n:"Trabajo de Investigación", k:"Tesis o trabajo de investigación para obtener el grado.", c:["Problema","Marco teórico","Metodología","Conclusiones"], q:"¿Tienes claro el problema y la metodología de tu tesis sobre Pukllay?", tie:"Tu tesis en curso."}
+ ]}
+];
+
+/* ================= Render de repaso (maestría y publicidad) ================= */
+function renderReview(data, mountId, prefix, label, store, books){
+  let html = "";
+  data.forEach((b, i) => {
+    const n = i + 1;
+    html += `<section class="stage" aria-labelledby="${prefix}-h-${n}">
+      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">${esc(label)}</div><h3 class="h-sec" id="${prefix}-h-${n}">${esc(b.t)}</h3><p>${esc(b.d)}</p></div></div>
+      <div class="table review"><div class="thead"><span>Curso</span><span>Lo que deberías saber</span><span>Pregúntate</span></div>`;
+    b.items.forEach((it, j) => {
+      const id = `${prefix}${n}-${j}`;
+      const book = books ? books[it.n] : null;
+      html += `<div class="row${store[id] ? " done" : ""}" data-id="${id}">
+        <div class="cell"><label class="cname"><input type="checkbox" id="${id}"${store[id] ? " checked" : ""}><span>${esc(it.n)}</span></label></div>
+        <div class="cell"><p class="know">${esc(it.k)}</p><div class="keys">${it.c.map(x => `<span>${esc(x)}</span>`).join("")}</div></div>
+        <div class="cell"><p class="ask">${esc(it.q)}</p>${it.tie ? `<p class="tie">${esc(it.tie)}</p>` : ""}${book ? `<p class="book"><span class="tag">Libro</span><span>${esc(book)}</span></p>` : ""}</div></div>`;
+    });
+    html += `</div></section>`;
+  });
+  $(mountId).innerHTML = html;
+}
+function reviewStats(mountId, store, p, tabPctId){
+  const rows = [...document.querySelectorAll(`#${mountId} .row`)];
+  const d = rows.filter(r => store[r.dataset.id]).length;
+  const pct = rows.length ? Math.round(d / rows.length * 100) : 0;
+  $(`${p}-total`).textContent = rows.length;
+  $(`${p}-done`).textContent = d;
+  $(`${p}-pct`).textContent = pct + "%";
+  $(`${p}-bar`).style.width = pct + "%";
+  $(tabPctId).textContent = "Avance " + pct + "%";
+}
+
+const MA_KEY = "maestria-utp-v1", PU_KEY = "publicidad-ucsm-v1";
+const maDone = load(MA_KEY), puDone = load(PU_KEY);
+const MA_BOOKS = {
+  "Entorno Competitivo y Transformación Digital":"Estrategia competitiva · Michael Porter",
+  "Transformación Digital":"The Digital Transformation Playbook · David L. Rogers",
+  "Gestión Estratégica":"Good Strategy Bad Strategy · Richard Rumelt",
+  "Gestión Empresarial":"La meta · Eliyahu Goldratt",
+  "Tecnologías Digitales":"La segunda era de las máquinas · Erik Brynjolfsson y Andrew McAfee",
+  "Customer Centric":"Mapping Experiences · Jim Kalbach",
+  "E-Business & Digital Media":"Digital Marketing · Dave Chaffey y Fiona Ellis-Chadwick",
+  "E-Business Governance":"IT Governance · Peter Weill y Jeanne Ross",
+  "Rediseño de Procesos":"Fundamentals of Business Process Management · Dumas, La Rosa, Mendling y Reijers",
+  "Aplicación de Metodologías Ágiles":"Scrum: el arte de hacer el doble de trabajo en la mitad de tiempo · Jeff Sutherland",
+  "Innovación y Agilidad":"Doing Agile Right · Darrell Rigby, Sarah Elk y Steve Berez",
+  "Digital Project Management":"Guía del PMBOK, 7.ª edición · PMI",
+  "Ecosistema Móvil y Virtual":"Mobile First · Luke Wroblewski",
+  "Business Model Canvas":"Generación de modelos de negocio · Alexander Osterwalder e Yves Pigneur",
+  "Start-ups y Emprendimiento":"El método Lean Startup · Eric Ries",
+  "Innovación y Design Thinking":"Change by Design · Tim Brown",
+  "Hub de Innovación":"El dilema del innovador · Clayton Christensen",
+  "UX/UI Design":"No me hagas pensar · Steve Krug",
+  "Change Management":"Liderando el cambio · John Kotter",
+  "LEGO® Serious Play®":"Building a Better Business Using the LEGO Serious Play Method · Per Kristiansen y Robert Rasmussen",
+  "Negociación Efectiva":"Obtenga el sí · Roger Fisher, William Ury y Bruce Patton",
+  "Presentaciones de Alto Impacto":"The Pyramid Principle · Barbara Minto",
+  "Soft Skills":"Radical Candor · Kim Scott",
+  "Modelos de Arquitectura Tecnológica":"Enterprise Architecture as Strategy · Jeanne Ross, Peter Weill y David Robertson",
+  "Big Data & Cloud Computing":"Big data: la revolución de los datos masivos · Viktor Mayer-Schönberger y Kenneth Cukier",
+  "Business Intelligence & Analytics":"Storytelling con datos · Cole Nussbaumer Knaflic",
+  "Machine Learning & Artificial Intelligence":"Prediction Machines · Ajay Agrawal, Joshua Gans y Avi Goldfarb",
+  "Aspectos Legales TI":"Ley 29733 y su reglamento · texto oficial, gratis",
+  "Gestión de Resultados y OKRs":"Mide lo que importa · John Doerr",
+  "Digital Management":"Digital to the Core · Mark Raskino y Graham Waller",
+  "Simulador Business Management":"Thinking in Systems · Donella Meadows",
+  "Plan de Transformación Digital I y II":"Leading Digital · George Westerman, Didier Bonnet y Andrew McAfee"
+};
+
+const MA_CERTS = [
+  {n:"Google Analytics y Google Ads", p:"Gratis", v:"si", d:"Se sacan en Skillshop de Google. Validan lo que ya haces con tiendas online y encajan con E-Business y Business Intelligence.", w:"Ya mismo, en un fin de semana."},
+  {n:"PSPO I · Scrum.org", p:"200 USD", v:"si", d:"Product Owner: une agilidad, producto y negocio, justo el cruce entre tu maestría y tu perfil de UX. No exige curso previo. Si te ves más como facilitador de equipos, el PSM I cuesta lo mismo.", w:"Al terminar la maestría, con Metodologías Ágiles fresco."},
+  {n:"Meta Certified Digital Marketing Associate", p:"99 USD", v:"op", d:"Los cursos de Meta Blueprint son gratis; lo que se paga es el examen (99 USD en EE. UU., varía por país). Útil si también manejas campañas de Facebook e Instagram para tus clientes.", w:"Si ofreces publicidad en Meta como servicio."},
+  {n:"CAPM · PMI", p:"225–300 USD", v:"op", d:"Gestión de proyectos de nivel inicial, conocida en empresas y en el Estado. Pide 23 horas de formación en gestión de proyectos. Con membresía PMI el examen baja a 225.", w:"Si postulas a puestos de jefe de proyecto."},
+  {n:"PMP · PMI", p:"445–675 USD", v:"op", d:"La de más peso en gerencia de proyectos, pero exige 36 meses dirigiendo proyectos y 35 horas de formación. Tus proyectos freelance pueden contar si los documentas bien.", w:"Más adelante, cuando juntes la experiencia."},
+  {n:"ITIL 4 Foundation", p:"~420–536 USD", v:"op", d:"Gestión de servicios de TI. El temario oficial es gratis y el curso no es obligatorio, pero el examen es caro (precio de referencia en México; varía por proveedor).", w:"Solo si apuntas a gerencia de TI en una empresa grande o el Estado."},
+  {n:"Google UX Design (Coursera)", p:"Suscripción", v:"no", d:"Está en español y tiene ayuda financiera, pero es de nivel inicial: 7 cursos y unas 214 horas para aprender lo que ya haces. Tu portafolio demuestra más.", w:"Sáltalo."},
+  {n:"COBIT y TOGAF", p:"Caras", v:"no", d:"Gobierno de TI y arquitectura empresarial. Sirven para auditoría o arquitectura en corporativos grandes, no para tu perfil actual.", w:"Solo si te especializas en gobierno de TI."}
+];
+
+const PU_BOOKS = [
+  {t:"Confesiones de un publicitario", a:"David Ogilvy", e:"Fundamentos de la Publicidad", d:"El clásico de la publicidad moderna, contado por uno de sus grandes nombres."},
+  {t:"Posicionamiento: la batalla por su mente", a:"Al Ries y Jack Trout", e:"Segmentación y Posicionamiento", d:"El libro que creó el concepto de posicionamiento."},
+  {t:"Hey Whipple, Squeeze This", a:"Luke Sullivan", e:"Campañas Publicitarias", d:"Cómo se crean buenas campañas, contado por un creativo con humor."},
+  {t:"Influencia", a:"Robert Cialdini", e:"Comportamiento del Consumidor", d:"Los principios psicológicos que hacen que la gente diga que sí."},
+  {t:"Contagioso", a:"Jonah Berger", e:"Storytelling y Medios Digitales", d:"Por qué algunas ideas se comparten y otras no."},
+  {t:"Sistemas de retículas", a:"Josef Müller-Brockmann", e:"Diseño Gráfico y Editorial", d:"La base de la composición con retícula."},
+  {t:"Pensar con tipos", a:"Ellen Lupton", e:"Diseño Gráfico II", d:"Guía clara de tipografía para diseñadores."},
+  {t:"La interacción del color", a:"Josef Albers", e:"Diseño Gráfico I", d:"Cómo se comporta el color en la práctica."},
+  {t:"¡Salva al gato!", a:"Blake Snyder", e:"Guion y Narrativa", d:"Estructura de guion aplicada a historias que enganchan."},
+  {t:"Roba como un artista", a:"Austin Kleon", e:"Creatividad", d:"Libro corto sobre cómo funciona la creatividad en la práctica."}
+];
+
+renderReview(MA, "ma-blocks", "m", "Certificación progresiva", maDone, MA_BOOKS);
+renderReview(PU, "pu-cycles", "p", "Ciclo", puDone);
+$("ma-certs").innerHTML = MA_CERTS.map(certCard).join("");
+$("pu-books").innerHTML = PU_BOOKS.map(bookCard).join("");
+const maStats = () => reviewStats("ma-blocks", maDone, "ma", "tp-maestria");
+const puStats = () => reviewStats("pu-cycles", puDone, "pu", "tp-publicidad");
+
+function wireChecks(mountId, store, key, after){
+  $(mountId).addEventListener("change", e => {
+    const box = e.target;
+    if (!box || box.type !== "checkbox") return;
+    const row = box.closest(".row");
+    if (box.checked) store[row.dataset.id] = true; else delete store[row.dataset.id];
+    row.classList.toggle("done", box.checked);
+    persist(key, store);
+    after();
+  });
+}
+wireChecks("sw-stages", swDone, SW_KEY, swStats);
+wireChecks("ma-blocks", maDone, MA_KEY, maStats);
+wireChecks("pu-cycles", puDone, PU_KEY, puStats);
+swStats(); maStats(); puStats();
+
+/* ================= Pestañas ================= */
+const TABS = ["software", "maestria", "publicidad"];
+function showTab(t, focus){
+  TABS.forEach(x => {
+    const on = x === t;
+    const tab = $("tab-" + x);
+    tab.setAttribute("aria-selected", String(on));
+    tab.tabIndex = on ? 0 : -1;
+    $("panel-" + x).hidden = !on;
+  });
+  try { localStorage.setItem("plan-tab", t); } catch(e) {}
+  if (focus) $("tab-" + t).focus();
+}
+function keepPanelInView(){
+  const panelsTop = $("panels").getBoundingClientRect().top + window.scrollY - $("tabbar").offsetHeight;
+  if (window.scrollY > panelsTop) window.scrollTo({ top: Math.max(0, panelsTop) });
+}
+document.querySelectorAll(".tab").forEach(b => {
+  b.addEventListener("click", () => { showTab(b.dataset.t); keepPanelInView(); });
+  b.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const i = TABS.indexOf(b.dataset.t);
+    const next = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+    showTab(next, true);
+    keepPanelInView();
+  });
+});
+function tabFromHash(){
+  const h = (location.hash || "").slice(1);
+  if (TABS.includes(h)) return h;
+  if (/^etapa-\d+$/.test(h)) return "software";
+  return null;
+}
+let start = tabFromHash();
+if (!start) { try { start = localStorage.getItem("plan-tab"); } catch(e) { start = null; } }
+if (!TABS.includes(start)) start = "software";
+showTab(start);
+window.addEventListener("hashchange", () => { const t = tabFromHash(); if (t) showTab(t); });
+
+/* Altura real de la barra de pestañas, para que la barra de filtros quede justo debajo */
+const setTabH = () => document.documentElement.style.setProperty("--tabbar-h", $("tabbar").offsetHeight + "px");
+setTabH();
+if (window.ResizeObserver) new ResizeObserver(setTabH).observe($("tabbar"));
+else window.addEventListener("resize", setTabH);
+</script>
+
+</body></html>
