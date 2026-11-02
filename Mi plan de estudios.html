@@ -1,9 +1,15 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Mi plan de estudios</title>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
+<title>Mi plan de estudios</title>
+<meta name="description" content="Ruta autodidacta de Ingeniería de Software, repaso de la maestría UTP y de la carrera de Publicidad UCSM, con avance guardado en el navegador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <style>
 /* Layout: un solo documento con tres pestañas (ruta de software, maestría, carrera); cada pestaña es una tabla de temas por etapa o ciclo, con su propio color y su propio avance */
 :root{
@@ -100,7 +106,7 @@ h4{font-size:16.5px;font-weight:600}
 .spine li span{font-size:13px;color:var(--muted)}
 .certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .cert{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.cert-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cert-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px}
 .price{font-family:var(--f-display);font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .verdict{align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
 .v-si{background:var(--covered-soft);color:var(--covered)}
@@ -126,7 +132,7 @@ h4{font-size:16.5px;font-weight:600}
 
 /* Etapas, bloques y ciclos */
 .stages{display:flex;flex-direction:column;gap:44px}
-.stage{display:flex;flex-direction:column;gap:12px;scroll-margin-top:calc(var(--tabbar-h,78px) + 90px)}
+.stage{display:flex;flex-direction:column;gap:12px;scroll-margin-top:calc(var(--tabbar-h,78px) + var(--ctl-h,90px) + 16px)}
 .stage-head{display:flex;align-items:baseline;gap:6px 16px}
 .stage-head .num{font-family:var(--f-display);font-weight:800;font-size:44px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
 .stage-head p{margin:4px 0 0;font-size:14px;color:var(--muted);max-width:70ch}
@@ -171,16 +177,44 @@ h4{font-size:16.5px;font-weight:600}
 .tips b{font-weight:600}
 .panel.focus{border-color:var(--accent)}
 
+/* Búsqueda, progreso por etapa, "sigue con" y respaldo */
+.ctl-right{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.search{flex:0 1 230px;min-width:0;font:400 14px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 14px}
+.search::placeholder{color:var(--muted)}
+.chips a.full{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.stage-head .sprog{margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.stage-head .sprog.full{color:var(--accent)}
+.next{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin:4px 0 0;font-size:14.5px}
+.goto{font:600 14.5px var(--f-body);color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-align:left}
+.next .where{color:var(--muted);font-size:13px}
+.row{scroll-margin-top:calc(var(--tabbar-h,78px) + var(--ctl-h,90px) + 24px)}
+.row.flash{animation:flash 1.8s ease-out}
+@keyframes flash{from{background:var(--accent-soft)}to{background:transparent}}
+.empty{margin:0;padding:28px 18px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:14px}
+.backup-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font:500 13.5px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 14px;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bk-msg{font-size:13px;color:var(--muted)}
+
 @media (max-width:760px){
+  .search{flex:1 1 200px}
   .thead{display:none}
   .route .row,.review .row{grid-template-columns:1fr;gap:10px}
   .row .cell:not(:first-child){padding-left:26px}
   .controls{position:static}
   .tab{padding:8px 10px;font-size:13px}
 }
-@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}.row.flash{animation:none;outline:2px solid var(--accent)}}
+@media print{
+  .tabbar,.controls,.backup,.next{display:none!important}
+  body{background:#fff}
+  .wrap{padding-block:0}
+  .row,.cert,.school,.stage-head{break-inside:avoid}
+}
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header class="top">
     <div class="eyebrow">Software · Maestría · Publicidad</div>
@@ -208,6 +242,7 @@ h4{font-size:16.5px;font-weight:600}
           <div class="stat"><b id="sw-pct">0%</b><span>completado</span></div>
         </div>
         <div class="bar" aria-hidden="true"><i id="sw-bar"></i></div>
+        <p class="next" id="sw-next" aria-live="polite"></p>
       </div>
 
       <section class="section" aria-labelledby="schools-h">
@@ -277,13 +312,17 @@ h4{font-size:16.5px;font-weight:600}
         <div class="certs" id="sw-books"></div>
       </section>
 
-      <div class="controls">
+      <div class="controls" data-for="software">
         <nav class="chips" id="sw-chips" aria-label="Ir a etapa"></nav>
-        <div class="filters" id="sw-filters" role="group" aria-label="Filtrar temas">
-          <button type="button" data-f="all" aria-pressed="true">Todos</button>
-          <button type="button" data-f="suplir" aria-pressed="false">Por estudiar</button>
-          <button type="button" data-f="ya" aria-pressed="false">Ya cubiertos</button>
-          <button type="button" data-f="practica" aria-pressed="false">Prácticas</button>
+        <div class="ctl-right">
+          <input type="search" class="search" placeholder="Buscar tema, curso o recurso" aria-label="Buscar en la ruta de software">
+          <div class="filters" role="group" aria-label="Filtrar temas">
+            <button type="button" data-f="all" aria-pressed="true">Todos</button>
+            <button type="button" data-f="pend" aria-pressed="false">Sin marcar</button>
+            <button type="button" data-f="suplir" aria-pressed="false">Por estudiar</button>
+            <button type="button" data-f="ya" aria-pressed="false">Ya cubiertos</button>
+            <button type="button" data-f="practica" aria-pressed="false">Prácticas</button>
+          </div>
         </div>
       </div>
 
@@ -298,6 +337,7 @@ h4{font-size:16.5px;font-weight:600}
       </div>
 
       <div class="stages" id="sw-stages"></div>
+      <p class="empty" id="sw-empty" hidden>Ningún tema coincide con la búsqueda o el filtro.</p>
 
       <p class="note">Mallas tomadas de los brochures de Cibertec, IDAT y Tecsup; las tres se reservan cambios. Precios de exámenes verificados en octubre de 2026 y sujetos a cambio.</p>
     </section>
@@ -314,6 +354,7 @@ h4{font-size:16.5px;font-weight:600}
           <div class="stat"><b id="ma-pct">0%</b><span>dominio</span></div>
         </div>
         <div class="bar" aria-hidden="true"><i id="ma-bar"></i></div>
+        <p class="next" id="ma-next" aria-live="polite"></p>
         <p class="note"><strong>Ojo:</strong> el brochure muestra los cursos sueltos, sin orden de ciclo. Los agrupé por tema según los nombres de las cuatro certificaciones, así que el orden real en que los llevas puede variar.</p>
       </div>
       <section class="panel focus" aria-labelledby="ux-h">
@@ -346,7 +387,20 @@ h4{font-size:16.5px;font-weight:600}
         </div>
       </section>
 
+      <div class="controls" data-for="maestria">
+        <nav class="chips" id="ma-chips" aria-label="Ir a bloque"></nav>
+        <div class="ctl-right">
+          <input type="search" class="search" placeholder="Buscar curso o concepto" aria-label="Buscar en la maestría">
+          <div class="filters" role="group" aria-label="Filtrar cursos">
+            <button type="button" data-f="all" aria-pressed="true">Todos</button>
+            <button type="button" data-f="pend" aria-pressed="false">Por repasar</button>
+            <button type="button" data-f="done" aria-pressed="false">Los domino</button>
+          </div>
+        </div>
+      </div>
+
       <div class="stages" id="ma-blocks"></div>
+      <p class="empty" id="ma-empty" hidden>Ningún curso coincide con la búsqueda o el filtro.</p>
     </section>
 
     <!-- ============ PUBLICIDAD UCSM ============ -->
@@ -361,6 +415,7 @@ h4{font-size:16.5px;font-weight:600}
           <div class="stat"><b id="pu-pct">0%</b><span>dominio</span></div>
         </div>
         <div class="bar" aria-hidden="true"><i id="pu-bar"></i></div>
+        <p class="next" id="pu-next" aria-live="polite"></p>
         <p class="note"><strong>Ojo:</strong> es la malla vigente desde 2026. Si estudiaste con una malla anterior, algunos nombres o cursos pueden ser distintos, pero los temas de fondo son los mismos.</p>
       </div>
       <section class="panel" aria-labelledby="pu-books-h">
@@ -370,9 +425,34 @@ h4{font-size:16.5px;font-weight:600}
         <div class="certs" id="pu-books"></div>
       </section>
 
+      <div class="controls" data-for="publicidad">
+        <nav class="chips" id="pu-chips" aria-label="Ir a ciclo"></nav>
+        <div class="ctl-right">
+          <input type="search" class="search" placeholder="Buscar curso o concepto" aria-label="Buscar en publicidad">
+          <div class="filters" role="group" aria-label="Filtrar cursos">
+            <button type="button" data-f="all" aria-pressed="true">Todos</button>
+            <button type="button" data-f="pend" aria-pressed="false">Por repasar</button>
+            <button type="button" data-f="done" aria-pressed="false">Los domino</button>
+          </div>
+        </div>
+      </div>
+
       <div class="stages" id="pu-cycles"></div>
+      <p class="empty" id="pu-empty" hidden>Ningún curso coincide con la búsqueda o el filtro.</p>
     </section>
   </main>
+
+  <section class="panel backup" aria-labelledby="bk-h">
+    <div class="eyebrow">Tu avance se guarda solo en este navegador</div>
+    <h3 class="h-sec" id="bk-h">Respaldo de tu avance</h3>
+    <p class="note">Si borras los datos del navegador o cambias de dispositivo, pierdes lo marcado. Descarga un respaldo de las tres pestañas de vez en cuando y restáuralo donde quieras seguir.</p>
+    <div class="backup-actions">
+      <button type="button" class="btn primary" id="bk-export">Descargar respaldo</button>
+      <button type="button" class="btn" id="bk-import">Restaurar respaldo</button>
+      <input type="file" id="bk-file" accept="application/json,.json" hidden>
+      <span class="bk-msg" id="bk-msg" role="status"></span>
+    </div>
+  </section>
 </div>
 
 <script>
@@ -591,7 +671,7 @@ $("sw-books").innerHTML = SW_BOOKS.map(bookCard).join("");
     const n = i + 1;
     chips += `<a href="#etapa-${n}" title="${esc(st.t)}">E${pad(n)}</a>`;
     html += `<section class="stage" id="etapa-${n}" aria-labelledby="sw-h-${n}">
-      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">Etapa</div><h3 class="h-sec" id="sw-h-${n}">${esc(st.t)}</h3><p>${esc(st.d)}</p></div></div>
+      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">Etapa</div><h3 class="h-sec" id="sw-h-${n}">${esc(st.t)}</h3><p>${esc(st.d)}</p></div><span class="sprog"></span></div>
       <div class="table route"><div class="thead"><span>Tema</span><span>Qué aprendes y dónde se enseña</span><span>Cómo lo suples</span></div>`;
     st.items.forEach((it, j) => {
       const k = it.k || "suplir", id = `e${n}-${j}`;
@@ -623,13 +703,6 @@ function swStats(){
   $("sw-bar").style.width = pct + "%";
   $("tp-software").textContent = "Avance " + pct + "%";
 }
-
-document.querySelectorAll("#sw-filters button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll("#sw-filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-  const f = b.dataset.f;
-  document.querySelectorAll("#sw-stages .row").forEach(r => { r.hidden = !(f === "all" || r.dataset.k === f); });
-  document.querySelectorAll("#sw-stages .stage").forEach(s => { s.hidden = !s.querySelector(".row:not([hidden])"); });
-}));
 
 /* ================= MAESTRÍA UTP ================= */
 const MA = [
@@ -763,12 +836,13 @@ const PU = [
 ];
 
 /* ================= Render de repaso (maestría y publicidad) ================= */
-function renderReview(data, mountId, prefix, label, store, books){
-  let html = "";
+function renderReview(data, mountId, prefix, label, store, books, anchor, chipsId, chipLetter){
+  let html = "", chips = "";
   data.forEach((b, i) => {
     const n = i + 1;
-    html += `<section class="stage" aria-labelledby="${prefix}-h-${n}">
-      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">${esc(label)}</div><h3 class="h-sec" id="${prefix}-h-${n}">${esc(b.t)}</h3><p>${esc(b.d)}</p></div></div>
+    chips += `<a href="#${anchor}-${n}" title="${esc(b.t)}">${chipLetter}${pad(n)}</a>`;
+    html += `<section class="stage" id="${anchor}-${n}" aria-labelledby="${prefix}-h-${n}">
+      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">${esc(label)}</div><h3 class="h-sec" id="${prefix}-h-${n}">${esc(b.t)}</h3><p>${esc(b.d)}</p></div><span class="sprog"></span></div>
       <div class="table review"><div class="thead"><span>Curso</span><span>Lo que deberías saber</span><span>Pregúntate</span></div>`;
     b.items.forEach((it, j) => {
       const id = `${prefix}${n}-${j}`;
@@ -781,6 +855,7 @@ function renderReview(data, mountId, prefix, label, store, books){
     html += `</div></section>`;
   });
   $(mountId).innerHTML = html;
+  $(chipsId).innerHTML = chips;
 }
 function reviewStats(mountId, store, p, tabPctId){
   const rows = [...document.querySelectorAll(`#${mountId} .row`)];
@@ -854,31 +929,167 @@ const PU_BOOKS = [
   {t:"Roba como un artista", a:"Austin Kleon", e:"Creatividad", d:"Libro corto sobre cómo funciona la creatividad en la práctica."}
 ];
 
-renderReview(MA, "ma-blocks", "m", "Certificación progresiva", maDone, MA_BOOKS);
-renderReview(PU, "pu-cycles", "p", "Ciclo", puDone);
+renderReview(MA, "ma-blocks", "m", "Certificación progresiva", maDone, MA_BOOKS, "bloque", "ma-chips", "B");
+renderReview(PU, "pu-cycles", "p", "Ciclo", puDone, null, "ciclo", "pu-chips", "C");
 $("ma-certs").innerHTML = MA_CERTS.map(certCard).join("");
 $("pu-books").innerHTML = PU_BOOKS.map(bookCard).join("");
 const maStats = () => reviewStats("ma-blocks", maDone, "ma", "tp-maestria");
 const puStats = () => reviewStats("pu-cycles", puDone, "pu", "tp-publicidad");
 
-function wireChecks(mountId, store, key, after){
-  $(mountId).addEventListener("change", e => {
+/* ================= Avance, búsqueda y filtros (las tres pestañas) ================= */
+const TABS = ["software", "maestria", "publicidad"];
+const PANELS = {
+  software:  {mount:"sw-stages", chips:"sw-chips", next:"sw-next", empty:"sw-empty", store:swDone, key:SW_KEY, stats:swStats},
+  maestria:  {mount:"ma-blocks", chips:"ma-chips", next:"ma-next", empty:"ma-empty", store:maDone, key:MA_KEY, stats:maStats},
+  publicidad:{mount:"pu-cycles", chips:"pu-chips", next:"pu-next", empty:"pu-empty", store:puDone, key:PU_KEY, stats:puStats}
+};
+const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const FSTATE = {};
+TABS.forEach(t => { FSTATE[t] = {f:"all", q:""}; });
+
+function stageProgress(name){
+  const P = PANELS[name];
+  document.querySelectorAll(`#${P.mount} .stage`).forEach(st => {
+    const rows = [...st.querySelectorAll(".row")];
+    const d = rows.filter(r => P.store[r.dataset.id]).length;
+    const full = rows.length > 0 && d === rows.length;
+    const sp = st.querySelector(".sprog");
+    sp.textContent = `${d}/${rows.length}`;
+    sp.classList.toggle("full", full);
+    sp.title = full ? "Completo" : `${d} de ${rows.length} marcados`;
+    const chip = document.querySelector(`#${P.chips} a[href="#${st.id}"]`);
+    if (chip) chip.classList.toggle("full", full);
+  });
+}
+function nextUp(name){
+  const P = PANELS[name];
+  const pending = [...document.querySelectorAll(`#${P.mount} .row`)].filter(r => !P.store[r.dataset.id]);
+  const row = pending.find(r => r.dataset.k === "suplir") || pending[0];
+  const el = $(P.next);
+  if (!row) { el.innerHTML = '<span class="eyebrow">Sigue con</span><span>Todo marcado. Buen trabajo.</span>'; return; }
+  const st = row.closest(".stage");
+  el.innerHTML = `<span class="eyebrow">Sigue con</span><button type="button" class="goto" data-goto="${row.dataset.id}">${esc(row.querySelector(".cname span").textContent)}</button><span class="where">${esc(st.querySelector(".stage-head .num").textContent)} · ${esc(st.querySelector(".h-sec").textContent)}</span>`;
+}
+function refresh(name){ PANELS[name].stats(); stageProgress(name); nextUp(name); }
+
+function applyFilter(name){
+  const P = PANELS[name], {f, q} = FSTATE[name], nq = norm(q.trim());
+  let any = false;
+  document.querySelectorAll(`#${P.mount} .stage`).forEach(st => {
+    if (st._t === undefined) st._t = norm(st.querySelector(".stage-head").textContent);
+    const stageHit = !nq || st._t.includes(nq);
+    let visible = 0;
+    st.querySelectorAll(".row").forEach(r => {
+      if (r._t === undefined) r._t = norm(r.textContent);
+      const done = !!P.store[r.dataset.id];
+      const okF = f === "all" || (f === "pend" ? !done : f === "done" ? done : r.dataset.k === f);
+      const okQ = stageHit || r._t.includes(nq);
+      r.hidden = !(okF && okQ);
+      if (!r.hidden) visible++;
+    });
+    st.hidden = !visible;
+    if (visible) any = true;
+  });
+  $(P.empty).hidden = any;
+}
+function resetFilter(name){
+  FSTATE[name] = {f:"all", q:""};
+  const c = document.querySelector(`.controls[data-for="${name}"]`);
+  c.querySelector(".search").value = "";
+  c.querySelectorAll(".filters button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === "all")));
+  applyFilter(name);
+}
+document.querySelectorAll(".controls[data-for]").forEach(c => {
+  const name = c.dataset.for;
+  c.querySelector(".search").addEventListener("input", e => { FSTATE[name].q = e.target.value; applyFilter(name); });
+  c.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+    c.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    FSTATE[name].f = b.dataset.f;
+    applyFilter(name);
+  }));
+  /* Si la etapa elegida está oculta por un filtro, se limpia antes de saltar */
+  c.querySelector(".chips").addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    const target = document.querySelector(a.getAttribute("href"));
+    if (target && target.hidden) resetFilter(name);
+  });
+});
+
+/* "Sigue con": lleva al siguiente tema sin marcar y lo resalta */
+document.addEventListener("click", e => {
+  const g = e.target.closest(".goto");
+  if (!g) return;
+  const row = document.querySelector(`.row[data-id="${g.dataset.goto}"]`);
+  if (!row) return;
+  const name = TABS.find(t => row.closest("#" + PANELS[t].mount));
+  if (row.hidden || row.closest(".stage").hidden) resetFilter(name);
+  const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  row.scrollIntoView({block:"center", behavior: smooth ? "smooth" : "auto"});
+  row.querySelector("input").focus({preventScroll:true});
+  row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+  setTimeout(() => row.classList.remove("flash"), 2000);
+});
+
+TABS.forEach(name => {
+  const P = PANELS[name];
+  $(P.mount).addEventListener("change", e => {
     const box = e.target;
     if (!box || box.type !== "checkbox") return;
     const row = box.closest(".row");
-    if (box.checked) store[row.dataset.id] = true; else delete store[row.dataset.id];
+    if (box.checked) P.store[row.dataset.id] = true; else delete P.store[row.dataset.id];
     row.classList.toggle("done", box.checked);
-    persist(key, store);
-    after();
+    persist(P.key, P.store);
+    refresh(name);
   });
-}
-wireChecks("sw-stages", swDone, SW_KEY, swStats);
-wireChecks("ma-blocks", maDone, MA_KEY, maStats);
-wireChecks("pu-cycles", puDone, PU_KEY, puStats);
-swStats(); maStats(); puStats();
+  refresh(name);
+});
+
+/* ================= Respaldo ================= */
+const bkMsg = t => { $("bk-msg").textContent = t; };
+$("bk-export").addEventListener("click", () => {
+  const data = {plan:"mi-plan-de-estudios", version:1, fecha:new Date().toISOString(), progreso:{}};
+  TABS.forEach(t => { data.progreso[t] = {...PANELS[t].store}; });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `plan-de-estudios-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  const n = TABS.reduce((s, t) => s + Object.keys(PANELS[t].store).length, 0);
+  bkMsg(`Respaldo descargado con ${n} temas marcados.`);
+});
+$("bk-import").addEventListener("click", () => $("bk-file").click());
+$("bk-file").addEventListener("change", async e => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  let data;
+  try { data = JSON.parse(await file.text()); } catch(err) { data = null; }
+  if (!data || data.plan !== "mi-plan-de-estudios" || !data.progreso || typeof data.progreso !== "object") {
+    bkMsg("Ese archivo no es un respaldo de este plan. No se cambió nada.");
+    return;
+  }
+  let n = 0;
+  TABS.forEach(name => {
+    const P = PANELS[name], src = data.progreso[name] || {};
+    Object.keys(P.store).forEach(k => delete P.store[k]);
+    document.querySelectorAll(`#${P.mount} .row`).forEach(r => {
+      const on = src[r.dataset.id] === true;
+      if (on) { P.store[r.dataset.id] = true; n++; }
+      r.classList.toggle("done", on);
+      r.querySelector("input").checked = on;
+    });
+    persist(P.key, P.store);
+    refresh(name);
+    applyFilter(name);
+  });
+  const when = data.fecha ? new Date(data.fecha).toLocaleDateString("es-PE", {day:"numeric", month:"long", year:"numeric"}) : "";
+  bkMsg(`Respaldo restaurado${when ? " del " + when : ""}: ${n} temas marcados.`);
+});
 
 /* ================= Pestañas ================= */
-const TABS = ["software", "maestria", "publicidad"];
 function showTab(t, focus){
   TABS.forEach(x => {
     const on = x === t;
@@ -888,6 +1099,7 @@ function showTab(t, focus){
     $("panel-" + x).hidden = !on;
   });
   try { localStorage.setItem("plan-tab", t); } catch(e) {}
+  setTabH();
   if (focus) $("tab-" + t).focus();
 }
 function keepPanelInView(){
@@ -909,19 +1121,29 @@ function tabFromHash(){
   const h = (location.hash || "").slice(1);
   if (TABS.includes(h)) return h;
   if (/^etapa-\d+$/.test(h)) return "software";
+  if (/^bloque-\d+$/.test(h)) return "maestria";
+  if (/^ciclo-\d+$/.test(h)) return "publicidad";
   return null;
 }
 let start = tabFromHash();
 if (!start) { try { start = localStorage.getItem("plan-tab"); } catch(e) { start = null; } }
 if (!TABS.includes(start)) start = "software";
 showTab(start);
+/* Si se abre con un enlace a una etapa, bloque o ciclo, se va a él cuando su pestaña ya es visible */
+if (location.hash.length > 1) { const tgt = document.getElementById(location.hash.slice(1)); if (tgt) requestAnimationFrame(() => tgt.scrollIntoView()); }
 window.addEventListener("hashchange", () => { const t = tabFromHash(); if (t) showTab(t); });
 
 /* Altura real de la barra de pestañas, para que la barra de filtros quede justo debajo */
-const setTabH = () => document.documentElement.style.setProperty("--tabbar-h", $("tabbar").offsetHeight + "px");
+function setTabH(){
+  const root = document.documentElement.style;
+  root.setProperty("--tabbar-h", $("tabbar").offsetHeight + "px");
+  const c = document.querySelector(".tabpanel:not([hidden]) .controls");
+  /* En móvil la barra de controles no es fija, así que no ocupa espacio arriba */
+  root.setProperty("--ctl-h", (c && getComputedStyle(c).position === "sticky" ? c.offsetHeight : 0) + "px");
+}
 setTabH();
-if (window.ResizeObserver) new ResizeObserver(setTabH).observe($("tabbar"));
-else window.addEventListener("resize", setTabH);
+if (window.ResizeObserver) { const ro = new ResizeObserver(setTabH); ro.observe($("tabbar")); document.querySelectorAll(".controls").forEach(c => ro.observe(c)); }
+window.addEventListener("resize", setTabH);
 </script>
 
 </body></html>
