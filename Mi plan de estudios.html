@@ -367,9 +367,11 @@ h4{font-size:16.5px;font-weight:600}
       </section>
 
       <section class="panel" aria-labelledby="sw-books-h">
-        <div class="eyebrow">Para leer en paralelo</div>
+        <div class="eyebrow">Para leer en paralelo · por área y nivel</div>
         <h3 class="h-sec" id="sw-books-h">Libros de la ruta</h3>
-        <p class="note">Los títulos van en español cuando hay edición en español; los demás, en su idioma original.</p>
+        <p class="note">Los títulos van en español cuando hay edición en español; los demás, en su idioma original. Los marcados <strong>Gratis en línea</strong> los publicó el propio autor y se leen completos en su web. Para los demás, revisa O'Reilly Learning (los tiene casi todos) o la biblioteca de tu universidad antes de comprar.</p>
+        <p class="note"><strong>Si solo lees cinco:</strong> Curso intensivo de Python, Effective TypeScript, Grokking Algorithms, El programador pragmático y A Philosophy of Software Design. Uno a la vez, en paralelo a la etapa que estés haciendo.</p>
+        <div class="cmap-filters filters" id="book-filters" role="group" aria-label="Filtrar libros"></div>
         <div class="certs" id="sw-books"></div>
       </section>
 
@@ -833,9 +835,6 @@ const PLAT = [
   {n:"CodelyTV", u:"https://codely.com", p:"Suscripción", v:"si", e:"Etapas 4, 5 y 9",
    d:"Arquitectura hexagonal, DDD, CQRS, SOLID, testing, microservicios e infraestructura, en español de España (el código va en inglés) y con repos públicos de ejemplo en TypeScript, PHP, Java y Go. Es exactamente el hueco que deja ser autodidacta: sabes escribir código, pero nadie te enseñó a estructurar una app que crece.",
    w:"La más importante de esta lista para ti, y no estaba en la tuya."},
-  {n:"Cursos de Desarrollo Web", u:"https://www.cursosdesarrolloweb.es", p:"150 € al año", v:"si", e:"Etapas 3, 4 y 5",
-   d:"Más de 289 cursos en español de Laravel, PHP, JavaScript, Livewire, Filament, Tailwind, bases de datos, testing y deployment. Pago único anual, sin cargos automáticos, con 10 días de garantía si no has visto ningún curso.",
-   w:"Es literalmente el stack de Artemisa: Laravel más Filament."},
   {n:"DevTalles", u:"https://cursos.devtalles.com/pages/todos-los-cursos", p:"18 USD/mes · 198 USD/año", v:"si", e:"Toda la ruta",
    d:"Fernando Herrera. El catálogo más amplio en español con profe que explica paso a paso: Python, SQL con PostgreSQL, patrones de diseño, SOLID, Docker, Git, Django, FastAPI, NestJS, React Native y n8n con IA.",
    w:"Paga meses sueltos cuando ataques una etapa, no el año entero de golpe."},
@@ -880,10 +879,7 @@ const PLAT = [
    w:"Solo si eliges datos o ML."},
   {n:"Frontend Masters", u:"https://frontendmasters.com", p:"39 USD/mes · 390 USD/año", v:"no", e:"Ya lo dominas",
    d:"Lo mejor que hay en JavaScript, TypeScript, React y rendimiento web, con profesores de primer nivel.",
-   w:"Excelente, pero es tu zona fuerte. No es donde va tu plata ahora."},
-  {n:"Laracasts", u:"https://laracasts.com", p:"Suscripción", v:"op", e:"Solo para Artemisa",
-   d:"La referencia para Laravel y PHP moderno, en inglés. Es la alternativa a Cursos de Desarrollo Web.",
-   w:"Elige una de las dos para Laravel, no ambas."}
+   w:"Excelente, pero es tu zona fuerte. No es donde va tu plata ahora."}
 ];
 const FREE = [
   {n:"CS50 de Harvard", u:"https://cs50.harvard.edu", e:"Etapas 1, 2, 5 y 9", l:"sub", d:"CS50x, CS50 Python, CS50 Web, CS50 SQL y CS50 AI. Los mejores cursos introductorios del mundo, con certificado gratis."},
@@ -967,16 +963,108 @@ $("sw-plat").innerHTML = PLAT.map(c => `<div class="cert">
   <span class="when">${esc(c.w)}</span>
   <span class="verdict v-etapa">${esc(c.e)}</span></div>`).join("");
 
+const BOOK_G = {py:"Python", ts:"TypeScript y JavaScript", cs:"Fundamentos", eng:"Buenas prácticas", arq:"Arquitectura y diseño", db:"Bases de datos y web", ops:"DevOps y nube", sec:"Seguridad", ia:"Datos e IA", car:"Carrera y hábitos"};
 const SW_BOOKS = [
-  {t:"Curso intensivo de Python", a:"Eric Matthes", e:"Etapas 1 y 2", d:"El libro de Python más recomendado para empezar, con tres proyectos completos."},
-  {t:"Automate the Boring Stuff with Python", a:"Al Sweigart · gratis en línea", u:"https://automatetheboringstuff.com", e:"Automatización", d:"Python para automatizar tareas reales: archivos, Excel, web y correos. Encaja con lo que haces con n8n."},
-  {t:"Grokking Algorithms", a:"Aditya Bhargava", e:"Etapa 2", d:"Algoritmos y estructuras de datos explicados con dibujos. El más fácil de leer del tema."},
-  {t:"El programador pragmático", a:"David Thomas y Andrew Hunt", e:"Toda la ruta", d:"Hábitos y criterio de un buen desarrollador. Se lee por capítulos sueltos."},
-  {t:"Código limpio", a:"Robert C. Martin", e:"Etapa 4", d:"Cómo escribir código legible. Tómalo como guía, no como reglas absolutas."},
-  {t:"Fundamentals of Software Architecture", a:"Mark Richards y Neal Ford", e:"Etapa 4", d:"Estilos de arquitectura y cómo decidir entre ellos."},
-  {t:"Designing Data-Intensive Applications", a:"Martin Kleppmann", e:"Etapas 4 y 9", d:"La referencia sobre bases de datos y sistemas distribuidos. Déjalo para el final de la ruta."}
+  /* Python */
+  {g:"py", l:"Inicio", t:"Curso intensivo de Python", a:"Eric Matthes", e:"Etapas 1 y 2", d:"El libro de Python más recomendado para empezar, con tres proyectos completos."},
+  {g:"py", l:"Inicio", t:"Think Python", a:"Allen B. Downey", u:"https://allendowney.github.io/ThinkPython/", e:"Etapa 1", d:"Introducción a programar con Python, pensada para aprender a pensar como programador. Hay una traducción al español de la edición anterior (Piensa en Python)."},
+  {g:"py", l:"Inicio", t:"Automate the Boring Stuff with Python", a:"Al Sweigart", u:"https://automatetheboringstuff.com", e:"Etapas 1 y 2", d:"Python para automatizar tareas reales: archivos, Excel, web y correos. Encaja con lo que haces con n8n."},
+  {g:"py", l:"Intermedio", t:"Effective Python", a:"Brett Slatkin", e:"Etapa 2", d:"Decenas de consejos cortos para escribir Python idiomático. Se lee por temas, no de corrido."},
+  {g:"py", l:"Intermedio", t:"Python Tricks", a:"Dan Bader", e:"Etapa 2", d:"Funciones, decoradores, clases y estructuras de datos de Python explicados con ejemplos breves."},
+  {g:"py", l:"Avanzado", t:"Fluent Python", a:"Luciano Ramalho", e:"Etapas 2 y 4", d:"El libro para dominar Python de verdad: modelo de datos, iteradores, concurrencia y metaprogramación. Largo; úsalo como referencia."},
+  {g:"py", l:"Intermedio", t:"Robust Python", a:"Patrick Viafore", e:"Etapa 2", d:"Tipado, diseño de clases y cómo escribir código Python que otros puedan mantener."},
+  {g:"py", l:"Intermedio", t:"Test-Driven Development with Python", a:"Harry Percival", u:"https://www.obeythetestinggoat.com", e:"Etapas 5 y 7", d:"Construye una app web con Django escribiendo los tests primero. Enseña testing y Django a la vez."},
+  {g:"py", l:"Avanzado", t:"Architecture Patterns with Python", a:"Harry Percival y Bob Gregory", u:"https://www.cosmicpython.com", e:"Etapa 4", d:"Arquitectura hexagonal, DDD, repositorios y eventos aplicados a Python (conocido como Cosmic Python)."},
+  {g:"py", l:"Intermedio", t:"Django for Beginners y Django for APIs", a:"William S. Vincent", e:"Etapa 5", d:"Dos libros cortos y prácticos para construir apps y APIs con Django, actualizados con cada versión."},
+  {g:"py", l:"Avanzado", t:"Two Scoops of Django", a:"Daniel y Audrey Roy Greenfeld", e:"Etapa 5", d:"Buenas prácticas de proyectos Django reales: estructura, configuración, seguridad y despliegue."},
+  {g:"py", l:"Avanzado", t:"High Performance Python", a:"Micha Gorelick e Ian Ozsvald", e:"Especialidades", d:"Medir y acelerar código Python: perfiles, NumPy, concurrencia y compilación."},
+  /* TypeScript y JavaScript */
+  {g:"ts", l:"Inicio", t:"Eloquent JavaScript", a:"Marijn Haverbeke", u:"https://eloquentjavascript.net", e:"Repaso", d:"Los fundamentos de JavaScript bien explicados, con ejercicios. Hay traducciones al español de ediciones anteriores (JavaScript Elocuente)."},
+  {g:"ts", l:"Intermedio", t:"You Don't Know JS Yet", a:"Kyle Simpson", u:"https://github.com/getify/You-Dont-Know-JS", e:"Repaso", d:"Cómo funciona JavaScript por dentro: alcance, closures, this, prototipos. Lo que JavaScript Mastery no explica."},
+  {g:"ts", l:"Inicio", t:"Manual de TypeScript", a:"Equipo de TypeScript (oficial)", u:"https://www.typescriptlang.org/docs/handbook/intro.html", e:"Repaso", d:"La documentación oficial en formato de libro. Base obligatoria antes de los demás."},
+  {g:"ts", l:"Intermedio", t:"Total TypeScript Essentials", a:"Matt Pocock", u:"https://www.totaltypescript.com/books/total-typescript-essentials", e:"Repaso", d:"TypeScript moderno y práctico, de uno de los mejores profesores del tema."},
+  {g:"ts", l:"Intermedio", t:"Learning TypeScript", a:"Josh Goldberg", e:"Repaso", d:"Introducción completa y amable al sistema de tipos, ideal si aprendiste TypeScript sobre la marcha."},
+  {g:"ts", l:"Avanzado", t:"Effective TypeScript", a:"Dan Vanderkam", e:"Repaso", d:"83 consejos concretos para usar bien los tipos. El mejor para pasar de usar TypeScript a dominarlo."},
+  {g:"ts", l:"Avanzado", t:"Programming TypeScript", a:"Boris Cherny", e:"Repaso", d:"El sistema de tipos a fondo: genéricos, tipos avanzados y cómo escalar TypeScript en proyectos grandes."},
+  {g:"ts", l:"Avanzado", t:"Node.js Design Patterns", a:"Mario Casciaro y Luciano Mammino", e:"Etapas 4 y 5", d:"Asincronía, streams y patrones de diseño en Node. Útil si haces backend con JavaScript."},
+  /* Fundamentos */
+  {g:"cs", l:"Inicio", t:"Grokking Algorithms", a:"Aditya Bhargava", e:"Etapa 2", d:"Algoritmos y estructuras de datos explicados con dibujos. El más fácil de leer del tema."},
+  {g:"cs", l:"Inicio", t:"Code", a:"Charles Petzold", e:"Etapa 1", d:"Cómo funciona una computadora desde los interruptores hasta el software, contado como una historia."},
+  {g:"cs", l:"Inicio", t:"The Linux Command Line", a:"William Shotts", u:"https://linuxcommand.org/tlcl.php", e:"Etapas 1 y 2", d:"La terminal de Linux de cero a scripts de Bash."},
+  {g:"cs", l:"Inicio", t:"Pro Git", a:"Scott Chacon y Ben Straub", u:"https://git-scm.com/book/es/v2", e:"Etapa 1", d:"El libro oficial de Git, traducido al español."},
+  {g:"cs", l:"Avanzado", t:"Introduction to Algorithms", a:"Cormen, Leiserson, Rivest y Stein", e:"Más adelante", d:"El clásico universitario de algoritmos. Úsalo como consulta, no para leerlo entero."},
+  /* Buenas prácticas */
+  {g:"eng", l:"Inicio", t:"El programador pragmático", a:"David Thomas y Andrew Hunt", e:"Toda la ruta", d:"Hábitos y criterio de un buen desarrollador. Se lee por capítulos sueltos."},
+  {g:"eng", l:"Intermedio", t:"Código limpio", a:"Robert C. Martin", e:"Etapa 4", d:"Cómo escribir código legible. Tómalo como guía, no como reglas absolutas."},
+  {g:"eng", l:"Intermedio", t:"A Philosophy of Software Design", a:"John Ousterhout", e:"Etapa 4", d:"Cómo reducir la complejidad con módulos profundos e interfaces simples. Corto, y un buen contrapeso a Código limpio."},
+  {g:"eng", l:"Intermedio", t:"Refactoring", a:"Martin Fowler", e:"Etapa 4", d:"Catálogo de cambios seguros para mejorar código existente sin romperlo."},
+  {g:"eng", l:"Intermedio", t:"Test Driven Development: By Example", a:"Kent Beck", e:"Etapa 7", d:"El libro que popularizó escribir los tests primero, de su creador."},
+  {g:"eng", l:"Avanzado", t:"Working Effectively with Legacy Code", a:"Michael Feathers", e:"Más adelante", d:"Cómo meter tests y mejorar código viejo sin miedo. Muy útil al heredar proyectos de clientes."},
+  /* Arquitectura y diseño */
+  {g:"arq", l:"Intermedio", t:"Head First Design Patterns", a:"Eric Freeman y Elisabeth Robson", e:"Etapa 4", d:"Patrones de diseño con dibujos y humor. Complementa Refactoring.Guru."},
+  {g:"arq", l:"Intermedio", t:"Arquitectura limpia", a:"Robert C. Martin", e:"Etapa 4", d:"Principios para separar la lógica de negocio de frameworks y bases de datos."},
+  {g:"arq", l:"Intermedio", t:"Fundamentals of Software Architecture", a:"Mark Richards y Neal Ford", e:"Etapa 4", d:"Estilos de arquitectura y cómo decidir entre ellos."},
+  {g:"arq", l:"Intermedio", t:"Learning Domain-Driven Design", a:"Vlad Khononov", e:"Etapa 4", d:"DDD explicado de forma práctica y moderna. Más fácil de leer que el libro original de Eric Evans."},
+  {g:"arq", l:"Intermedio", t:"System Design Interview, vol. 1", a:"Alex Xu", e:"Etapa 4", d:"Diseño de sistemas paso a paso con casos reales (acortador de URLs, chat, feed de noticias)."},
+  {g:"arq", l:"Avanzado", t:"Building Microservices", a:"Sam Newman", e:"Etapas 4 y 8", d:"Cuándo conviene dividir en microservicios, cómo hacerlo y cuándo no."},
+  {g:"arq", l:"Avanzado", t:"Software Architecture: The Hard Parts", a:"Neal Ford, Mark Richards, Pramod Sadalage y Zhamak Dehghani", e:"Más adelante", d:"Las decisiones difíciles: dividir datos, transacciones distribuidas y contratos entre servicios."},
+  {g:"arq", l:"Avanzado", t:"Designing Data-Intensive Applications", a:"Martin Kleppmann", e:"Etapas 4 y 9", d:"La referencia sobre bases de datos y sistemas distribuidos. Déjalo para el final de la ruta."},
+  /* Bases de datos y web */
+  {g:"db", l:"Inicio", t:"Learning SQL", a:"Alan Beaulieu", e:"Etapa 3", d:"SQL desde cero hasta consultas avanzadas, claro y con ejercicios."},
+  {g:"db", l:"Intermedio", t:"SQL Antipatterns", a:"Bill Karwin", e:"Etapa 3", d:"Los errores de diseño de bases de datos más comunes y cómo evitarlos."},
+  {g:"db", l:"Intermedio", t:"The Art of PostgreSQL", a:"Dimitri Fontaine", e:"Etapa 3", d:"Sacarle provecho a PostgreSQL con SQL bien escrito en vez de lógica en la aplicación."},
+  {g:"db", l:"Avanzado", t:"Database Internals", a:"Alex Petrov", e:"Más adelante", d:"Cómo funcionan las bases de datos por dentro: almacenamiento, índices y replicación."},
+  {g:"db", l:"Intermedio", t:"High Performance Browser Networking", a:"Ilya Grigorik", u:"https://hpbn.co", e:"Etapa 5", d:"TCP, TLS, HTTP/2, WebSockets y rendimiento de red explicados para desarrolladores web."},
+  {g:"db", l:"Intermedio", t:"API Design Patterns", a:"JJ Geewax", e:"Etapa 5", d:"Cómo diseñar APIs consistentes: recursos, paginación, filtros, versiones y operaciones largas."},
+  /* DevOps y nube */
+  {g:"ops", l:"Inicio", t:"El proyecto Fénix", a:"Gene Kim, Kevin Behr y George Spafford", e:"Etapa 8", d:"Una novela sobre un área de TI en crisis que descubre DevOps. Se lee rápido y conecta con tu maestría."},
+  {g:"ops", l:"Intermedio", t:"Accelerate", a:"Nicole Forsgren, Jez Humble y Gene Kim", e:"Etapa 8", d:"La investigación que mide qué prácticas hacen rendir a los equipos de software (las métricas DORA)."},
+  {g:"ops", l:"Intermedio", t:"Docker Deep Dive", a:"Nigel Poulton", e:"Etapa 8", d:"Docker de principio a fin, claro y actualizado con frecuencia."},
+  {g:"ops", l:"Intermedio", t:"Kubernetes: Up and Running", a:"Brendan Burns, Joe Beda, Kelsey Hightower y Lachlan Evenson", e:"Etapa 8", d:"Kubernetes explicado por sus creadores."},
+  {g:"ops", l:"Intermedio", t:"Terraform: Up and Running", a:"Yevgeniy Brikman", e:"Etapa 8", d:"Infraestructura como código con Terraform, con buenas prácticas de equipo."},
+  {g:"ops", l:"Avanzado", t:"Continuous Delivery", a:"Jez Humble y David Farley", e:"Especialidad DevOps", d:"Los principios de entregar software de forma segura y frecuente."},
+  {g:"ops", l:"Avanzado", t:"Site Reliability Engineering", a:"Google", u:"https://sre.google/books/", e:"Especialidad DevOps", d:"Cómo opera Google sus sistemas: SLOs, guardias e incidentes."},
+  /* Seguridad */
+  {g:"sec", l:"Inicio", t:"Alice and Bob Learn Application Security", a:"Tanya Janca", e:"Etapa 7", d:"Seguridad de aplicaciones para desarrolladores, sin necesitar ser experto."},
+  {g:"sec", l:"Intermedio", t:"Real-World Bug Hunting", a:"Peter Yaworski", e:"Especialidad Seguridad", d:"Vulnerabilidades web reales explicadas a partir de reportes de recompensas."},
+  {g:"sec", l:"Intermedio", t:"Hacking APIs", a:"Corey Ball", e:"Especialidad Seguridad", d:"Cómo atacar y proteger APIs REST y GraphQL."},
+  /* Datos e IA */
+  {g:"ia", l:"Intermedio", t:"Python for Data Analysis", a:"Wes McKinney", u:"https://wesmckinney.com/book/", e:"Etapa 9", d:"pandas explicado por su creador."},
+  {g:"ia", l:"Intermedio", t:"Fundamentals of Data Engineering", a:"Joe Reis y Matt Housley", e:"Especialidad Datos", d:"El panorama completo de la ingeniería de datos, sin atarse a una herramienta."},
+  {g:"ia", l:"Intermedio", t:"Hands-On Machine Learning", a:"Aurélien Géron", e:"Etapa 9", d:"El libro práctico de ML más usado, con scikit-learn y redes neuronales. Tiene edición en español."},
+  {g:"ia", l:"Intermedio", t:"AI Engineering", a:"Chip Huyen", e:"Especialidad IA", d:"Cómo construir productos con modelos de lenguaje: evaluación, RAG, agentes, costos y despliegue."},
+  {g:"ia", l:"Avanzado", t:"Designing Machine Learning Systems", a:"Chip Huyen", e:"Especialidad IA", d:"Llevar modelos a producción y mantenerlos funcionando."},
+  {g:"ia", l:"Avanzado", t:"Build a Large Language Model (From Scratch)", a:"Sebastian Raschka", e:"Especialidad IA", d:"Construir un modelo tipo GPT paso a paso con PyTorch para entender cómo funciona."},
+  /* Carrera y hábitos */
+  {g:"car", l:"Inicio", t:"Hábitos atómicos", a:"James Clear", e:"Antes de empezar", d:"Cómo sostener el estudio todos los días con hábitos pequeños. Clave para una ruta de años."},
+  {g:"car", l:"Inicio", t:"Ultraaprendizaje", a:"Scott H. Young", e:"Antes de empezar", d:"Estrategias para aprender habilidades difíciles por tu cuenta, rápido y a fondo."},
+  {g:"car", l:"Inicio", t:"Enfócate", a:"Cal Newport", e:"Toda la ruta", d:"Trabajo profundo sin distracciones: cómo estudiar y programar con concentración."},
+  {g:"car", l:"Inicio", t:"The Missing README", a:"Chris Riccomini y Dmitriy Ryaboy", e:"Etapa 10", d:"Lo que nadie te dice en tu primer trabajo de software: código ajeno, revisiones, guardias y despliegues."},
+  {g:"car", l:"Intermedio", t:"Cracking the Coding Interview", a:"Gayle Laakmann McDowell", e:"Etapa 10", d:"Preparación completa de entrevistas técnicas con 189 problemas resueltos."},
+  {g:"car", l:"Avanzado", t:"The Staff Engineer's Path", a:"Tanya Reilly", e:"Especialidad Producto", d:"Cómo crecer como ingeniero senior sin pasar a gerente."},
+  {g:"car", l:"Avanzado", t:"The Manager's Path", a:"Camille Fournier", e:"Especialidad Producto", d:"De desarrollador a líder técnico y gerente, etapa por etapa."}
 ];
-$("sw-books").innerHTML = SW_BOOKS.map(bookCard).join("");
+(function renderBooks(){
+  const lvl = {Inicio:"v-si", Intermedio:"v-op", Avanzado:"v-no"};
+  $("sw-books").innerHTML = SW_BOOKS.map(b => `<div class="cert">
+    <h4>${b.u ? `<a class="plink" href="${b.u}" target="_blank" rel="noopener">${esc(b.t)}</a>` : esc(b.t)}</h4>
+    <span class="when">${esc(b.a)}</span>
+    <div class="yt-kind"><span class="verdict ${lvl[b.l]}">${esc(b.l)}</span>${b.u ? '<span class="free">Gratis en línea</span>' : ""}</div>
+    <p>${esc(b.d)}</p>
+    <span class="verdict v-etapa">${esc(BOOK_G[b.g])} · ${esc(b.e)}</span></div>`).join("");
+  const f = $("book-filters");
+  const opts = [["all", "Todos"], ...Object.entries(BOOK_G), ["free", "Gratis en línea"]];
+  f.innerHTML = opts.map(([k, v], i) => `<button type="button" data-g="${k}" aria-pressed="${i === 0}">${esc(v)}</button>`).join("");
+  f.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    f.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    const g = b.dataset.g;
+    $("sw-books").querySelectorAll(".cert").forEach((el, i) => {
+      el.hidden = !(g === "all" || (g === "free" ? !!SW_BOOKS[i].u : SW_BOOKS[i].g === g));
+    });
+  });
+})();
 
 /* Lista de recursos de un tema o paso: enlaces con idioma y costo, nota opcional, o texto plano */
 function resHtml(it){
