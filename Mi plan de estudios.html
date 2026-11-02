@@ -1047,17 +1047,33 @@ TABS.forEach(name => {
 
 /* ================= Respaldo ================= */
 const bkMsg = t => { $("bk-msg").textContent = t; };
-$("bk-export").addEventListener("click", () => {
+/* En claude.ai la descarga pasa por el permiso "downloads"; abierto como archivo local, se usa un enlace normal */
+const downloadsReady = (window.claude && typeof window.claude.use === "function")
+  ? window.claude.use("downloads").catch(() => null) : Promise.resolve(null);
+const inViewer = !!(window.claude && typeof window.claude.use === "function");
+$("bk-export").addEventListener("click", async () => {
   const data = {plan:"mi-plan-de-estudios", version:1, fecha:new Date().toISOString(), progreso:{}};
   TABS.forEach(t => { data.progreso[t] = {...PANELS[t].store}; });
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
+  const json = JSON.stringify(data, null, 2);
+  const filename = `plan-de-estudios-${new Date().toISOString().slice(0, 10)}.json`;
+  const n = TABS.reduce((s, t) => s + Object.keys(PANELS[t].store).length, 0);
+  const downloads = await downloadsReady;
+  if (downloads) {
+    try {
+      await downloads.save({filename, data: json});
+      bkMsg(`Respaldo descargado con ${n} temas marcados.`);
+    } catch (err) {
+      const code = err && err.code;
+      bkMsg(code === "declined" ? "Descarga cancelada." : code === "rate_limited" ? "Espera un momento e inténtalo de nuevo." : "No se pudo descargar el respaldo aquí.");
+    }
+    return;
+  }
+  if (inViewer) { bkMsg("La descarga no está disponible en esta vista."); return; }
+  const url = URL.createObjectURL(new Blob([json], {type:"application/json"}));
   const a = document.createElement("a");
-  a.href = url;
-  a.download = `plan-de-estudios-${new Date().toISOString().slice(0, 10)}.json`;
+  a.href = url; a.download = filename;
   document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  const n = TABS.reduce((s, t) => s + Object.keys(PANELS[t].store).length, 0);
   bkMsg(`Respaldo descargado con ${n} temas marcados.`);
 });
 $("bk-import").addEventListener("click", () => $("bk-file").click());
