@@ -17,6 +17,7 @@
   --acc-sw:#1E5BD8; --acc-sw-soft:#E3ECFD;
   --acc-ma:#6A3FD1; --acc-ma-soft:#EEE8FC;
   --acc-pu:#B42A60; --acc-pu-soft:#FBE6EE;
+  --acc-sp:#0B7570; --acc-sp-soft:#DDF2F0;
   --accent:var(--acc-sw); --accent-soft:var(--acc-sw-soft);
   --covered:#4F6E22; --covered-soft:#EAF2DE;
   --practice:#8A5A12; --practice-soft:#F8EEDC;
@@ -32,6 +33,7 @@
   --acc-sw:#7AA5FF; --acc-sw-soft:#1B2C4A;
   --acc-ma:#B49BFF; --acc-ma-soft:#2A2147;
   --acc-pu:#FF8DB7; --acc-pu-soft:#3A1A28;
+  --acc-sp:#5FD6CE; --acc-sp-soft:#123230;
   --covered:#A9C978; --covered-soft:#1E2A16;
   --practice:#E4B56A; --practice-soft:#2E2414;
   --no:#F0A3A0; --no-soft:#331C1C;
@@ -42,6 +44,7 @@
   --acc-sw:#7AA5FF; --acc-sw-soft:#1B2C4A;
   --acc-ma:#B49BFF; --acc-ma-soft:#2A2147;
   --acc-pu:#FF8DB7; --acc-pu-soft:#3A1A28;
+  --acc-sp:#5FD6CE; --acc-sp-soft:#123230;
   --covered:#A9C978; --covered-soft:#1E2A16;
   --practice:#E4B56A; --practice-soft:#2E2414;
   --no:#F0A3A0; --no-soft:#331C1C;
@@ -66,10 +69,11 @@ h4{font-size:16.5px;font-weight:600}
 .top{display:flex;flex-direction:column;gap:12px}
 
 /* Pestañas */
-.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .tab{--accent:var(--acc-sw);--accent-soft:var(--acc-sw-soft);display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;text-align:left;font:600 14px/1.3 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
 .tab[data-t="maestria"]{--accent:var(--acc-ma);--accent-soft:var(--acc-ma-soft)}
 .tab[data-t="publicidad"]{--accent:var(--acc-pu);--accent-soft:var(--acc-pu-soft)}
+.tab[data-t="especialidades"]{--accent:var(--acc-sp);--accent-soft:var(--acc-sp-soft)}
 .tab .tlabel{display:flex;align-items:center;gap:7px}
 .tab .tlabel::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .tab .tpct{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -79,6 +83,7 @@ h4{font-size:16.5px;font-weight:600}
 
 [data-panel="maestria"]{--accent:var(--acc-ma);--accent-soft:var(--acc-ma-soft)}
 [data-panel="publicidad"]{--accent:var(--acc-pu);--accent-soft:var(--acc-pu-soft)}
+[data-panel="especialidades"]{--accent:var(--acc-sp);--accent-soft:var(--acc-sp-soft)}
 .tabpanel{display:flex;flex-direction:column;gap:36px;padding-top:16px}
 .intro{display:flex;flex-direction:column;gap:12px}
 .stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:4px}
@@ -196,15 +201,40 @@ h4{font-size:16.5px;font-weight:600}
 .btn:hover{border-color:var(--ink)}
 .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .bk-msg{font-size:13px;color:var(--muted)}
+.v-luego{background:var(--accent-soft);color:var(--accent)}
+.free{color:var(--covered);font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.extra{margin:0;font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.tag.mk{color:var(--practice);border-color:currentColor}
+.tablink{font:600 14px var(--f-body);color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+/* Especialidades */
+.rmeta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.rmeta dt{color:var(--muted);font-size:13px}
+.rmeta dd{margin:0;min-width:0}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;list-style:none;margin:0;padding:0}
+.chain li{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.chain li span{font-family:var(--f-mono);font-size:11.5px;padding:2px 8px;border-radius:5px;background:var(--accent-soft);color:var(--accent)}
+.chain li + li::before{content:"→";color:var(--muted)}
+.cmap .thead,.cmap .row{grid-template-columns:minmax(0,1.3fr) minmax(0,.55fr) minmax(0,.6fr) minmax(0,2fr)}
+.cmap .row{padding-block:12px}
+.cmap .cn{font-weight:600}
+.cmap .by{font-size:12.5px;color:var(--muted)}
+.cmap .pr{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.cmap .area{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.cmap-filters{display:flex;flex-wrap:wrap;gap:6px}
 
 @media (max-width:760px){
   .search{flex:1 1 200px}
   .thead{display:none}
+  .cmap .row{grid-template-columns:1fr auto;gap:6px 12px}
+  .cmap .row .cell:nth-child(3){grid-column:1/-1;padding-left:0}
+  .cmap .row .cell:nth-child(4){grid-column:1/-1;padding-left:0}
+  .cmap .row .cell:nth-child(2){padding-left:0;text-align:right}
   .route .row,.review .row{grid-template-columns:1fr;gap:10px}
   .row .cell:not(:first-child){padding-left:26px}
   .controls{position:static}
   .tab{padding:8px 10px;font-size:13px}
 }
+@media (max-width:560px){.tabbar{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}.row.flash{animation:none;outline:2px solid var(--accent)}}
 @media print{
   .tabbar,.controls,.backup,.next{display:none!important}
@@ -217,13 +247,14 @@ h4{font-size:16.5px;font-weight:600}
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">Software · Maestría · Publicidad</div>
+    <div class="eyebrow">Software · Especialidades · Maestría · Publicidad</div>
     <h1>Mi plan de estudios</h1>
-    <p class="lede">Todo en un solo lugar: la ruta para aprender Ingeniería de Software por tu cuenta, el repaso de tu maestría en la UTP y el de tu carrera de Publicidad en la UCSM. Cada pestaña guarda su propio avance en este navegador.</p>
+    <p class="lede">Todo en un solo lugar: la ruta para aprender Ingeniería de Software por tu cuenta, las especialidades que puedes tomar después con sus certificaciones, el repaso de tu maestría en la UTP y el de tu carrera de Publicidad en la UCSM. Cada pestaña guarda su propio avance en este navegador.</p>
   </header>
 
   <div class="tabbar" id="tabbar" role="tablist" aria-label="Secciones del plan">
     <button type="button" class="tab" role="tab" id="tab-software" data-t="software" aria-controls="panel-software" aria-selected="true"><span class="tlabel">Ruta de Software</span><span class="tpct" id="tp-software">Avance 0%</span></button>
+    <button type="button" class="tab" role="tab" id="tab-especialidades" data-t="especialidades" aria-controls="panel-especialidades" aria-selected="false" tabindex="-1"><span class="tlabel">Especialidades</span><span class="tpct" id="tp-especialidades">Avance 0%</span></button>
     <button type="button" class="tab" role="tab" id="tab-maestria" data-t="maestria" aria-controls="panel-maestria" aria-selected="false" tabindex="-1"><span class="tlabel">Maestría UTP</span><span class="tpct" id="tp-maestria">Avance 0%</span></button>
     <button type="button" class="tab" role="tab" id="tab-publicidad" data-t="publicidad" aria-controls="panel-publicidad" aria-selected="false" tabindex="-1"><span class="tlabel">Publicidad UCSM</span><span class="tpct" id="tp-publicidad">Avance 0%</span></button>
   </div>
@@ -284,11 +315,19 @@ h4{font-size:16.5px;font-weight:600}
         <h3 class="h-sec" id="certs-h">Certificaciones de pago: cuáles valen la plata</h3>
         <p class="note">Los cursos de NetAcad (IT Essentials, redes, Linux, Python) son gratis. Lo que se paga es el examen de certificación. Los paquetes que venden por redes sociales te dan el curso en NetAcad, no la certificación. Para un desarrollador freelance, pocas valen la pena.</p>
         <div class="certs" id="sw-certs"></div>
+        <p class="note">Estas son las de la ruta base. El <button type="button" class="tablink" data-tab="especialidades" data-scroll="cmap">mapa completo de certificaciones</button> (nube, Kubernetes, Terraform, seguridad, datos, IA y calidad) está en la pestaña Especialidades.</p>
         <div class="budget">
           <span class="eyebrow">Inversión recomendada</span>
           <b>159 USD</b>
           <span class="note">PCEP + AWS Cloud Practitioner. Lo demás, solo si vas a postular a empresas grandes.</span>
         </div>
+      </section>
+
+      <section class="panel" aria-labelledby="free-h">
+        <div class="eyebrow">Sin pagar nada · ordenadas por cuánto te sirven</div>
+        <h3 class="h-sec" id="free-h">Plataformas gratuitas</h3>
+        <p class="note">Con esto solo se puede hacer la ruta entera. Las de pago de abajo sirven para ir más rápido o tener un profe en español, no porque falte contenido.</p>
+        <div class="certs" id="sw-free"></div>
       </section>
 
       <section class="panel focus" aria-labelledby="plat-h">
@@ -339,7 +378,59 @@ h4{font-size:16.5px;font-weight:600}
       <div class="stages" id="sw-stages"></div>
       <p class="empty" id="sw-empty" hidden>Ningún tema coincide con la búsqueda o el filtro.</p>
 
+      <section class="panel focus" aria-labelledby="after-h">
+        <div class="eyebrow">Cuando termines las etapas 1 a 5</div>
+        <h3 class="h-sec" id="after-h">¿Y después?</h3>
+        <p class="note">La ruta base te da el perfil de desarrollador completo. Para cobrar más o entrar a un puesto específico, elige una especialidad (DevOps, nube, backend, datos, IA, seguridad, QA, móvil o producto) y síguela paso a paso. <button type="button" class="tablink" data-tab="especialidades">Ver especialidades</button></p>
+      </section>
+
       <p class="note">Mallas tomadas de los brochures de Cibertec, IDAT y Tecsup; las tres se reservan cambios. Precios de exámenes verificados en octubre de 2026 y sujetos a cambio.</p>
+    </section>
+
+    <!-- ============ ESPECIALIDADES ============ -->
+    <section class="tabpanel" id="panel-especialidades" role="tabpanel" aria-labelledby="tab-especialidades" data-panel="especialidades" hidden>
+      <div class="intro">
+        <div class="eyebrow">Después de la ruta base · con certificaciones en orden</div>
+        <h2 class="ptitle">Especialidades</h2>
+        <p class="lede">Nueve caminos para después de la ruta base. Cada uno dice para qué trabajos sirve, qué etapas necesitas antes, cuánto toma, qué certificaciones sacar y en qué orden, y los pasos con sus recursos. No hagas todas: elige una principal y, como mucho, una segunda.</p>
+        <div class="stats">
+          <div class="stat"><b id="es-total">0</b><span>pasos en total</span></div>
+          <div class="stat"><b id="es-done">0</b><span>completados</span></div>
+          <div class="stat"><b id="es-pct">0%</b><span>avance</span></div>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="es-bar"></i></div>
+        <p class="next" id="es-next" aria-live="polite"></p>
+        <p class="note"><strong>Para tu perfil</strong> (UX/UI, React, automatizaciones con n8n, clientes de e-commerce y maestría en gerencia de TI), las que más rinden son <strong>Producto y liderazgo técnico</strong>, <strong>IA aplicada</strong> y <strong>Backend Python</strong>. <strong>DevOps</strong> y <strong>Nube</strong> son las que más demanda tienen en empleo formal. Las duraciones son estimadas a unas 10 horas por semana.</p>
+      </div>
+
+      <section class="panel" aria-labelledby="cmap-h" id="cmap">
+        <div class="eyebrow">Precios de examen en dólares, revisados en noviembre de 2026 · se cobran en moneda local más impuestos</div>
+        <h3 class="h-sec" id="cmap-h">Mapa de certificaciones</h3>
+        <p class="note">Todas las que tienen sentido en software, con el veredicto para tu perfil. <strong>Sí vale</strong>: buena relación precio y valor. <strong>Opcional</strong>: solo si apuntas a ese trabajo. <strong>Más adelante</strong>: cara o avanzada, cuando ya tengas experiencia. Casi todas tienen descuentos frecuentes (Black Friday, eventos), y Microsoft y Google a veces regalan vouchers en sus retos de aprendizaje. Confirma el precio al reservar.</p>
+        <div class="cmap-filters filters" id="cmap-filters" role="group" aria-label="Filtrar certificaciones por área"></div>
+        <div class="table cmap" id="cmap-table"></div>
+        <div class="budget">
+          <span class="eyebrow">Si solo puedes pagar tres</span>
+          <b>~320 USD</b>
+          <span class="note">PCEP (59) + AWS Cloud Practitioner (100) + AWS Solutions Architect Associate (150). Con la de Cloud Practitioner tienes 50% de descuento en la siguiente de AWS, así que la Associate te sale más barata. Si vas por DevOps, suma Terraform Associate (70.50).</span>
+        </div>
+      </section>
+
+      <div class="controls" data-for="especialidades">
+        <nav class="chips" id="es-chips" aria-label="Ir a especialidad"></nav>
+        <div class="ctl-right">
+          <input type="search" class="search" placeholder="Buscar paso, tema o recurso" aria-label="Buscar en especialidades">
+          <div class="filters" role="group" aria-label="Filtrar pasos">
+            <button type="button" data-f="all" aria-pressed="true">Todos</button>
+            <button type="button" data-f="pend" aria-pressed="false">Sin marcar</button>
+            <button type="button" data-f="done" aria-pressed="false">Hechos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stages" id="es-routes"></div>
+      <p class="empty" id="es-empty" hidden>Ningún paso coincide con la búsqueda o el filtro.</p>
+      <p class="note">Precios de plataformas y exámenes tomados de sus páginas y de guías de 2026; cambian seguido y varían por país. Las duraciones son estimaciones, no promesas.</p>
     </section>
 
     <!-- ============ MAESTRÍA UTP ============ -->
@@ -501,7 +592,88 @@ const R = {
   thm:["TryHackMe","https://tryhackme.com"],
   scrum:["Guía de Scrum","https://scrumguides.org"],
   bbc:["BBC Learning English","https://www.bbc.co.uk/learningenglish"],
-  efset:["EF SET · test de inglés gratis","https://www.efset.org"]
+  efset:["EF SET · test de inglés gratis","https://www.efset.org"],
+  /* Añadidos: temas extra y especialidades */
+  cs50p:["CS50 Python","https://cs50.harvard.edu/python/"],
+  cs50w:["CS50 Web con Python y JavaScript","https://cs50.harvard.edu/web/"],
+  exercism:["Exercism · ruta de Python","https://exercism.org/tracks/python"],
+  neetcode:["NeetCode Roadmap","https://neetcode.io/roadmap"],
+  leetcode:["LeetCode","https://leetcode.com"],
+  sdprimer:["System Design Primer","https://github.com/donnemartin/system-design-primer"],
+  bytebytego:["ByteByteGo","https://bytebytego.com"],
+  uv:["Documentación de uv","https://docs.astral.sh/uv/"],
+  ruff:["Documentación de Ruff","https://docs.astral.sh/ruff/"],
+  asyncio:["Documentación de asyncio","https://docs.python.org/es/3/library/asyncio.html"],
+  realpython:["Real Python","https://realpython.com"],
+  owaspcs:["OWASP Cheat Sheet Series","https://cheatsheetseries.owasp.org"],
+  owasp:["OWASP Top 10","https://owasp.org/www-project-top-ten/"],
+  redis:["Redis · aprende","https://redis.io/learn"],
+  celery:["Documentación de Celery","https://docs.celeryq.dev"],
+  tf:["Tutoriales de Terraform (HashiCorp)","https://developer.hashicorp.com/terraform/tutorials"],
+  ansible:["Documentación de Ansible","https://docs.ansible.com"],
+  ghskills:["GitHub Skills","https://skills.github.com"],
+  ghactions:["Documentación de GitHub Actions","https://docs.github.com/es/actions"],
+  otel:["OpenTelemetry","https://opentelemetry.io/docs/"],
+  prom:["Prometheus","https://prometheus.io/docs/introduction/overview/"],
+  grafana:["Tutoriales de Grafana","https://grafana.com/tutorials/"],
+  sre:["Libros de SRE de Google (gratis)","https://sre.google/books/"],
+  tih:["Tech Interview Handbook","https://www.techinterviewhandbook.org"],
+  firstpr:["First Contributions","https://github.com/firstcontributions/first-contributions"],
+  roadmap:["roadmap.sh","https://roadmap.sh"],
+  rmdevops:["roadmap.sh · DevOps","https://roadmap.sh/devops"],
+  lfs101:["Introduction to Linux (LFS101, Linux Foundation)","https://training.linuxfoundation.org/training/introduction-to-linux/"],
+  lfs158:["Introduction to Kubernetes (LFS158, Linux Foundation)","https://training.linuxfoundation.org/training/introduction-to-kubernetes/"],
+  killercoda:["Killercoda · laboratorios","https://killercoda.com"],
+  dockerdocs:["Documentación de Docker","https://docs.docker.com/get-started/"],
+  argocd:["Documentación de Argo CD","https://argo-cd.readthedocs.io"],
+  trivy:["Trivy","https://trivy.dev"],
+  kodekloud:["KodeKloud","https://kodekloud.com"],
+  cantrill:["Adrian Cantrill · cursos de AWS","https://learn.cantrill.io"],
+  maarek:["Stephane Maarek en Udemy","https://www.udemy.com/user/stephane-maarek/"],
+  tdojo:["Tutorials Dojo · exámenes de práctica","https://tutorialsdojo.com"],
+  wellarch:["AWS Well-Architected","https://aws.amazon.com/architecture/well-architected/"],
+  serverless:["Serverless Land","https://serverlessland.com"],
+  awscalc:["AWS Pricing Calculator","https://calculator.aws"],
+  finops:["FinOps Foundation · qué es FinOps","https://www.finops.org/introduction/what-is-finops/"],
+  mslearn:["Microsoft Learn","https://learn.microsoft.com/es-es/training/"],
+  gcsb:["Google Cloud Skills Boost","https://www.cloudskillsboost.google"],
+  djdocs:["Documentación de Django","https://docs.djangoproject.com/es/"],
+  drf:["Django REST framework","https://www.django-rest-framework.org"],
+  apiguide:["Guía de APIs REST de Zalando","https://opensource.zalando.com/restful-api-guidelines/"],
+  uti:["Use The Index, Luke","https://use-the-index-luke.com/es"],
+  testcont:["Testcontainers","https://testcontainers.com"],
+  cosmic:["Cosmic Python (libro gratis)","https://www.cosmicpython.com"],
+  codely:["CodelyTV","https://codely.com"],
+  modesql:["Tutorial de SQL de Mode","https://mode.com/sql-tutorial"],
+  airflow:["Documentación de Apache Airflow","https://airflow.apache.org/docs/"],
+  dbt:["dbt Learn","https://learn.getdbt.com"],
+  dbx:["Databricks Academy","https://www.databricks.com/learn/training"],
+  confluent:["Confluent Developer · Kafka","https://developer.confluent.io"],
+  datacamp:["DataCamp","https://www.datacamp.com"],
+  b1b:["3Blue1Brown · álgebra lineal y cálculo","https://www.3blue1brown.com"],
+  fastai:["fast.ai · Practical Deep Learning","https://course.fast.ai"],
+  karpathy:["Neural Networks: Zero to Hero (Karpathy)","https://karpathy.ai/zero-to-hero.html"],
+  hf:["Hugging Face Learn","https://huggingface.co/learn"],
+  anthcourses:["Cursos de Anthropic (API, prompts, tool use)","https://github.com/anthropics/courses"],
+  genai:["Generative AI for Beginners (Microsoft)","https://github.com/microsoft/generative-ai-for-beginners"],
+  llmzoom:["LLM Zoomcamp","https://github.com/DataTalksClub/llm-zoomcamp"],
+  hack4u:["Hack4u","https://hack4u.io"],
+  htb:["Hack The Box Academy","https://academy.hackthebox.com"],
+  flaws:["flaws.cloud","http://flaws.cloud"],
+  pico:["picoCTF","https://picoctf.org"],
+  istqb:["ISTQB · temarios gratis","https://www.istqb.org"],
+  tau:["Test Automation University","https://testautomationu.applitools.com"],
+  playwright:["Playwright para Python","https://playwright.dev/python/"],
+  locust:["Locust","https://locust.io"],
+  k6:["Documentación de k6","https://grafana.com/docs/k6/latest/"],
+  axe:["axe · pruebas de accesibilidad","https://www.deque.com/axe/"],
+  rn:["Documentación de React Native","https://reactnative.dev"],
+  android:["Cursos de Android Developers","https://developer.android.com/courses"],
+  swiftui:["Tutoriales de SwiftUI (Apple)","https://developer.apple.com/tutorials/swiftui"],
+  shapeup:["Shape Up (libro gratis de Basecamp)","https://basecamp.com/shapeup"],
+  skillshop:["Google Skillshop · Analytics","https://skillshop.withgoogle.com"],
+  engprac:["Google Engineering Practices · revisión de código","https://google.github.io/eng-practices/"],
+  adr:["Architecture Decision Records","https://adr.github.io"]
 };
 
 const CERTS = [
@@ -542,7 +714,11 @@ const S = [
   {n:"Programación avanzada", w:"Módulos, archivos, excepciones, iteradores, generadores, decoradores y tipado.", s:[["c","Lenguaje de Programación I y II · Gestión de Datos Dinámicos"]], r:[["helsinki","Partes 6–7 y 10–12","en"]]},
   {n:"Estructuras de datos y algoritmos", w:"Listas, pilas, colas, árboles, grafos, búsqueda, ordenamiento y Big O.", s:[["c","Algoritmos y Estructura de Datos"],["t","Estructuras de Datos y Algoritmos"]], r:[["helsinki","Partes 5–7","en"],["pythonds","libro gratis","en"]]},
   {n:"Sistemas operativos y Linux", w:"Procesos, memoria, permisos y manejo de servidores Linux.", s:[["t","Sistemas Operativos"]], r:[["netacad","NDG Linux Essentials","es"],["missing","","en"]]},
-  {n:"Redes", w:"TCP/IP, direccionamiento, subredes y conectividad.", s:[["c","Infraestructura de Redes y Conectividad"],["i","Redes Informáticas"]], r:[["netacad","CCNA: Introducción a las redes, o Networking Basics","es"]], x:"Con el primer curso del CCNA basta para un desarrollador. Los otros dos son para administrar redes."}
+  {n:"Redes", w:"TCP/IP, direccionamiento, subredes y conectividad.", s:[["c","Infraestructura de Redes y Conectividad"],["i","Redes Informáticas"]], r:[["netacad","CCNA: Introducción a las redes, o Networking Basics","es"]], x:"Con el primer curso del CCNA basta para un desarrollador. Los otros dos son para administrar redes."},
+  {n:"Python profesional", w:"Entornos y dependencias con uv, formato y linting con Ruff, tipado, logging y cómo organizar un proyecto.", s:[], r:[["uv","","en"],["ruff","","en"],["realpython","artículos gratis; el resto de pago","en"]]},
+  {n:"Concurrencia y asincronía", w:"Hilos, procesos y asyncio: cuándo usar cada uno y cómo no bloquear un servidor.", s:[], r:[["asyncio","","es"],["realpython","guías de asyncio y concurrencia","en"]]},
+  {n:"Práctica de algoritmos", w:"Resolver problemas a diario: arreglos, hash maps, dos punteros, árboles, grafos y programación dinámica. Es lo que preguntan en entrevistas.", s:[], r:[["exercism","con mentoría gratis","en"],["neetcode","orden de estudio y videos","en"],["leetcode","","en"]]},
+  {n:"CS50 completo", w:"El curso de introducción a la computación más conocido: C, memoria, estructuras de datos, Python, SQL y web.", s:[], r:[["cs50x","las 10 semanas","sub"],["cs50p","si quieres reforzar Python","sub"]], x:"Da certificado gratis al terminar."}
  ]},
  {t:"Bases de datos", d:"Las tres mallas le dan dos o tres cursos a este bloque.", items:[
   {n:"Bases de datos relacionales y SQL", w:"Modelo relacional, SQL, normalización y diagramas entidad-relación.", s:[["c","Base de Datos"],["i","Diseño de Base de Datos Relacionales"],["t","Base de Datos"]], r:[["cs50sql","","sub"],["sqlbolt","práctica interactiva","en"]]},
@@ -553,13 +729,18 @@ const S = [
   {n:"Requerimientos y análisis de sistemas", w:"Levantar requisitos, casos de uso y diagramas UML.", s:[["c","Análisis y Diseño de Sistemas I"],["i","Análisis y Diseño de Sistemas Orientados a Objetos"],["t","Ingeniería de Requerimientos y Diseño de Software"]], r:[["coursera","Software Design and Architecture, U. de Alberta (modo auditor gratis)","en"]]},
   {n:"Patrones de diseño", w:"Patrones creacionales, estructurales y de comportamiento.", s:[["c","Análisis y Diseño de Sistemas II"],["i","Patrones de Diseño de Software"]], r:[["refguru","","es"]]},
   {n:"Interfaces y diseño centrado en el usuario", k:"ya", w:"Construir interfaces, prototipar y diseñar a partir de las personas.", s:[["i","Desarrollo de Interfaces 1, 2 y 3 · Productos Centrados en el Usuario · Innovación Centrada en Personas"],["t","Diseño de Interfaces de Programación"]], p:"Es tu terreno: vienes de UX/UI y ya construyes front con React."},
-  {n:"Arquitectura de software y sistemas distribuidos", w:"Escalabilidad, rendimiento, replicación, consistencia y tolerancia a fallos.", s:[["c","Arquitectura de Software y Atributos de Calidad · Diseño de Sistemas Distribuidos"]], r:[["coursera","Software Design and Architecture","en"],["mitocw","6.5840 Distributed Systems","en"]], x:"Libro de referencia: Designing Data-Intensive Applications (de pago)."}
+  {n:"Arquitectura de software y sistemas distribuidos", w:"Escalabilidad, rendimiento, replicación, consistencia y tolerancia a fallos.", s:[["c","Arquitectura de Software y Atributos de Calidad · Diseño de Sistemas Distribuidos"]], r:[["coursera","Software Design and Architecture","en"],["mitocw","6.5840 Distributed Systems","en"]], x:"Libro de referencia: Designing Data-Intensive Applications (de pago)."},
+  {n:"Diseño de sistemas (system design)", w:"Diseñar sistemas grandes: cachés, colas, réplicas, particionado, límites de tasa. Lo piden en entrevistas de nivel medio y senior.", s:[], r:[["sdprimer","","en"],["bytebytego","","en",1]]},
+  {n:"Arquitectura limpia en Python", w:"Arquitectura hexagonal, repositorios, unidad de trabajo y eventos de dominio aplicados a Python.", s:[], r:[["cosmic","Architecture Patterns with Python","en"],["codely","arquitectura hexagonal y DDD","es",1]]}
  ]},
  {t:"Web, APIs y backend", d:"El corazón de las tres carreras y de tu trabajo diario.", items:[
   {n:"Front-end web", w:"HTML, CSS, JavaScript y un framework moderno.", s:[["c","Desarrollo de Entornos Web"],["t","Desarrollo de Aplicaciones en Internet · Desarrollo de Aplicaciones Web · Web Avanzado"]], r:[["fso","Partes 1, 2 y 7, como repaso: ya dominas React y TS","es"]]},
   {n:"Backend en Python", w:"Servidor, modelos, autenticación y lógica de negocio con Django.", s:[["c","Desarrollo de Aplicaciones Web I y II"],["i","Desarrollo de los Componentes del Negocio"],["t","Desarrollo de Aplicaciones Empresariales y Avanzado"]], r:[["djgirls","","es"]]},
   {n:"APIs y servicios web", w:"APIs REST, JSON, JWT y GraphQL.", s:[["c","Desarrollo de Servicios Web I y II"],["i","Desarrollo de Servicios Web"]], r:[["fastapi","","es"],["fso","Partes 3 y 8","es"]]},
-  {n:"Integración de sistemas empresariales", k:"ya", w:"Conectar sistemas, APIs y automatizaciones.", s:[["c","Integración Tecnológica"],["i","Efsrt 2: integración de capas"],["t","Integración de Sistemas Empresariales y Avanzado"]], p:"Ya lo haces con n8n, Odoo y WhatsApp para tus clientes."}
+  {n:"Integración de sistemas empresariales", k:"ya", w:"Conectar sistemas, APIs y automatizaciones.", s:[["c","Integración Tecnológica"],["i","Efsrt 2: integración de capas"],["t","Integración de Sistemas Empresariales y Avanzado"]], p:"Ya lo haces con n8n, Odoo y WhatsApp para tus clientes."},
+  {n:"Autenticación y autorización", w:"Sesiones, JWT, OAuth2 y OpenID Connect, roles y permisos, y cómo guardar contraseñas.", s:[], r:[["fastapi","sección de seguridad","es"],["owaspcs","Authentication y Password Storage","en"]]},
+  {n:"Cachés, colas y tareas en segundo plano", w:"Redis como caché, colas de tareas con Celery, envío de correos y procesos largos fuera de la petición.", s:[], r:[["redis","","en"],["celery","","en"]]},
+  {n:"Web full stack con Python", w:"Una aplicación web completa con Django, JavaScript y SQL, de punta a punta.", s:[], r:[["cs50w","","sub"]]}
  ]},
  {t:"Aplicaciones móviles", d:"Dos cursos o más en cada malla.", items:[
   {n:"Apps móviles multiplataforma", w:"Una app para Android e iOS: estado, navegación, notificaciones y publicación en tiendas.", s:[["c","Desarrollo de Aplicaciones Móviles I y II"],["i","Desarrollo de Aplicaciones Móviles 1 y 2"],["t","Programación en Móviles · Multiplataforma · Avanzado"]], r:[["fso","Parte 10, React Native","es"],["expo","","en"]]}
@@ -573,7 +754,10 @@ const S = [
  {t:"Nube y DevOps", d:"Desplegar, automatizar y escalar.", items:[
   {n:"Computación en la nube", w:"Servidores, almacenamiento, bases gestionadas y serverless.", s:[["c","Soluciones Cloud Computing"],["i","Computación en la Nube · Desarrollo de Aplicaciones en la Nube"],["t","Desarrollo de Soluciones en la Nube"]], r:[["aws","Cloud Practitioner Essentials","sub"]], x:"Aquí sí vale pagar el examen: 100 USD."},
   {n:"DevOps y contenedores", w:"Docker, CI/CD, logs y métricas.", s:[["c","DevOps, Contenedores y Observabilidad"],["i","Devops: Fundamentos"]], r:[["docker","","en"],["fso","Parte 11, CI/CD","es"]], x:"Canal de YouTube Pelado Nerd para Docker en español."},
-  {n:"Kubernetes y cloud native", w:"Microservicios, orquestación y escalado automático.", s:[["c","Despliegue de Aplicaciones Cloud Native"]], r:[["k8s","","en"]]}
+  {n:"Kubernetes y cloud native", w:"Microservicios, orquestación y escalado automático.", s:[["c","Despliegue de Aplicaciones Cloud Native"]], r:[["k8s","","en"]]},
+  {n:"CI/CD con GitHub Actions", w:"Correr tests, construir y desplegar en cada push; secretos y entornos.", s:[], r:[["ghskills","cursos interactivos","en"],["ghactions","","es"]]},
+  {n:"Infraestructura como código", w:"Crear servidores, bases y redes con Terraform en vez de hacer clics en la consola.", s:[], r:[["tf","","en"]], x:"La certificación Terraform Associate cuesta 70.50 USD: de las más baratas y valoradas."},
+  {n:"Observabilidad", w:"Logs, métricas y trazas: saber qué pasa en producción antes de que el cliente te avise.", s:[], r:[["otel","","en"],["prom","","en"],["grafana","","en"]]}
  ]},
  {t:"Datos e inteligencia artificial", d:"El bloque donde Cibertec va más lejos que las otras dos.", items:[
   {n:"Análisis de datos e inteligencia de negocios", w:"pandas, visualización, dashboards y métricas de negocio.", s:[["c","Analítica de Datos para Nuevos Negocios"],["i","Introducción a la Ciencia de Datos"],["t","Inteligencia de Negocios"]], r:[["kaggle","Pandas y Data Visualization","en"],["powerbi","","es"]]},
@@ -581,7 +765,9 @@ const S = [
   {n:"Estadística y matemática discreta", w:"Probabilidad, inferencia, grafos, combinatoria e inducción.", s:[["c","Cálculo Discreto · Cálculo Inferencial"],["t","Aplicaciones del Cálculo y Estadística"]], r:[["khan","Estadística y probabilidad","es"],["mitocw","6.042J Mathematics for Computer Science","en"]]},
   {n:"Inteligencia artificial y machine learning", w:"Regresión, clasificación, redes neuronales y scikit-learn.", s:[["c","Inteligencia Artificial · Machine Learning"],["i","Inteligencia Artificial"],["t","Tecnologías Emergentes"]], r:[["coursera","Machine Learning Specialization, Andrew Ng","sub"],["cs50ai","","sub"]]},
   {n:"IA en producción", w:"APIs de modelos de lenguaje, RAG, agentes y MLOps.", s:[["c","Integración de Servicios de IA · Despliegue y Monitoreo de Modelos"]], r:[["dlai","","en"],["mlopszoom","","en"]]},
-  {n:"Ética de la IA y gobierno de datos", w:"Privacidad, sesgos, responsabilidad y regulación.", s:[["c","Gobierno de Datos y Ética en IA"],["i","Investigación, Ética y Responsabilidad Ciudadana"]], r:[["ethics","","en"]]}
+  {n:"Ética de la IA y gobierno de datos", w:"Privacidad, sesgos, responsabilidad y regulación.", s:[["c","Gobierno de Datos y Ética en IA"],["i","Investigación, Ética y Responsabilidad Ciudadana"]], r:[["ethics","","en"]]},
+  {n:"Deep learning", w:"Redes neuronales con PyTorch: visión, texto y cómo entrenar y ajustar modelos.", s:[], r:[["fastai","","en"],["karpathy","","en"]]},
+  {n:"Construir con modelos de lenguaje", w:"Prompts, salidas estructuradas, uso de herramientas y agentes con las APIs de Claude y otros modelos.", s:[], r:[["anthcourses","","en"],["genai","traducido al español","es"],["hf","Agents Course y LLM Course","en"]]}
  ]},
  {t:"Idioma, gestión y formación general", d:"Casi todo esto ya lo tienes. La excepción es el inglés.", items:[
   {n:"Inglés técnico", w:"Leer documentación, escribir en inglés y comunicarte con equipos y clientes de fuera.", s:[["i","Fundamentos del Inglés · Inglés para el Trabajo"]], r:[["bbc","","en"],["efset","mide tu nivel","en"]], x:"Es tu vacío más importante: la mitad de los mejores recursos de esta ruta están en inglés."},
@@ -590,7 +776,10 @@ const S = [
   {n:"Negocio, innovación y emprendimiento", k:"ya", w:"Gestión empresarial, marketing, investigación de mercado y startups.", s:[["c","Gestión Empresarial · Innovación y Emprendimiento · Transformación Digital"],["i","Innovación y Transformación Digital · Gestión Estratégica de la Innovación · seminarios"],["t","Investigación de Mercado · Marketing · Startup Venture Project · Emprendimiento · Proyectos de Innovación"]], p:"Lo cubren tu maestría en transformación digital y tu curso de Start Ups con ComeYa."},
   {n:"Comunicación y habilidades blandas", k:"ya", w:"Redacción, expresión oral, liderazgo y desarrollo profesional.", s:[["c","Redacción Técnica · Comunicación Profesional · Posicionamiento · Liderazgo"],["i","Lectura y Escritura · Lectura Crítica · Habilidades Intra e Interpersonales · Desarrollo Profesional"],["t","Expresión Oral y Escrita · Producción de Textos · Desarrollo Personal · Consultoría · Sociedad y Desarrollo Sostenible"]], p:"Lo cubren tu formación en publicidad, la maestría y el trato con clientes. Para escritura técnica: Google Technical Writing, gratis."},
   {n:"Investigación y tesis", k:"ya", w:"Metodología de investigación y desarrollo de tesis.", s:[["c","Investigación Aplicada I a IV"],["t","Investigación e Innovación Tecnológica"]], p:"Lo cubren tu tesis en UCSM y la maestría."},
-  {n:"Prácticas preprofesionales", k:"practica", w:"Experiencia de trabajo real en cada ciclo.", s:PR_SRC, p:"Tu trabajo freelance cuenta como práctica real. Documenta un proyecto por etapa como caso en tu portafolio."}
+  {n:"Prácticas preprofesionales", k:"practica", w:"Experiencia de trabajo real en cada ciclo.", s:PR_SRC, p:"Tu trabajo freelance cuenta como práctica real. Documenta un proyecto por etapa como caso en tu portafolio."},
+  {n:"Portafolio y GitHub", w:"Tres a cinco proyectos con README claro, demo en vivo, tests y despliegue. Tu GitHub es tu CV.", s:[], r:[["roadmap","proyectos sugeridos por ruta","en"]], x:"Tus casos de UX (Donar, Unno) más los proyectos de esta ruta te dan un perfil poco común: diseño y desarrollo."},
+  {n:"Open source", w:"Tu primera contribución a un proyecto real: issues, forks, pull requests y revisión de código.", s:[], r:[["firstpr","","en"],["ghskills","","en"]]},
+  {n:"Entrevistas técnicas y búsqueda de trabajo", w:"CV técnico, LinkedIn, entrevistas de código, de diseño de sistemas y de comportamiento.", s:[], r:[["tih","","en"],["neetcode","","en"]]}
  ]}
 ];
 
@@ -599,7 +788,7 @@ const swDone = load(SW_KEY);
 const INST = {c:"CIB", i:"IDAT", t:"TEC"};
 const langTag = l => l === "es" ? '<span class="tag es">ES</span>' : l === "sub" ? '<span class="tag en">EN·sub</span>' : '<span class="tag en">EN</span>';
 const statusLbl = {suplir:"Por estudiar", ya:"Ya cubierto", practica:"Práctica"};
-const vLbl = {si:"Sí vale", op:"Opcional", no:"No para ti"};
+const vLbl = {si:"Sí vale", op:"Opcional", no:"No para ti", luego:"Más adelante"};
 
 const certCard = c => `<div class="cert">
   <div class="cert-top"><h4>${esc(c.n)}</h4><span class="price">${esc(c.p)}</span></div>
@@ -620,7 +809,7 @@ $("sw-paid").innerHTML = PAID.map(c => `<div class="cert">
 
 const PLAT = [
   {n:"CodelyTV", u:"https://codely.com", p:"Suscripción", v:"si", e:"Etapas 4, 5 y 9",
-   d:"Arquitectura hexagonal, DDD, CQRS, SOLID, testing, microservicios e infraestructura, en español y con repos públicos de ejemplo en TypeScript, PHP, Java y Go. Es exactamente el hueco que deja ser autodidacta: sabes escribir código, pero nadie te enseñó a estructurar una app que crece.",
+   d:"Arquitectura hexagonal, DDD, CQRS, SOLID, testing, microservicios e infraestructura, en español de España (el código va en inglés) y con repos públicos de ejemplo en TypeScript, PHP, Java y Go. Es exactamente el hueco que deja ser autodidacta: sabes escribir código, pero nadie te enseñó a estructurar una app que crece.",
    w:"La más importante de esta lista para ti, y no estaba en la tuya."},
   {n:"Cursos de Desarrollo Web", u:"https://www.cursosdesarrolloweb.es", p:"150 € al año", v:"si", e:"Etapas 3, 4 y 5",
    d:"Más de 289 cursos en español de Laravel, PHP, JavaScript, Livewire, Filament, Tailwind, bases de datos, testing y deployment. Pago único anual, sin cargos automáticos, con 10 días de garantía si no has visto ningún curso.",
@@ -628,7 +817,7 @@ const PLAT = [
   {n:"DevTalles", u:"https://cursos.devtalles.com/pages/todos-los-cursos", p:"18 USD/mes · 198 USD/año", v:"si", e:"Toda la ruta",
    d:"Fernando Herrera. El catálogo más amplio en español con profe que explica paso a paso: Python, SQL con PostgreSQL, patrones de diseño, SOLID, Docker, Git, Django, FastAPI, NestJS, React Native y n8n con IA.",
    w:"Paga meses sueltos cuando ataques una etapa, no el año entero de golpe."},
-  {n:"Platzi", u:"https://platzi.com", p:"Suscripción anual", v:"op", e:"Etapas 2, 3 y 8",
+  {n:"Platzi", u:"https://platzi.com", p:"~249 USD/año (Expert)", v:"op", e:"Etapas 2, 3 y 8",
    d:"El catálogo más grande de LatAm en español. Sirve para lo que las otras cubren mal: algoritmos y estructuras de datos, bases de datos, cloud e inglés técnico. La calidad varía mucho de curso a curso.",
    w:"Útil por amplitud, no por profundidad. Revisa reseñas del curso puntual antes de entrar."},
   {n:"EDteam", u:"https://ed.team", p:"Suscripción", v:"op", e:"Etapas 2 y 3",
@@ -645,8 +834,61 @@ const PLAT = [
    w:"No por ahora. Es una especialización, no una base, y tú estás llenando bases."},
   {n:"Boot.dev", u:"https://boot.dev", p:"Suscripción", v:"op", e:"Etapa 2",
    d:"Algoritmos, estructuras de datos y backend en Go y Python, resolviendo ejercicios en vez de ver video. El formato que mejor fija los fundamentos.",
-   w:"Solo en inglés. Con nivel A2 va a costar, pero el código es universal."}
+   w:"Solo en inglés. Con nivel A2 va a costar, pero el código es universal."},
+  {n:"KodeKloud", u:"https://kodekloud.com", p:"Desde ~15 USD/mes", v:"si", e:"Especialidad DevOps",
+   d:"Linux, Docker, Kubernetes, Terraform, Ansible y nube con laboratorios en el navegador. Sus cursos de CKA y CKAD son de los más usados para aprobar. El descuento anual cambia mucho: espera una promoción.",
+   w:"La mejor si eliges DevOps o Kubernetes. En inglés."},
+  {n:"Adrian Cantrill", u:"https://learn.cantrill.io", p:"Por curso", v:"si", e:"Especialidad Nube",
+   d:"Los cursos de AWS más profundos que hay: explica cómo funciona cada servicio por dentro, con diagramas y demos. Pago único con acceso de por vida.",
+   w:"Para la Solutions Architect Associate. Si prefieres algo más corto, el curso de Stephane Maarek en Udemy en oferta."},
+  {n:"Coursera Plus", u:"https://www.coursera.org/courseraplus", p:"59 USD/mes · 399 USD/año", v:"op", e:"Etapa 9 e IA",
+   d:"Acceso a casi todo Coursera con certificados: Machine Learning de Andrew Ng, DeepLearning.AI, certificados profesionales de Google, IBM y Meta. En ofertas el año baja a unos 199–239 USD.",
+   w:"Un mes suelto alcanza para terminar un curso concreto con certificado. El modo auditor es gratis, pero sin certificado."},
+  {n:"Zero To Mastery", u:"https://zerotomastery.io", p:"~299 USD/año", v:"op", e:"Etapas 2, 4 y 8",
+   d:"Rutas completas en inglés: Python, algoritmos y entrevistas, DevOps, ML y ciberseguridad, con una comunidad activa en Discord.",
+   w:"Alternativa a Platzi en inglés, con más profundidad por curso."},
+  {n:"Educative", u:"https://www.educative.io", p:"~248 USD/año", v:"op", e:"Diseño de sistemas y entrevistas",
+   d:"Cursos en texto interactivo, sin videos. Es fuerte en diseño de sistemas y preparación de entrevistas (Grokking the System Design Interview).",
+   w:"Solo cuando prepares entrevistas para empresas de fuera. El precio de entrada suele ser promocional; revisa la renovación."},
+  {n:"O'Reilly Learning", u:"https://www.oreilly.com", p:"Suscripción", v:"op", e:"Libros de toda la ruta",
+   d:"Casi todos los libros técnicos de esta página (Designing Data-Intensive Applications, Fundamentals of Software Architecture, Código limpio) más cursos y laboratorios.",
+   w:"Si vas a leer mucho, sale más barato que comprar los libros. Tiene prueba gratis."},
+  {n:"DataCamp", u:"https://www.datacamp.com", p:"Suscripción", v:"op", e:"Especialidad Datos",
+   d:"Python para datos, SQL, pandas, visualización e ingeniería de datos con ejercicios en el navegador. Tiene parte en español.",
+   w:"Solo si eliges datos o ML."},
+  {n:"Frontend Masters", u:"https://frontendmasters.com", p:"39 USD/mes · 390 USD/año", v:"no", e:"Ya lo dominas",
+   d:"Lo mejor que hay en JavaScript, TypeScript, React y rendimiento web, con profesores de primer nivel.",
+   w:"Excelente, pero es tu zona fuerte. No es donde va tu plata ahora."},
+  {n:"Laracasts", u:"https://laracasts.com", p:"Suscripción", v:"op", e:"Solo para Artemisa",
+   d:"La referencia para Laravel y PHP moderno, en inglés. Es la alternativa a Cursos de Desarrollo Web.",
+   w:"Elige una de las dos para Laravel, no ambas."}
 ];
+const FREE = [
+  {n:"CS50 de Harvard", u:"https://cs50.harvard.edu", e:"Etapas 1, 2, 5 y 9", l:"sub", d:"CS50x, CS50 Python, CS50 Web, CS50 SQL y CS50 AI. Los mejores cursos introductorios del mundo, con certificado gratis."},
+  {n:"MOOCs de la Universidad de Helsinki", u:"https://www.mooc.fi/en/", e:"Python, DevOps, seguridad, Full Stack", l:"en", d:"Python, Full Stack Open, DevOps with Docker y Kubernetes, Cyber Security Base y Ethics of AI. Dan créditos universitarios europeos."},
+  {n:"roadmap.sh", u:"https://roadmap.sh", e:"Para orientarte", l:"en", d:"Mapas visuales de cada especialidad (backend, DevOps, IA, QA) con lo que tienes que saber y en qué orden. Úsalo para revisar que no te salte nada."},
+  {n:"freeCodeCamp", u:"https://www.freecodecamp.org/espanol/", e:"Etapas 1, 3 y 5", l:"es", d:"Currículo completo con certificados gratis: web, JavaScript, Python, bases de datos y análisis de datos. Parte en español."},
+  {n:"The Odin Project", u:"https://www.theodinproject.com", e:"Etapa 5", l:"en", d:"Ruta full stack basada en proyectos reales, sin videos. Te obliga a leer documentación, como en el trabajo."},
+  {n:"Exercism", u:"https://exercism.org", e:"Etapa 2", l:"en", d:"Ejercicios de Python y otros 70 lenguajes, con mentores voluntarios que revisan tu código."},
+  {n:"NeetCode", u:"https://neetcode.io", e:"Algoritmos y entrevistas", l:"en", d:"Las 150 preguntas de algoritmos más comunes, ordenadas por tema y con videos explicados."},
+  {n:"Microsoft Learn", u:"https://learn.microsoft.com/es-es/training/", e:"Nube, IA y datos", l:"es", d:"Todo el temario de Azure, Power BI, GitHub e IA en español. A veces regala vouchers de examen en sus retos de aprendizaje."},
+  {n:"AWS Skill Builder", u:"https://skillbuilder.aws", e:"Etapa 8 y Nube", l:"sub", d:"Más de 600 cursos gratis de AWS, incluido el oficial de Cloud Practitioner, con subtítulos."},
+  {n:"Google Cloud Skills Boost", u:"https://www.cloudskillsboost.google", e:"Nube y datos", l:"en", d:"Cursos y laboratorios de Google Cloud. Con créditos gratis puedes practicar en una consola real."},
+  {n:"Linux Foundation", u:"https://training.linuxfoundation.org", e:"Linux, Kubernetes y DevOps", l:"en", d:"Cursos gratis de Linux, Kubernetes, Git, DevOps y seguridad de software, de la misma organización que da las certificaciones CKA y CKAD."},
+  {n:"GitHub Skills", u:"https://skills.github.com", e:"Git y CI/CD", l:"en", d:"Cursos interactivos dentro de GitHub: Git, pull requests, Actions y seguridad."},
+  {n:"DataTalksClub Zoomcamps", u:"https://datatalks.club", e:"Datos, ML, MLOps y LLMs", l:"en", d:"Bootcamps gratis de ingeniería de datos, ML, MLOps y LLMs con proyectos finales revisados por la comunidad."},
+  {n:"Kaggle Learn", u:"https://www.kaggle.com/learn", e:"Etapa 9", l:"en", d:"Microcursos de Python, pandas, ML y visualización, con datasets reales y competencias."},
+  {n:"fast.ai y Hugging Face", u:"https://huggingface.co/learn", e:"IA", l:"en", d:"Deep learning práctico (fast.ai) y cursos de LLMs, agentes y modelos abiertos (Hugging Face)."},
+  {n:"PortSwigger y TryHackMe", u:"https://portswigger.net/web-security", e:"Seguridad", l:"en", d:"Laboratorios de seguridad web (PortSwigger, gratis completo) y rutas de hacking ético (TryHackMe, gran parte gratis)."},
+  {n:"Test Automation University", u:"https://testautomationu.applitools.com", e:"QA", l:"en", d:"Cursos gratis de pruebas automatizadas: Playwright, pytest, APIs, rendimiento y pruebas visuales."},
+  {n:"MIT OpenCourseWare", u:"https://ocw.mit.edu", e:"Matemática y sistemas", l:"en", d:"Clases completas del MIT: matemática para computación, algoritmos y sistemas distribuidos."}
+];
+$("sw-free").innerHTML = FREE.map(c => `<div class="cert">
+  <div class="cert-top"><h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4><span class="free">Gratis</span></div>
+  <p>${esc(c.d)}</p>
+  <span class="when">${langTag(c.l)}</span>
+  <span class="verdict v-etapa">${esc(c.e)}</span></div>`).join("");
+
 $("sw-plat").innerHTML = PLAT.map(c => `<div class="cert">
   <div class="cert-top"><h4><a class="plink" href="${c.u}" target="_blank" rel="noopener">${esc(c.n)}</a></h4><span class="price">${esc(c.p)}</span></div>
   <span class="verdict v-${c.v}">${vLbl[c.v]}</span>
@@ -665,6 +907,12 @@ const SW_BOOKS = [
 ];
 $("sw-books").innerHTML = SW_BOOKS.map(bookCard).join("");
 
+/* Lista de recursos de un tema o paso: enlaces con idioma y costo, nota opcional, o texto plano */
+function resHtml(it){
+  if (!it.r) return `<p class="plain">${esc(it.p)}</p>`;
+  return '<ul class="res">' + it.r.map(([key, det, l, paid]) => `<li><a href="${R[key][1]}" target="_blank" rel="noopener">${esc(R[key][0])}</a>${det ? `<span class="what">${esc(det)}</span>` : ""}${langTag(l)}${paid ? '<span class="tag">Pago</span>' : ''}</li>`).join("") + (it.x ? `<li class="what">${esc(it.x)}</li>` : "") + '</ul>';
+}
+
 (function renderRoute(){
   let html = "", chips = "";
   S.forEach((st, i) => {
@@ -675,10 +923,10 @@ $("sw-books").innerHTML = SW_BOOKS.map(bookCard).join("");
       <div class="table route"><div class="thead"><span>Tema</span><span>Qué aprendes y dónde se enseña</span><span>Cómo lo suples</span></div>`;
     st.items.forEach((it, j) => {
       const k = it.k || "suplir", id = `e${n}-${j}`;
-      const src = '<ul class="src">' + it.s.map(([inst, names]) => `<li><span class="inst ${inst}">${INST[inst]}</span><span>${esc(names)}</span></li>`).join("") + '</ul>';
-      const how = it.r
-        ? '<ul class="res">' + it.r.map(([key, det, l, paid]) => `<li><a href="${R[key][1]}" target="_blank" rel="noopener">${esc(R[key][0])}</a>${det ? `<span class="what">${esc(det)}</span>` : ""}${langTag(l)}${paid ? '<span class="tag">Pago</span>' : ''}</li>`).join("") + (it.x ? `<li class="what">${esc(it.x)}</li>` : "") + '</ul>'
-        : `<p class="plain">${esc(it.p)}</p>`;
+      const src = it.s.length
+        ? '<ul class="src">' + it.s.map(([inst, names]) => `<li><span class="inst ${inst}">${INST[inst]}</span><span>${esc(names)}</span></li>`).join("") + '</ul>'
+        : '<p class="extra"><span class="tag mk">Extra</span><span>No está en ninguna de las tres mallas, pero lo piden en el trabajo.</span></p>';
+      const how = resHtml(it);
       html += `<div class="row${swDone[id] ? " done" : ""}" data-k="${k}" data-id="${id}">
         <div class="cell"><label class="cname"><input type="checkbox" id="${id}"${swDone[id] ? " checked" : ""}><span>${esc(it.n)}</span></label><span class="status st-${k}">${statusLbl[k]}</span></div>
         <div class="cell"><p class="what">${esc(it.w)}</p>${src}</div>
@@ -936,10 +1184,226 @@ $("pu-books").innerHTML = PU_BOOKS.map(bookCard).join("");
 const maStats = () => reviewStats("ma-blocks", maDone, "ma", "tp-maestria");
 const puStats = () => reviewStats("pu-cycles", puDone, "pu", "tp-publicidad");
 
-/* ================= Avance, búsqueda y filtros (las tres pestañas) ================= */
-const TABS = ["software", "maestria", "publicidad"];
+/* ================= ESPECIALIDADES ================= */
+const CAREAS = {py:"Python", cloud:"Nube", ops:"DevOps y Kubernetes", sec:"Seguridad", data:"Datos e IA", qa:"Calidad y gestión"};
+const CMAP = [
+  {a:"py", n:"PCEP", by:"Python Institute · inicial", p:"59 USD", v:"si", d:"Sale directo de NetAcad Python Essentials 1. Barata y valida tu base."},
+  {a:"py", n:"PCAP", by:"Python Institute · asociado", p:"295 USD", v:"op", d:"Útil si postulas a empresas que filtran por certificados. Está cambiando de versión (31-03 a 31-04): revisa cuál cubre el voucher."},
+  {a:"py", n:"PCPP1", by:"Python Institute · profesional", p:"~325 USD", v:"no", d:"Poco conocida por los reclutadores. Tu GitHub demuestra más."},
+  {a:"cloud", n:"AWS Cloud Practitioner", by:"AWS · fundamentos", p:"100 USD", v:"si", d:"La puerta de entrada a la nube. Al aprobarla tienes 50% de descuento en el siguiente examen de AWS."},
+  {a:"cloud", n:"AWS Solutions Architect Associate", by:"AWS · asociado", p:"150 USD", v:"si", d:"La certificación de nube más pedida en ofertas de trabajo. Base de la especialidad Nube y muy útil en DevOps."},
+  {a:"cloud", n:"AWS Developer Associate", by:"AWS · asociado", p:"150 USD", v:"op", d:"Para backend en AWS: Lambda, DynamoDB, API Gateway, CI/CD. Alternativa a la de arquitecto si eres más de código."},
+  {a:"cloud", n:"AWS AI Practitioner", by:"AWS · fundamentos", p:"100 USD", v:"op", d:"Conceptos de IA, IA generativa y servicios de AWS. Buen complemento si vas por IA y ya tienes la Cloud Practitioner."},
+  {a:"cloud", n:"AWS Solutions Architect Professional", by:"AWS · profesional", p:"300 USD", v:"luego", d:"De las más valoradas en nube, pero exige experiencia real diseñando en AWS."},
+  {a:"cloud", n:"Azure Fundamentals (AZ-900)", by:"Microsoft · fundamentos", p:"99 USD", v:"op", d:"Precio de EE. UU.; en Perú suele ser menor. Útil si tus clientes o empleadores usan Microsoft. Revisa los retos de Microsoft Learn que regalan vouchers."},
+  {a:"cloud", n:"Azure Developer (AZ-204)", by:"Microsoft · asociado", p:"165 USD", v:"op", d:"Desarrollo en Azure. Solo si trabajas en una empresa con Microsoft."},
+  {a:"cloud", n:"Google Cloud Digital Leader", by:"Google Cloud · fundamentos", p:"99 USD", v:"op", d:"Equivalente a la Cloud Practitioner en Google Cloud. Mejor elegir una nube y profundizar."},
+  {a:"cloud", n:"Google Associate Cloud Engineer", by:"Google Cloud · asociado", p:"125 USD", v:"op", d:"Práctica y bien valorada, pero AWS tiene más demanda en Perú."},
+  {a:"ops", n:"Terraform Associate (004)", by:"HashiCorp · asociado", p:"70.50 USD", v:"si", d:"Infraestructura como código. Barata, rápida de preparar y la piden mucho en DevOps."},
+  {a:"ops", n:"GitHub Actions (GH-200)", by:"GitHub · asociado", p:"99 USD", v:"op", d:"Valida CI/CD con GitHub. Útil para DevOps; lo práctico pesa más que el papel."},
+  {a:"ops", n:"GitHub Foundations (GH-900)", by:"GitHub · fundamentos", p:"99 USD", v:"no", d:"Git y GitHub básico. Ya lo demuestras con tu perfil de GitHub."},
+  {a:"ops", n:"KCNA", by:"Linux Foundation · fundamentos", p:"250 USD", v:"op", d:"Teórica, de opción múltiple, sobre Kubernetes y cloud native. Incluye un reintento. Si vas a sacar CKAD, puedes saltarla."},
+  {a:"ops", n:"CKAD", by:"Linux Foundation · práctica", p:"445 USD", v:"si", d:"Kubernetes para desarrolladores, examen 100% práctico en terminal. Incluye un reintento y simulador. Busca los descuentos de 30–50% que salen varias veces al año."},
+  {a:"ops", n:"CKA", by:"Linux Foundation · práctica", p:"445 USD", v:"si", d:"Administración de Kubernetes. La más pedida en DevOps y SRE. El paquete CKA + CKAD + CKS cuesta 1 245 USD."},
+  {a:"ops", n:"CKS", by:"Linux Foundation · práctica", p:"445 USD", v:"luego", d:"Seguridad en Kubernetes. Exige tener la CKA vigente."},
+  {a:"ops", n:"LFCS", by:"Linux Foundation · práctica", p:"445 USD", v:"op", d:"Administración de Linux, examen práctico. Útil para SRE; para la mayoría de desarrolladores basta saber Linux."},
+  {a:"sec", n:"eJPT", by:"INE · práctica", p:"249 USD", v:"si", d:"Pentesting de inicio, examen práctico de 48 horas. La mejor primera certificación de hacking ético por precio."},
+  {a:"sec", n:"Burp Suite Certified Practitioner", by:"PortSwigger · práctica", p:"99 USD", v:"si", d:"Seguridad web aplicada, y todo el temario está gratis en la Web Security Academy. Ideal para AppSec."},
+  {a:"sec", n:"CompTIA Security+", by:"CompTIA · fundamentos", p:"~425 USD", v:"op", d:"La que filtran bancos, gobierno y corporativos. Cara para lo que enseña; la versión SY0-801 sale a fines de 2026."},
+  {a:"sec", n:"OSCP+", by:"OffSec · profesional", p:"~1 749 USD", v:"luego", d:"La más respetada en pentesting, con curso y laboratorios incluidos. Solo cuando ya tengas eJPT y mucha práctica."},
+  {a:"data", n:"Databricks Data Engineer Associate", by:"Databricks · asociado", p:"200 USD", v:"si", d:"La más pedida en ingeniería de datos moderna: Spark, Delta Lake y pipelines."},
+  {a:"data", n:"AWS Data Engineer Associate", by:"AWS · asociado", p:"150 USD", v:"op", d:"Pipelines y analítica en AWS. Buena si ya vas por la ruta de AWS."},
+  {a:"data", n:"AWS Machine Learning Engineer Associate", by:"AWS · asociado", p:"150 USD", v:"op", d:"Llevar modelos a producción en AWS con SageMaker. Para la especialidad de IA."},
+  {a:"data", n:"Azure AI Engineer (AI-102)", by:"Microsoft · asociado", p:"165 USD", v:"op", d:"Construir soluciones con los servicios de IA de Azure. Alternativa a la de AWS si trabajas con Microsoft."},
+  {a:"data", n:"Google Professional Data Engineer", by:"Google Cloud · profesional", p:"200 USD", v:"luego", d:"Muy valorada en datos, pero exige experiencia con BigQuery y Dataflow."},
+  {a:"data", n:"MongoDB Associate Developer", by:"MongoDB · asociado", p:"Verificar", v:"op", d:"Valida MongoDB para desarrolladores. No pude confirmar el precio actual; revisa learn.mongodb.com."},
+  {a:"qa", n:"ISTQB Foundation (CTFL)", by:"ISTQB · fundamentos", p:"Varía por país", v:"si", d:"El estándar en testing; la piden en casi toda oferta de QA. El temario es gratis en istqb.org."},
+  {a:"qa", n:"PSM I o PSPO I", by:"Scrum.org", p:"200 USD", v:"op", d:"Agilidad. La PSPO I está en el plan de tu maestría; la PSM I es para facilitar equipos. No pagues las dos."},
+  {a:"qa", n:"Google Project Management", by:"Google en Coursera", p:"Suscripción", v:"no", d:"Certificado profesional de nivel inicial. Tu maestría ya cubre esto con más peso."}
+];
+
+const SP = [
+ {t:"DevOps, SRE y plataforma", d:"Automatizar cómo se construye, despliega y vigila el software.",
+  jobs:"DevOps engineer, SRE, platform engineer, cloud engineer", req:"Etapas 1 y 2 (Linux y redes) y 8 de la ruta base", dur:"6 a 9 meses",
+  certs:["Terraform Associate","GitHub Actions","CKAD o CKA","AWS Solutions Architect Associate","CKS (más adelante)"], pay:"KodeKloud para los laboratorios; el curso de CKA de Mumshad Mannambeth es de los más usados.",
+  items:[
+  {n:"Linux y Bash a fondo", w:"Procesos, systemd, permisos, redes, logs y scripts de Bash para automatizar.", r:[["lfs101","","en"],["missing","","en"],["kodekloud","Linux Basics","en",1]]},
+  {n:"Redes para DevOps", w:"DNS, HTTP y TLS, balanceadores, proxies inversos como Nginx y firewalls.", r:[["rmdevops","sección de redes","en"],["netacad","Networking Basics","es"]]},
+  {n:"Git y flujos de trabajo en equipo", w:"Ramas, rebase, trunk-based development, pull requests y revisión de código.", r:[["progit","","es"],["ghskills","","en"]]},
+  {n:"Contenedores", w:"Docker a fondo: imágenes multi-etapa, Compose, registros y seguridad de imágenes.", r:[["docker","","en"],["dockerdocs","","en"]]},
+  {n:"CI/CD", w:"Pipelines con GitHub Actions: tests, build, despliegue por entornos y manejo de secretos.", r:[["ghactions","","es"],["ghskills","","en"]]},
+  {n:"Infraestructura como código", w:"Terraform con estado remoto y módulos; Ansible para configurar servidores.", r:[["tf","","en"],["ansible","","en"]], x:"Aquí sacas la Terraform Associate."},
+  {n:"Kubernetes", w:"Pods, deployments, services, ingress, ConfigMaps, secretos, Helm y escalado.", r:[["k8s","","en"],["lfs158","","en"],["killercoda","simuladores gratis de CKA y CKAD","en"]], x:"Aquí sacas la CKAD o la CKA."},
+  {n:"Nube para DevOps", w:"VPC, IAM, EC2, ECS y EKS, RDS y S3 en AWS.", r:[["aws","","sub"],["cantrill","","en",1]]},
+  {n:"Observabilidad", w:"Métricas con Prometheus, dashboards en Grafana, logs centralizados y trazas con OpenTelemetry.", r:[["prom","","en"],["grafana","","en"],["otel","","en"]]},
+  {n:"SRE", w:"SLIs y SLOs, presupuestos de error, guardias, manejo de incidentes y postmortems.", r:[["sre","Site Reliability Engineering y The Site Reliability Workbook","en"]]},
+  {n:"GitOps y plataforma interna", w:"Argo CD, despliegues declarativos, entornos de vista previa y plantillas para otros equipos.", r:[["argocd","","en"],["rmdevops","","en"]]},
+  {n:"DevSecOps", w:"Escanear imágenes y dependencias, manejar secretos y aplicar mínimo privilegio.", r:[["trivy","","en"],["owaspcs","","en"]]},
+  {n:"Proyecto final", w:"Llevar una app tuya a producción como lo haría una empresa.", p:"Despliega Pukllay o ComeYa con Terraform, Kubernetes, CI/CD y monitoreo, y documenta la arquitectura en el README."}
+ ]},
+ {t:"Nube: arquitecto de soluciones", d:"Diseñar sistemas en AWS que escalen, sean seguros y no cuesten de más.",
+  jobs:"Cloud engineer, arquitecto de soluciones, consultor cloud", req:"Etapas 4, 5 y 8 de la ruta base", dur:"4 a 6 meses",
+  certs:["AWS Cloud Practitioner","AWS Solutions Architect Associate","AWS Developer Associate (opcional)","AWS Solutions Architect Professional (más adelante)"], pay:"Adrian Cantrill (profundo) o Stephane Maarek en Udemy (rápido), más los exámenes de práctica de Tutorials Dojo.",
+  items:[
+  {n:"Fundamentos de AWS", w:"Cuentas, regiones, IAM, facturación y alertas de costo para no llevarte sustos.", r:[["aws","Cloud Practitioner Essentials","sub"]]},
+  {n:"Cómputo", w:"EC2, autoescalado, balanceadores de carga, contenedores y Lambda.", r:[["aws","","sub"],["cantrill","","en",1]]},
+  {n:"Almacenamiento y bases de datos", w:"S3, EBS, EFS, RDS, Aurora y DynamoDB: cuándo usar cada uno.", r:[["aws","","sub"],["maarek","","en",1]]},
+  {n:"Redes en la nube", w:"VPC, subredes públicas y privadas, NAT, tablas de rutas, grupos de seguridad y VPN.", r:[["cantrill","","en",1]]},
+  {n:"Serverless y eventos", w:"API Gateway, Lambda, SQS, SNS, EventBridge y Step Functions.", r:[["serverless","patrones y ejemplos","en"]]},
+  {n:"Well-Architected", w:"Los seis pilares: excelencia operativa, seguridad, fiabilidad, rendimiento, costo y sostenibilidad.", r:[["wellarch","","en"]]},
+  {n:"Costos (FinOps)", w:"Estimar, etiquetar recursos y bajar la factura de un cliente.", r:[["awscalc","","en"],["finops","","en"]]},
+  {n:"Otras nubes", w:"Equivalencias de servicios en Azure y Google Cloud para no quedarte encerrado en una.", r:[["mslearn","ruta AZ-900","es"],["gcsb","","en"]]},
+  {n:"Exámenes de práctica", w:"Dos o tres simulacros con 80% o más antes de cada examen real.", r:[["tdojo","","en",1]]},
+  {n:"Proyecto final", w:"Diseñar y documentar una arquitectura real.", p:"Diagrama y decisiones (con costos estimados) para la tienda de uno de tus clientes en AWS, publicado en tu portafolio."}
+ ]},
+ {t:"Backend Python avanzado", d:"APIs y servicios rápidos, seguros y fáciles de mantener.",
+  jobs:"Backend developer, API developer, Python developer", req:"Etapas 2, 3, 4, 5 y 7 de la ruta base", dur:"4 a 6 meses",
+  certs:["PCAP (si buscas empleo)","AWS Developer Associate o CKAD"], pay:"CodelyTV para arquitectura; Real Python para Python a fondo.",
+  items:[
+  {n:"Python profesional", w:"Tipado con mypy, uv, Ruff, logging estructurado y empaquetado.", r:[["uv","","en"],["ruff","","en"],["realpython","","en",1]]},
+  {n:"Asincronía en servidores", w:"asyncio, FastAPI asíncrono y cuándo conviene usar hilos o procesos.", r:[["asyncio","","es"],["fastapi","","es"]]},
+  {n:"Django a fondo", w:"ORM, migraciones, admin, señales y Django REST framework.", r:[["djdocs","","es"],["drf","","en"]]},
+  {n:"Diseño de APIs", w:"REST bien hecho: versionado, paginación, errores, OpenAPI. Cuándo usar GraphQL o gRPC.", r:[["apiguide","","en"],["fastapi","","es"]]},
+  {n:"Bases de datos para backend", w:"Índices, EXPLAIN, transacciones, bloqueos y migraciones sin cortar el servicio.", r:[["uti","","es"],["pg","","en"]]},
+  {n:"Cachés y colas", w:"Redis, Celery, RabbitMQ o Kafka, y tareas en segundo plano.", r:[["redis","","en"],["celery","","en"]]},
+  {n:"Seguridad de APIs", w:"OAuth2, OIDC, JWT, límites de tasa y el OWASP API Security Top 10.", r:[["owaspcs","","en"],["owasp","","en"]]},
+  {n:"Testing de backend", w:"pytest, fixtures, mocks y tests de integración con bases reales en contenedores.", r:[["pytest","","en"],["testcont","","en"]]},
+  {n:"Arquitectura", w:"Hexagonal, DDD, CQRS y eventos aplicados a Python.", r:[["cosmic","","en"],["codely","","es",1]]},
+  {n:"Diseño de sistemas", w:"Escalar horizontalmente, réplicas, particionado y consistencia.", r:[["sdprimer","","en"],["bytebytego","","en",1]]},
+  {n:"Proyecto final", w:"Un backend completo de nivel profesional.", p:"API de ComeYa con FastAPI, PostgreSQL, Redis, autenticación, tests, CI y despliegue."}
+ ]},
+ {t:"Ingeniería de datos", d:"Mover, limpiar y preparar datos para que el negocio decida.",
+  jobs:"Data engineer, analytics engineer, BI developer", req:"Etapas 2, 3 y 9 de la ruta base", dur:"5 a 7 meses",
+  certs:["Databricks Data Engineer Associate","AWS Data Engineer Associate (opcional)","Google Professional Data Engineer (más adelante)"], pay:"DataCamp, o nada: el Data Engineering Zoomcamp es gratis y muy completo.",
+  items:[
+  {n:"SQL avanzado", w:"Funciones de ventana, CTEs, subconsultas y optimización.", r:[["modesql","","en"],["pg","","en"]]},
+  {n:"Modelado de datos", w:"Esquema estrella, dimensiones, hechos, data warehouse y data lake.", r:[["dezoom","","en"]]},
+  {n:"Pipelines en Python", w:"ETL y ELT con pandas o Polars, APIs y validación de calidad de datos.", r:[["dezoom","","en"],["kaggle","","en"]]},
+  {n:"Orquestación", w:"Airflow, Prefect o Dagster: programar y vigilar pipelines.", r:[["airflow","","en"],["dezoom","","en"]]},
+  {n:"Transformación con dbt", w:"Modelos SQL versionados, tests de datos y documentación.", r:[["dbt","","en"]]},
+  {n:"Procesamiento distribuido", w:"Spark y Databricks para datos que no caben en una máquina.", r:[["dbx","","en"],["dezoom","","en"]]},
+  {n:"Streaming", w:"Kafka y procesamiento en tiempo real.", r:[["confluent","","en"],["dezoom","","en"]]},
+  {n:"Almacenes en la nube", w:"BigQuery, Snowflake o Redshift.", r:[["gcsb","BigQuery","en"],["dezoom","","en"]]},
+  {n:"Proyecto final", w:"Un pipeline real de punta a punta.", p:"Pipeline de ventas de una tienda Shopify hasta un dashboard en Power BI o Looker Studio."}
+ ]},
+ {t:"IA aplicada y ML engineering", d:"Construir productos con modelos de lenguaje y llevar modelos a producción.",
+  jobs:"AI engineer, ML engineer, desarrollador de agentes", req:"Etapas 2, 5 y 9 de la ruta base", dur:"6 a 9 meses",
+  certs:["AWS AI Practitioner","AWS ML Engineer Associate o Azure AI-102"], pay:"Coursera Plus por un mes o dos (DeepLearning.AI), o DevTalles para IA aplicada en español.",
+  items:[
+  {n:"Matemática para ML", w:"Álgebra lineal, derivadas y probabilidad, con intuición visual.", r:[["b1b","","en"],["khan","","es"]]},
+  {n:"Machine learning clásico", w:"Regresión, árboles, validación cruzada y métricas con scikit-learn.", r:[["coursera","Machine Learning Specialization","sub"],["kaggle","","en"]]},
+  {n:"Deep learning con PyTorch", w:"Redes neuronales, entrenamiento y ajuste fino.", r:[["fastai","","en"],["karpathy","","en"]]},
+  {n:"Cómo funcionan los LLMs", w:"Tokens, embeddings, transformers y por qué alucinan.", r:[["karpathy","Let's build GPT","en"],["hf","LLM Course","en"]]},
+  {n:"Construir con APIs de modelos", w:"Prompts, salidas estructuradas, streaming y uso de herramientas con la API de Claude y otras.", r:[["anthcourses","","en"],["genai","","es"],["dlai","","en"]]},
+  {n:"RAG", w:"Embeddings, bases vectoriales, búsqueda híbrida y cómo evaluar las respuestas.", r:[["llmzoom","","en"],["dlai","","en"]]},
+  {n:"Agentes", w:"Herramientas, MCP, flujos de varios pasos y límites de seguridad.", r:[["hf","Agents Course","en"],["dlai","","en"]], x:"Conecta directo con lo que ya haces en n8n."},
+  {n:"Evaluación y costos", w:"Evals automáticos, trazas, latencia y costo por respuesta.", r:[["llmzoom","","en"],["dlai","","en"]]},
+  {n:"MLOps", w:"Versionado de modelos, despliegue, monitoreo y reentrenamiento.", r:[["mlopszoom","","en"]]},
+  {n:"Proyecto final", w:"Un producto de IA que alguien use.", p:"Un tutor de quechua para Pukllay o un asistente con RAG para los clientes de Unno, con evaluación y costos medidos."}
+ ]},
+ {t:"Ciberseguridad de aplicaciones", d:"Encontrar y corregir fallas antes que un atacante.",
+  jobs:"AppSec engineer, pentester web, security champion", req:"Etapas 2, 5 y 7 de la ruta base", dur:"6 a 12 meses",
+  certs:["eJPT","Burp Suite Certified Practitioner","Security+ (si apuntas a corporativo)","OSCP+ (más adelante)"], pay:"Hack4u en español; Hack The Box Academy en inglés.",
+  items:[
+  {n:"Linux y redes para seguridad", w:"Terminal, permisos, servicios, puertos y tráfico de red.", r:[["thm","Pre Security","en"],["hack4u","","es",1]]},
+  {n:"OWASP en la práctica", w:"Top 10 web y API Top 10, explotando cada falla en laboratorios.", r:[["portswigger","","en"],["owasp","","en"]]},
+  {n:"Pentesting web con Burp Suite", w:"Interceptar, modificar y automatizar ataques a aplicaciones web.", r:[["portswigger","","en"]], x:"Aquí sacas la Burp Suite Certified Practitioner (99 USD)."},
+  {n:"Pentesting de redes y sistemas", w:"Nmap, explotación, escalada de privilegios y movimiento lateral.", r:[["thm","","en"],["htb","","en",1]], x:"Aquí sacas la eJPT."},
+  {n:"Desarrollo seguro", w:"Revisión de código, análisis estático, dependencias vulnerables y secretos.", r:[["owaspcs","","en"],["csb","","en"]]},
+  {n:"Seguridad en la nube", w:"IAM, buckets públicos y configuraciones erróneas en AWS.", r:[["flaws","","en"]]},
+  {n:"CTFs", w:"Competencias para practicar con retos reales.", r:[["pico","","en"],["thm","","en"]]},
+  {n:"Proyecto final", w:"Demostrar que sabes auditar.", p:"Informe de auditoría de una app tuya: hallazgos, severidad, prueba de concepto y corrección."}
+ ]},
+ {t:"QA automation", d:"Pruebas automatizadas que dan confianza para desplegar seguido.",
+  jobs:"QA automation, SDET, QA engineer", req:"Etapas 2, 5 y 7 de la ruta base", dur:"3 a 5 meses",
+  certs:["ISTQB Foundation (CTFL)","ISTQB Test Automation Engineer (opcional)"], pay:"No hace falta: Test Automation University es gratis.",
+  items:[
+  {n:"Fundamentos de testing", w:"Niveles, tipos y técnicas de diseño de casos de prueba.", r:[["istqb","temario CTFL","en"],["tau","","en"]]},
+  {n:"Unitarias e integración", w:"pytest, fixtures, mocks y cobertura.", r:[["pytest","","en"]]},
+  {n:"End-to-end", w:"Playwright con Python: selectores robustos, esperas y trazas.", r:[["playwright","","en"]]},
+  {n:"Pruebas de API", w:"Contratos, autenticación, datos de prueba y validación de esquemas.", r:[["tau","","en"]]},
+  {n:"Rendimiento", w:"Pruebas de carga con k6 o Locust.", r:[["k6","","en"],["locust","","en"]]},
+  {n:"Tests en CI", w:"Paralelizar, reportes y cómo eliminar tests inestables.", r:[["ghactions","","es"]]},
+  {n:"Accesibilidad y pruebas visuales", w:"Pruebas automáticas de accesibilidad y comparación visual. Tu ventaja como diseñador.", r:[["axe","","en"],["tau","","en"]]},
+  {n:"Proyecto final", w:"Una suite de pruebas que puedas mostrar.", p:"Tests E2E, de API y de accesibilidad de una tienda que hayas hecho, corriendo en GitHub Actions."}
+ ]},
+ {t:"Desarrollo móvil", d:"Apps publicadas en las tiendas, no solo prototipos.",
+  jobs:"Mobile developer, React Native developer", req:"Etapas 5 y 6 de la ruta base", dur:"3 a 6 meses",
+  certs:["No hay una que pese: lo que vale es tener apps publicadas"], pay:"DevTalles (React Native) o MoureDev (nativo).",
+  items:[
+  {n:"React Native con Expo a fondo", w:"Navegación, estado, almacenamiento local y formularios.", r:[["expo","","en"],["rn","","en"],["fso","Parte 10","es"]]},
+  {n:"Publicar en las tiendas", w:"Cuentas de desarrollador, firmas, builds con EAS y revisiones de Apple y Google.", r:[["expo","EAS Build y Submit","en"]]},
+  {n:"Notificaciones, pagos y analítica", w:"Push, compras dentro de la app y eventos de uso.", r:[["expo","","en"]]},
+  {n:"Offline y sincronización", w:"Que la app funcione sin señal y sincronice después.", r:[["rn","","en"]]},
+  {n:"Nativo básico", w:"Kotlin con Jetpack Compose o Swift con SwiftUI, para entender lo que hay debajo.", r:[["android","","en"],["swiftui","","en"]]},
+  {n:"Rendimiento y accesibilidad", w:"Listas grandes, animaciones fluidas y lectores de pantalla.", r:[["rn","","en"]]},
+  {n:"Proyecto final", w:"Una app real en manos de usuarios.", p:"Pukllay publicada en App Store y Google Play."}
+ ]},
+ {t:"Producto y liderazgo técnico", d:"Tu combinación más rara: diseño, desarrollo y gerencia de TI.",
+  jobs:"Product engineer, tech lead, CTO de startup, consultor de transformación digital", req:"Ruta base completa y la maestría", dur:"Continuo, en paralelo al trabajo",
+  certs:["PSPO I","AWS Solutions Architect Associate (más adelante)"], pay:"Ninguna obligatoria: libros y práctica real.",
+  items:[
+  {n:"Descubrimiento de producto", w:"Entrevistas, experimentos y decidir qué construir antes de programar.", r:[["shapeup","","en"]], x:"Libro: Inspired, de Marty Cagan (está en la pestaña de la maestría)."},
+  {n:"Analítica de producto", w:"Eventos, embudos, cohortes y pruebas A/B.", r:[["skillshop","Google Analytics 4","es"]]},
+  {n:"Arquitectura para startups", w:"Monolito modular, cuándo dividir en servicios y cómo no sobrediseñar.", r:[["codely","","es",1],["sdprimer","","en"]]},
+  {n:"Planificar y estimar", w:"Ciclos cortos, apuestas, alcance fijo y manejo de deuda técnica.", r:[["shapeup","","en"]]},
+  {n:"Revisión de código y mentoría", w:"Cómo revisar y dar feedback técnico que mejore al equipo.", r:[["engprac","","en"]]},
+  {n:"Documentos de diseño", w:"RFCs y registros de decisiones de arquitectura (ADR).", r:[["adr","","en"]]},
+  {n:"Liderar equipos técnicos", w:"Pasar de hacer a lograr que otros hagan: contratación, 1:1 y prioridades.", p:"Libros: The Manager's Path (Camille Fournier) y Staff Engineer (Will Larson)."},
+  {n:"Proyecto final", w:"Liderar un producto real.", p:"Lanzar ComeYa como MVP con métricas definidas y un equipo pequeño, aunque sea de dos."}
+ ]}
+];
+
+const ES_KEY = "especialidades-v1";
+const esDone = load(ES_KEY);
+(function renderSpecialties(){
+  let html = "", chips = "";
+  SP.forEach((rt, i) => {
+    const n = i + 1;
+    chips += `<a href="#ruta-${n}" title="${esc(rt.t)}">R${pad(n)}</a>`;
+    html += `<section class="stage" id="ruta-${n}" aria-labelledby="es-h-${n}">
+      <div class="stage-head"><span class="num">${pad(n)}</span><div><div class="eyebrow">Especialidad</div><h3 class="h-sec" id="es-h-${n}">${esc(rt.t)}</h3><p>${esc(rt.d)}</p></div><span class="sprog"></span></div>
+      <dl class="rmeta"><dt>Trabajos</dt><dd>${esc(rt.jobs)}</dd><dt>Antes</dt><dd>${esc(rt.req)}</dd><dt>Duración</dt><dd>${esc(rt.dur)}</dd>
+        <dt>Certificaciones</dt><dd><ol class="chain">${rt.certs.map(c => `<li><span>${esc(c)}</span></li>`).join("")}</ol></dd>
+        <dt>De pago</dt><dd>${esc(rt.pay)}</dd></dl>
+      <div class="table route"><div class="thead"><span>Paso</span><span>Qué aprendes</span><span>Con qué</span></div>`;
+    rt.items.forEach((it, j) => {
+      const id = `r${n}-${j}`;
+      html += `<div class="row${esDone[id] ? " done" : ""}" data-id="${id}">
+        <div class="cell"><label class="cname"><input type="checkbox" id="${id}"${esDone[id] ? " checked" : ""}><span>${esc(it.n)}</span></label></div>
+        <div class="cell"><p class="what">${esc(it.w)}</p></div>
+        <div class="cell">${resHtml(it)}</div></div>`;
+    });
+    html += `</div></section>`;
+  });
+  $("es-chips").innerHTML = chips;
+  $("es-routes").innerHTML = html;
+})();
+
+(function renderCertMap(){
+  const head = '<div class="thead"><span>Certificación</span><span>Examen</span><span>Para ti</span><span>Por qué</span></div>';
+  $("cmap-table").innerHTML = head + CMAP.map(c => `<div class="row" data-a="${c.a}">
+    <div class="cell"><span class="cn">${esc(c.n)}</span><span class="by">${esc(c.by)} · <span class="area">${esc(CAREAS[c.a])}</span></span></div>
+    <div class="cell"><span class="pr">${esc(c.p)}</span></div>
+    <div class="cell"><span class="verdict v-${c.v}">${vLbl[c.v]}</span></div>
+    <div class="cell"><p class="what">${esc(c.d)}</p></div></div>`).join("");
+  const f = $("cmap-filters");
+  f.innerHTML = `<button type="button" data-a="all" aria-pressed="true">Todas</button>` +
+    Object.entries(CAREAS).map(([k, v]) => `<button type="button" data-a="${k}" aria-pressed="false">${esc(v)}</button>`).join("");
+  f.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    f.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    $("cmap-table").querySelectorAll(".row").forEach(r => { r.hidden = !(b.dataset.a === "all" || r.dataset.a === b.dataset.a); });
+  });
+})();
+const esStats = () => reviewStats("es-routes", esDone, "es", "tp-especialidades");
+
+/* ================= Avance, búsqueda y filtros (todas las pestañas) ================= */
+const TABS = ["software", "especialidades", "maestria", "publicidad"];
 const PANELS = {
   software:  {mount:"sw-stages", chips:"sw-chips", next:"sw-next", empty:"sw-empty", store:swDone, key:SW_KEY, stats:swStats},
+  especialidades:{mount:"es-routes", chips:"es-chips", next:"es-next", empty:"es-empty", store:esDone, key:ES_KEY, stats:esStats, pickStarted:true},
   maestria:  {mount:"ma-blocks", chips:"ma-chips", next:"ma-next", empty:"ma-empty", store:maDone, key:MA_KEY, stats:maStats},
   publicidad:{mount:"pu-cycles", chips:"pu-chips", next:"pu-next", empty:"pu-empty", store:puDone, key:PU_KEY, stats:puStats}
 };
@@ -963,9 +1427,24 @@ function stageProgress(name){
 }
 function nextUp(name){
   const P = PANELS[name];
-  const pending = [...document.querySelectorAll(`#${P.mount} .row`)].filter(r => !P.store[r.dataset.id]);
-  const row = pending.find(r => r.dataset.k === "suplir") || pending[0];
+  let pending = [...document.querySelectorAll(`#${P.mount} .row`)].filter(r => !P.store[r.dataset.id]);
   const el = $(P.next);
+  if (P.pickStarted) {
+    /* En especialidades se sigue la ruta con más avance; si no hay ninguna empezada, se invita a elegir */
+    let best = null, bestDone = 0;
+    document.querySelectorAll(`#${P.mount} .stage`).forEach(st => {
+      const rows = [...st.querySelectorAll(".row")];
+      const d = rows.filter(r => P.store[r.dataset.id]).length;
+      if (d > bestDone && d < rows.length) { best = st; bestDone = d; }
+    });
+    if (!best) {
+      const any = Object.keys(P.store).length;
+      el.innerHTML = `<span class="eyebrow">Sigue con</span><span>${any ? "Terminaste las especialidades que empezaste. Elige otra si quieres." : "Elige una especialidad y marca su primer paso cuando lo termines."}</span>`;
+      return;
+    }
+    pending = [...best.querySelectorAll(".row")].filter(r => !P.store[r.dataset.id]);
+  }
+  const row = pending.find(r => r.dataset.k === "suplir") || pending[0];
   if (!row) { el.innerHTML = '<span class="eyebrow">Sigue con</span><span>Todo marcado. Buen trabajo.</span>'; return; }
   const st = row.closest(".stage");
   el.innerHTML = `<span class="eyebrow">Sigue con</span><button type="button" class="goto" data-goto="${row.dataset.id}">${esc(row.querySelector(".cname span").textContent)}</button><span class="where">${esc(st.querySelector(".stage-head .num").textContent)} · ${esc(st.querySelector(".h-sec").textContent)}</span>`;
@@ -1061,7 +1540,7 @@ $("bk-export").addEventListener("click", async () => {
   if (downloads) {
     try {
       await downloads.save({filename, data: json});
-      bkMsg(`Respaldo descargado con ${n} temas marcados.`);
+      bkMsg(`Respaldo descargado con ${n} ${n === 1 ? "tema marcado" : "temas marcados"}.`);
     } catch (err) {
       const code = err && err.code;
       bkMsg(code === "declined" ? "Descarga cancelada." : code === "rate_limited" ? "Espera un momento e inténtalo de nuevo." : "No se pudo descargar el respaldo aquí.");
@@ -1074,7 +1553,7 @@ $("bk-export").addEventListener("click", async () => {
   a.href = url; a.download = filename;
   document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  bkMsg(`Respaldo descargado con ${n} temas marcados.`);
+  bkMsg(`Respaldo descargado con ${n} ${n === 1 ? "tema marcado" : "temas marcados"}.`);
 });
 $("bk-import").addEventListener("click", () => $("bk-file").click());
 $("bk-file").addEventListener("change", async e => {
@@ -1089,7 +1568,8 @@ $("bk-file").addEventListener("change", async e => {
   }
   let n = 0;
   TABS.forEach(name => {
-    const P = PANELS[name], src = data.progreso[name] || {};
+    if (!data.progreso[name] || typeof data.progreso[name] !== "object") return;
+    const P = PANELS[name], src = data.progreso[name];
     Object.keys(P.store).forEach(k => delete P.store[k]);
     document.querySelectorAll(`#${P.mount} .row`).forEach(r => {
       const on = src[r.dataset.id] === true;
@@ -1102,7 +1582,7 @@ $("bk-file").addEventListener("change", async e => {
     applyFilter(name);
   });
   const when = data.fecha ? new Date(data.fecha).toLocaleDateString("es-PE", {day:"numeric", month:"long", year:"numeric"}) : "";
-  bkMsg(`Respaldo restaurado${when ? " del " + when : ""}: ${n} temas marcados.`);
+  bkMsg(`Respaldo restaurado${when ? " del " + when : ""}: ${n} ${n === 1 ? "tema marcado" : "temas marcados"}.`);
 });
 
 /* ================= Pestañas ================= */
@@ -1139,6 +1619,7 @@ function tabFromHash(){
   if (/^etapa-\d+$/.test(h)) return "software";
   if (/^bloque-\d+$/.test(h)) return "maestria";
   if (/^ciclo-\d+$/.test(h)) return "publicidad";
+  if (/^ruta-\d+$/.test(h) || h === "cmap") return "especialidades";
   return null;
 }
 let start = tabFromHash();
@@ -1148,6 +1629,17 @@ showTab(start);
 /* Si se abre con un enlace a una etapa, bloque o ciclo, se va a él cuando su pestaña ya es visible */
 if (location.hash.length > 1) { const tgt = document.getElementById(location.hash.slice(1)); if (tgt) requestAnimationFrame(() => tgt.scrollIntoView()); }
 window.addEventListener("hashchange", () => { const t = tabFromHash(); if (t) showTab(t); });
+/* Enlaces dentro del texto que llevan a otra pestaña (y opcionalmente a una sección de ella) */
+document.addEventListener("click", e => {
+  const b = e.target.closest(".tablink");
+  if (!b) return;
+  showTab(b.dataset.tab);
+  const target = b.dataset.scroll ? $(b.dataset.scroll) : $("panel-" + b.dataset.tab);
+  requestAnimationFrame(() => {
+    const top = target.getBoundingClientRect().top + window.scrollY - $("tabbar").offsetHeight - 16;
+    window.scrollTo({top: Math.max(0, top)});
+  });
+});
 
 /* Altura real de la barra de pestañas, para que la barra de filtros quede justo debajo */
 function setTabH(){
