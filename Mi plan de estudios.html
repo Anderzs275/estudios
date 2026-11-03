@@ -221,6 +221,22 @@ h4{font-size:16.5px;font-weight:600}
 .cmap .pr{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
 .cmap .area{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .cmap-filters{display:flex;flex-wrap:wrap;gap:6px}
+.verdict-box{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 12px 12px 0;padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+.verdict-box .note{color:var(--ink)}
+.vb-main{margin:0;font-family:var(--f-display);font-size:20px;font-weight:600;line-height:1.3;text-wrap:balance}
+.cmp .thead,.cmp .row{grid-template-columns:minmax(0,.55fr) minmax(0,1fr) minmax(0,1fr)}
+.cmp .row{padding-block:12px;font-size:14px}
+.cmp .cell{display:block}
+.win{font-weight:600;color:var(--covered)}
+.quiz{display:flex;flex-direction:column;gap:10px}
+.quiz fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.quiz legend{padding:0;font-size:14.5px;float:left;width:100%;margin-bottom:4px}
+.quiz label{display:inline-flex;gap:6px;align-items:center;font-size:14px;cursor:pointer}
+.quiz input{accent-color:var(--accent);width:16px;height:16px}
+.quiz-result{border-radius:12px;padding:14px 18px;background:var(--bg);border:1px dashed var(--line)}
+.quiz-result.done{border-style:solid;border-color:var(--accent);background:var(--accent-soft)}
+.quiz-result h5{margin:0 0 6px;font-family:var(--f-display);font-size:18px}
+.quiz-result p{margin:0;font-size:14.5px}
 .yt-tip{border:1px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
 .yt-tip .note{color:var(--ink)}
 .yt-kind{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -228,6 +244,10 @@ h4{font-size:16.5px;font-weight:600}
 @media (max-width:760px){
   .search{flex:1 1 200px}
   .thead{display:none}
+  .cmp .row{grid-template-columns:1fr;gap:4px}
+  .cmp .row .cell:not(:first-child){padding-left:0}
+  .cmp .row .cell:nth-child(2)::before{content:"UPN";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
+  .cmp .row .cell:nth-child(3)::before{content:"Cibertec";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
   .cmap .row{grid-template-columns:1fr auto;gap:6px 12px}
   .cmap .row .cell:nth-child(3){grid-column:1/-1;padding-left:0}
   .cmap .row .cell:nth-child(4){grid-column:1/-1;padding-left:0}
@@ -296,6 +316,63 @@ h4{font-size:16.5px;font-weight:600}
           </div>
         </div>
         <p class="note">Cibertec es la más profunda en cloud, IA y arquitectura. IDAT pone más peso en interfaces, innovación e inglés. Tecsup es más corta, con énfasis en aplicaciones empresariales e integración, y su grado es técnico, un escalón por debajo del bachiller profesional.</p>
+      </section>
+
+      <section class="panel focus" aria-labelledby="uni-h" id="carrera">
+        <div class="eyebrow">Brochures de UPN y Cibertec · noviembre de 2026</div>
+        <h3 class="h-sec" id="uni-h">¿Estudiar la carrera formal? UPN vs Cibertec</h3>
+        <p class="note">Las dos ofrecen Ingeniería de Software en 10 ciclos. En lo técnico enseñan casi lo mismo; lo que las separa es el <strong>tipo de título</strong>, el <strong>tiempo</strong> y la <strong>modalidad</strong>. Y en tu caso, la pregunta de fondo no es cuál elegir, sino si te conviene volver a hacer un pregrado.</p>
+
+        <div class="verdict-box">
+          <span class="eyebrow">Mi veredicto para ti</span>
+          <p class="vb-main">Hoy <strong>no te conviene</strong> hacer otra carrera completa, salvo que necesites el título de ingeniero o quieras entrar a planilla en una empresa grande.</p>
+          <p class="note">Ya tienes una carrera (Publicidad) y una maestría en Gerencia de TI que terminas en marzo de 2027. Otros 3 a 5 años de pregrado cuestan mucho tiempo y dinero para aprender lo mismo que tu ruta autodidacta, que es gratis o casi. Para freelance o para el perfil híbrido de desarrollo y datos, rinden más tu portafolio, unas pocas certificaciones y tu experiencia con clientes que un segundo bachiller.</p>
+        </div>
+
+        <h4>En qué se parecen</h4>
+        <ul class="tips">
+          <li>Las dos duran <b>10 ciclos</b> y dan <b>bachiller reconocido por SUNEDU</b>, con el que puedes hacer una maestría.</li>
+          <li>Cubren lo mismo en lo técnico: programación, estructuras de datos, bases de datos, web full stack, pruebas, gestión de proyectos, nube, DevOps, machine learning, IA, seguridad, arquitectura y microservicios o sistemas distribuidos.</li>
+          <li>Las dos terminan con investigación y tesis, e incluyen certificaciones durante la carrera.</li>
+        </ul>
+
+        <h4>En qué se diferencian</h4>
+        <div class="table cmp">
+          <div class="thead"><span>Aspecto</span><span>UPN</span><span>Cibertec</span></div>
+          <div class="row"><div class="cell"><b>Duración</b></div><div class="cell">5 años · 200 créditos</div><div class="cell"><span class="win">3 años y 4 meses</span></div></div>
+          <div class="row"><div class="cell"><b>Modalidad</b></div><div class="cell">Por campus; menciona cursos virtuales "según disponibilidad". Sus sedes no están en Arequipa: confirma si puedes estudiarla a distancia.</div><div class="cell"><span class="win">100% virtual</span>, con horarios flexibles para gente que trabaja.</div></div>
+          <div class="row"><div class="cell"><b>Título</b></div><div class="cell"><span class="win">Ingeniero de Software</span> (universitario). Es el que normalmente piden para colegiarte en el Colegio de Ingenieros.</div><div class="cell">Profesional en Ingeniería de Software, de escuela de educación superior. El bachiller es equivalente al universitario, pero el título no dice "ingeniero".</div></div>
+          <div class="row"><div class="cell"><b>Cursos generales</b></div><div class="cell">Muchos: física 1 y 2, cálculo diferencial e integral, matemáticas avanzadas, ciudadanía, cambio climático, arte y cultura, ética.</div><div class="cell"><span class="win">Pocos</span>: casi todo es técnico desde el primer ciclo.</div></div>
+          <div class="row"><div class="cell"><b>Datos</b></div><div class="cell"><span class="win">Más fuerte</span>: probabilidad, análisis de datos, inteligencia de negocios, dos estadísticas y credencial en IT Business Intelligence.</div><div class="cell">Analítica de datos para nuevos negocios y procesamiento e integración de datos.</div></div>
+          <div class="row"><div class="cell"><b>IA y nube</b></div><div class="cell">Machine learning, IA para investigación, DevOps e infraestructura y seguridad en la nube.</div><div class="cell"><span class="win">Más fuerte</span>: tres cursos de IA (incluido llevar modelos a producción), cloud native, DevOps y observabilidad.</div></div>
+          <div class="row"><div class="cell"><b>UX</b></div><div class="cell"><span class="win">Tiene</span> "Construcción de software y experiencia UX".</div><div class="cell">No tiene un curso de UX.</div></div>
+          <div class="row"><div class="cell"><b>Herramientas</b></div><div class="cell">El brochure no las nombra.</div><div class="cell">Java con Spring, Angular, SQL Server, MongoDB, Git y Docker.</div></div>
+          <div class="row"><div class="cell"><b>Certificaciones</b></div><div class="cell">Opción de hasta tres con AWS, Cisco y Google; credenciales de Coursera y Oracle.</div><div class="cell">5 modulares y 10 de empleabilidad, sin costo adicional.</div></div>
+          <div class="row"><div class="cell"><b>Precio</b></div><div class="cell">No aparece en el brochure.</div><div class="cell">No aparece en el brochure.</div></div>
+        </div>
+        <p class="note">Frases como "únicos alineados a ACM/IEEE" o "9 de cada 10 egresados trabajan" son marketing de la propia universidad: no las tomes como comparación.</p>
+
+        <h4>¿Te conviene? Responde y te digo</h4>
+        <div class="quiz" id="uni-quiz">
+          <fieldset><legend>¿Necesitas el título de <b>Ingeniero</b>? Por ejemplo, para colegiarte, trabajar en el Estado o postular a empresas que lo exigen.</legend>
+            <label><input type="radio" name="q1" value="1"> Sí</label><label><input type="radio" name="q1" value="0"> No</label></fieldset>
+          <fieldset><legend>¿Quieres <b>empleo en planilla</b> en una empresa grande, más que seguir freelance?</legend>
+            <label><input type="radio" name="q2" value="1"> Sí</label><label><input type="radio" name="q2" value="0"> No</label></fieldset>
+          <fieldset><legend>¿Te cuesta <b>estudiar por tu cuenta</b>, sin profesor ni fechas de entrega?</legend>
+            <label><input type="radio" name="q3" value="1"> Sí</label><label><input type="radio" name="q3" value="0"> No</label></fieldset>
+          <fieldset><legend>¿Puedes dedicar <b>3 a 5 años</b> y pagar las pensiones sin afectar tu trabajo ni la maestría?</legend>
+            <label><input type="radio" name="q4" value="1"> Sí</label><label><input type="radio" name="q4" value="0"> No</label></fieldset>
+          <div class="quiz-result" id="uni-result" aria-live="polite"><p class="note">Responde las cuatro preguntas para ver el resultado.</p></div>
+        </div>
+
+        <h4>Si igual te interesa, pregúntales esto antes de matricularte</h4>
+        <ol class="tips">
+          <li><b>Precio total de la carrera</b>, no solo la cuota por ciclo, y cuánto sube cada año.</li>
+          <li><b>Convalidación:</b> si por tener bachiller y maestría te reconocen cursos. Muchas tienen programas para titulados que acortan bastante la carrera.</li>
+          <li><b>Modalidad y horarios:</b> si es virtual de verdad o tiene clases en vivo a horas fijas.</li>
+          <li>En la UPN: <b>qué son "Essentials 1 y 2"</b>. Probablemente sean cursos de Cisco NetAcad, que puedes llevar gratis por tu cuenta.</li>
+          <li>En Cibertec: si el título <b>te permite colegiarte</b> como ingeniero o no.</li>
+        </ol>
       </section>
 
       <section class="panel spine" aria-labelledby="spine-h">
@@ -1342,6 +1419,34 @@ $("ma-certs").innerHTML = MA_CERTS.map(certCard).join("");
 $("pu-books").innerHTML = PU_BOOKS.map(bookCard).join("");
 const maStats = () => reviewStats("ma-blocks", maDone, "ma", "tp-maestria");
 const puStats = () => reviewStats("pu-cycles", puDone, "pu", "tp-publicidad");
+
+/* ================= ¿Estudiar la carrera formal? (mini test) ================= */
+(function uniQuiz(){
+  const q = $("uni-quiz"), out = $("uni-result");
+  q.addEventListener("change", () => {
+    const v = n => { const c = q.querySelector(`input[name="q${n}"]:checked`); return c ? c.value === "1" : null; };
+    const a = [1, 2, 3, 4].map(v);
+    if (a.includes(null)) return;
+    const [titulo, planilla, sola, puede] = a;
+    let h, p;
+    if (!puede) {
+      h = "Ahora no te conviene";
+      p = titulo ? "Necesitas el título, pero hoy no puedes con el tiempo o el costo. Termina tu maestría, avanza la ruta autodidacta y vuelve a evaluarlo en 2027, preguntando por convalidación para titulados." : "Sin tiempo ni presupuesto para 3 a 5 años, lo mejor es seguir tu ruta autodidacta y sumar certificaciones puntuales cuando las necesites.";
+    } else if (titulo) {
+      h = "Te conviene la UPN";
+      p = "Es la única de las dos que da el título de Ingeniero de Software, y además es más fuerte en datos y tiene un curso de UX. Antes de matricularte, confirma que puedes estudiarla a distancia desde Arequipa y pregunta por convalidación para acortarla.";
+    } else if (planilla || sola) {
+      h = "Te conviene Cibertec";
+      p = planilla ? "Para entrar a planilla te sirve el papel, y Cibertec te lo da en 3 años y 4 meses, 100% virtual y compatible con tu trabajo. Su bachiller es equivalente al universitario." : "Si te cuesta avanzar solo, la estructura de una carrera ayuda, y Cibertec es la más rápida y virtual. Pero prueba antes unos meses de la ruta con un horario fijo: a veces basta con eso.";
+      if (planilla && sola) p = "Para entrar a planilla te sirve el papel, y si además te cuesta avanzar solo, la estructura ayuda. Cibertec te da las dos cosas en 3 años y 4 meses, 100% virtual y compatible con tu trabajo.";
+    } else {
+      h = "No te conviene: sigue tu ruta";
+      p = "No necesitas el título, no buscas planilla y puedes estudiar solo. Una carrera completa te costaría años para aprender lo que ya tienes en esta página. Invierte ese tiempo en tu portafolio, en análisis de datos y en dos o tres certificaciones.";
+    }
+    out.classList.add("done");
+    out.innerHTML = `<h5>${esc(h)}</h5><p>${esc(p)}</p>`;
+  });
+})();
 
 /* ================= ESPECIALIDADES ================= */
 const CAREAS = {py:"Python", cloud:"Nube", ops:"DevOps y Kubernetes", sec:"Seguridad", data:"Datos e IA", qa:"Calidad y gestión"};
