@@ -227,6 +227,12 @@ h4{font-size:16.5px;font-weight:600}
 .cmp .thead,.cmp .row{grid-template-columns:minmax(0,.55fr) minmax(0,1fr) minmax(0,1fr)}
 .cmp .row{padding-block:12px;font-size:14px}
 .cmp .cell{display:block}
+.cmp3 .thead,.cmp3 .row{grid-template-columns:minmax(0,.5fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}
+.costs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.cost{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.cost b{font-family:var(--f-display);font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+.cost.alt{border-style:dashed;border-color:var(--covered)}
+.cost.alt b{color:var(--covered)}
 .win{font-weight:600;color:var(--covered)}
 .quiz{display:flex;flex-direction:column;gap:10px}
 .quiz fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
@@ -247,7 +253,9 @@ h4{font-size:16.5px;font-weight:600}
   .cmp .row{grid-template-columns:1fr;gap:4px}
   .cmp .row .cell:not(:first-child){padding-left:0}
   .cmp .row .cell:nth-child(2)::before{content:"UPN";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
-  .cmp .row .cell:nth-child(3)::before{content:"Cibertec";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
+  .cmp3 .row .cell:nth-child(4)::before{content:"Cibertec";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
+  .cmp3 .row .cell:nth-child(4){padding-left:0}
+  .cmp .row .cell:nth-child(3)::before{content:"UTP";font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em;display:block;margin-bottom:2px}
   .cmap .row{grid-template-columns:1fr auto;gap:6px 12px}
   .cmap .row .cell:nth-child(3){grid-column:1/-1;padding-left:0}
   .cmap .row .cell:nth-child(4){grid-column:1/-1;padding-left:0}
@@ -319,38 +327,50 @@ h4{font-size:16.5px;font-weight:600}
       </section>
 
       <section class="panel focus" aria-labelledby="uni-h" id="carrera">
-        <div class="eyebrow">Brochures de UPN y Cibertec · noviembre de 2026</div>
-        <h3 class="h-sec" id="uni-h">¿Estudiar la carrera formal? UPN vs Cibertec</h3>
-        <p class="note">Las dos ofrecen Ingeniería de Software en 10 ciclos. En lo técnico enseñan casi lo mismo; lo que las separa es el <strong>tipo de título</strong>, el <strong>tiempo</strong> y la <strong>modalidad</strong>. Y en tu caso, la pregunta de fondo no es cuál elegir, sino si te conviene volver a hacer un pregrado.</p>
+        <div class="eyebrow">Mallas, brochures y precios de los asesores · noviembre de 2026</div>
+        <h3 class="h-sec" id="uni-h">¿Estudiar la carrera formal? UPN vs UTP vs Cibertec</h3>
+        <p class="note">Las tres ofrecen Ingeniería de Software en 10 ciclos y enseñan casi lo mismo en lo básico. Lo que las separa es el <strong>título</strong>, el <strong>costo</strong>, el <strong>tiempo</strong> y qué tan <strong>actual</strong> es la malla. En tu caso, la primera pregunta sigue siendo si te conviene volver a hacer un pregrado.</p>
 
         <div class="verdict-box">
           <span class="eyebrow">Mi veredicto para ti</span>
-          <p class="vb-main">Hoy <strong>no te conviene</strong> hacer otra carrera completa, salvo que necesites el título de ingeniero o quieras entrar a planilla en una empresa grande.</p>
-          <p class="note">Ya tienes una carrera (Publicidad) y una maestría en Gerencia de TI que terminas en marzo de 2027. Otros 3 a 5 años de pregrado cuestan mucho tiempo y dinero para aprender lo mismo que tu ruta autodidacta, que es gratis o casi. Para freelance o para el perfil híbrido de desarrollo y datos, rinden más tu portafolio, unas pocas certificaciones y tu experiencia con clientes que un segundo bachiller.</p>
+          <p class="vb-main">Si necesitas el título de Ingeniero, <strong>la UPN es la mejor de las tres</strong>. Si no lo necesitas, <strong>ninguna te conviene</strong> hoy.</p>
+          <p class="note"><b>UPN:</b> título de Ingeniero, la malla más actual (nube, DevOps, machine learning, microservicios, UX), 100% virtual, exámenes que puedes dar al día siguiente, y más barata que la UTP. <b>UTP:</b> también da el título de Ingeniero e incluye inglés, pero es la más cara y su malla es más tradicional; solo gana si te dan un descuento grande por ser alumno de su maestría. <b>Cibertec:</b> la más barata y rápida, pero su título no dice "ingeniero". Y si no necesitas el título, tu ruta autodidacta y un buen portafolio te llevan a lo mismo por una fracción del costo.</p>
         </div>
 
-        <h4>En qué se parecen</h4>
+        <h4>Costos aproximados de la carrera completa</h4>
+        <div class="costs">
+          <div class="cost"><span class="eyebrow">UPN · 5 años</span><b>~S/ 26,500</b><span class="note">S/ 460 al mes. Primer ciclo con descuento S/ 2,358; luego unos S/ 2,680 por ciclo (matrícula S/ 380 + 5 cuotas).</span></div>
+          <div class="cost"><span class="eyebrow">UTP · 5 años</span><b>~S/ 28,000–35,000</b><span class="note">Unos S/ 700 al mes, según el asesor. El total depende de si son 4 o 5 cuotas por ciclo y de la matrícula: confírmalo.</span></div>
+          <div class="cost"><span class="eyebrow">Cibertec · 3 años y 4 meses</span><b>~S/ 18,000</b><span class="note">S/ 399 por cuota. Primer ciclo con descuento S/ 1,277; luego S/ 1,841 por ciclo (matrícula S/ 245 + 4 cuotas). Asumo que la cotización de S/ 399 es de Cibertec.</span></div>
+          <div class="cost alt"><span class="eyebrow">Tu ruta autodidacta</span><b>~S/ 1,200</b><span class="note">Las tres certificaciones clave (PCEP, AWS Cloud Practitioner y Solutions Architect) más algún mes de DevTalles o DataCamp. No da título.</span></div>
+        </div>
+        <p class="note">Precios de hoy: casi siempre suben cada año, y los descuentos son solo del primer ciclo. Cada ciclo que te convaliden por tu bachiller o tu maestría te ahorra entre S/ 1,800 y S/ 3,500.</p>
+
+        <h4>Comparación punto por punto</h4>
+        <div class="table cmp cmp3">
+          <div class="thead"><span>Aspecto</span><span>UPN</span><span>UTP</span><span>Cibertec</span></div>
+          <div class="row"><div class="cell"><b>Duración</b></div><div class="cell">5 años · 10 ciclos</div><div class="cell">5 años · 10 ciclos</div><div class="cell"><span class="win">3 años y 4 meses</span></div></div>
+          <div class="row"><div class="cell"><b>Título</b></div><div class="cell"><span class="win">Ingeniero de Software</span> (universitario)</div><div class="cell"><span class="win">Ingeniero de Software</span> (universitario)</div><div class="cell">Profesional en Ingeniería de Software; bachiller equivalente al universitario, pero no dice "ingeniero".</div></div>
+          <div class="row"><div class="cell"><b>Modalidad</b></div><div class="cell"><span class="win">100% virtual</span>, lunes a viernes de 7:30 a 10:40 p. m.; según el asesor, puedes dar un examen al día siguiente.</div><div class="cell">La malla dice que los cursos virtuales pueden ser por Zoom en vivo. Tiene sede en Arequipa. Confirma si hay versión 100% virtual y qué tan flexible es.</div><div class="cell"><span class="win">100% virtual</span>, horarios flexibles.</div></div>
+          <div class="row"><div class="cell"><b>Costo por mes</b></div><div class="cell">S/ 460</div><div class="cell">~S/ 700</div><div class="cell"><span class="win">S/ 399</span></div></div>
+          <div class="row"><div class="cell"><b>Inglés</b></div><div class="cell">No aparece en la malla.</div><div class="cell"><span class="win">Incluido:</span> Inglés 1 a 4 y English Discoveries para preparar el examen TOEIC. Es su mayor ventaja para ti.</div><div class="cell">No aparece en la malla.</div></div>
+          <div class="row"><div class="cell"><b>Ciencias y cursos generales</b></div><div class="cell">Física 1 y 2, cálculo diferencial e integral, matemáticas avanzadas, ciudadanía, cambio climático, arte y cultura.</div><div class="cell">Mecánica clásica y electromagnetismo con laboratorios, cálculo 1 y 2, ciudadanía, ética.</div><div class="cell"><span class="win">Pocos:</span> casi todo es técnico.</div></div>
+          <div class="row"><div class="cell"><b>Nube, DevOps y arquitectura</b></div><div class="cell"><span class="win">Fuerte:</span> diseño y arquitectura, DevOps, infraestructura y seguridad en la nube, microservicios, rendimiento.</div><div class="cell">Básico: servicios cloud recién en el ciclo 10, diseño de patrones. No tiene DevOps ni microservicios.</div><div class="cell"><span class="win">Fuerte:</span> cloud computing, cloud native, DevOps y observabilidad, arquitectura y sistemas distribuidos.</div></div>
+          <div class="row"><div class="cell"><b>IA y datos</b></div><div class="cell"><span class="win">Fuerte en datos:</span> análisis de datos, inteligencia de negocios, dos estadísticas, machine learning.</div><div class="cell">Inteligencia artificial, inteligencia de negocios y dos estadísticas.</div><div class="cell"><span class="win">Fuerte en IA:</span> tres cursos de IA (incluido llevar modelos a producción), machine learning.</div></div>
+          <div class="row"><div class="cell"><b>UX y producto</b></div><div class="cell"><span class="win">Tiene:</span> construcción de software y experiencia UX.</div><div class="cell"><span class="win">Tiene:</span> interacción humano-máquina y diseño de productos y servicios.</div><div class="cell">No tiene un curso de UX.</div></div>
+          <div class="row"><div class="cell"><b>Web y móvil</b></div><div class="cell">Programación web, full stack, desarrollo basado en plataformas.</div><div class="cell">JavaScript y CSS avanzados, marcos web, full stack, apps móviles.</div><div class="cell">Web, servicios web y móviles (dos ciclos cada uno), con Java, Spring y Angular.</div></div>
+          <div class="row"><div class="cell"><b>Extras</b></div><div class="cell">Opción de certificaciones de AWS, Cisco y Google; credenciales de Coursera y Oracle.</div><div class="cell">Programas de empleabilidad; 360 horas de prácticas; posible descuento por ser alumno de su maestría.</div><div class="cell">5 certificaciones modulares y 10 de empleabilidad, sin costo adicional.</div></div>
+        </div>
+        <p class="note">Frases como "N.° 1 en preferencia", "únicos alineados a ACM/IEEE" o "9 de cada 10 egresados trabajan" son marketing de cada institución: no las uses para comparar.</p>
+
+        <h4>Cuál gana en cada cosa</h4>
         <ul class="tips">
-          <li>Las dos duran <b>10 ciclos</b> y dan <b>bachiller reconocido por SUNEDU</b>, con el que puedes hacer una maestría.</li>
-          <li>Cubren lo mismo en lo técnico: programación, estructuras de datos, bases de datos, web full stack, pruebas, gestión de proyectos, nube, DevOps, machine learning, IA, seguridad, arquitectura y microservicios o sistemas distribuidos.</li>
-          <li>Las dos terminan con investigación y tesis, e incluyen certificaciones durante la carrera.</li>
+          <li><b>Título de Ingeniero al menor costo:</b> UPN.</li>
+          <li><b>Malla más actual</b> (nube, DevOps, IA): empate entre UPN y Cibertec; la UTP queda atrás.</li>
+          <li><b>Inglés:</b> UTP, la única que lo incluye. Con tu nivel A2, vale mucho, pero también puedes estudiarlo aparte por mucho menos.</li>
+          <li><b>Más barata y más rápida:</b> Cibertec.</li>
+          <li><b>Flexibilidad confirmada:</b> UPN y Cibertec.</li>
         </ul>
-
-        <h4>En qué se diferencian</h4>
-        <div class="table cmp">
-          <div class="thead"><span>Aspecto</span><span>UPN</span><span>Cibertec</span></div>
-          <div class="row"><div class="cell"><b>Duración</b></div><div class="cell">5 años · 200 créditos</div><div class="cell"><span class="win">3 años y 4 meses</span></div></div>
-          <div class="row"><div class="cell"><b>Modalidad</b></div><div class="cell">Por campus; menciona cursos virtuales "según disponibilidad". Sus sedes no están en Arequipa: confirma si puedes estudiarla a distancia.</div><div class="cell"><span class="win">100% virtual</span>, con horarios flexibles para gente que trabaja.</div></div>
-          <div class="row"><div class="cell"><b>Título</b></div><div class="cell"><span class="win">Ingeniero de Software</span> (universitario). Es el que normalmente piden para colegiarte en el Colegio de Ingenieros.</div><div class="cell">Profesional en Ingeniería de Software, de escuela de educación superior. El bachiller es equivalente al universitario, pero el título no dice "ingeniero".</div></div>
-          <div class="row"><div class="cell"><b>Cursos generales</b></div><div class="cell">Muchos: física 1 y 2, cálculo diferencial e integral, matemáticas avanzadas, ciudadanía, cambio climático, arte y cultura, ética.</div><div class="cell"><span class="win">Pocos</span>: casi todo es técnico desde el primer ciclo.</div></div>
-          <div class="row"><div class="cell"><b>Datos</b></div><div class="cell"><span class="win">Más fuerte</span>: probabilidad, análisis de datos, inteligencia de negocios, dos estadísticas y credencial en IT Business Intelligence.</div><div class="cell">Analítica de datos para nuevos negocios y procesamiento e integración de datos.</div></div>
-          <div class="row"><div class="cell"><b>IA y nube</b></div><div class="cell">Machine learning, IA para investigación, DevOps e infraestructura y seguridad en la nube.</div><div class="cell"><span class="win">Más fuerte</span>: tres cursos de IA (incluido llevar modelos a producción), cloud native, DevOps y observabilidad.</div></div>
-          <div class="row"><div class="cell"><b>UX</b></div><div class="cell"><span class="win">Tiene</span> "Construcción de software y experiencia UX".</div><div class="cell">No tiene un curso de UX.</div></div>
-          <div class="row"><div class="cell"><b>Herramientas</b></div><div class="cell">El brochure no las nombra.</div><div class="cell">Java con Spring, Angular, SQL Server, MongoDB, Git y Docker.</div></div>
-          <div class="row"><div class="cell"><b>Certificaciones</b></div><div class="cell">Opción de hasta tres con AWS, Cisco y Google; credenciales de Coursera y Oracle.</div><div class="cell">5 modulares y 10 de empleabilidad, sin costo adicional.</div></div>
-          <div class="row"><div class="cell"><b>Precio</b></div><div class="cell">No aparece en el brochure.</div><div class="cell">No aparece en el brochure.</div></div>
-        </div>
-        <p class="note">Frases como "únicos alineados a ACM/IEEE" o "9 de cada 10 egresados trabajan" son marketing de la propia universidad: no las tomes como comparación.</p>
 
         <h4>¿Te conviene? Responde y te digo</h4>
         <div class="quiz" id="uni-quiz">
@@ -365,13 +385,13 @@ h4{font-size:16.5px;font-weight:600}
           <div class="quiz-result" id="uni-result" aria-live="polite"><p class="note">Responde las cuatro preguntas para ver el resultado.</p></div>
         </div>
 
-        <h4>Si igual te interesa, pregúntales esto antes de matricularte</h4>
+        <h4>Pregúntales esto antes de matricularte</h4>
         <ol class="tips">
-          <li><b>Precio total de la carrera</b>, no solo la cuota por ciclo, y cuánto sube cada año.</li>
-          <li><b>Convalidación:</b> si por tener bachiller y maestría te reconocen cursos. Muchas tienen programas para titulados que acortan bastante la carrera.</li>
-          <li><b>Modalidad y horarios:</b> si es virtual de verdad o tiene clases en vivo a horas fijas.</li>
-          <li>En la UPN: <b>qué son "Essentials 1 y 2"</b>. Probablemente sean cursos de Cisco NetAcad, que puedes llevar gratis por tu cuenta.</li>
-          <li>En Cibertec: si el título <b>te permite colegiarte</b> como ingeniero o no.</li>
+          <li><b>A las tres:</b> precio total de la carrera, cuánto sube cada año y cuántos cursos te convalidan por tu bachiller y tu maestría.</li>
+          <li><b>A las tres:</b> si la carrera está acreditada por <b>ICACIT</b>, la acreditadora de carreras de ingeniería. Las carreras nuevas casi nunca lo están todavía.</li>
+          <li><b>UPN:</b> si las clases quedan grabadas, si la asistencia cuenta para la nota y qué son "Essentials 1 y 2" (probablemente cursos de Cisco NetAcad, gratis por tu cuenta).</li>
+          <li><b>UTP:</b> cuántas cuotas de S/ 700 hay por ciclo y cuánto es la matrícula; si hay versión 100% virtual con flexibilidad real; y <b>qué descuento te dan por ser alumno de su maestría</b>. Con un 25 a 30% de descuento, quedaría a la par de la UPN en precio.</li>
+          <li><b>Cibertec:</b> confirma que la cotización de S/ 399 por cuota es suya, y si su título te permite colegiarte como ingeniero.</li>
         </ol>
       </section>
 
@@ -1434,7 +1454,7 @@ const puStats = () => reviewStats("pu-cycles", puDone, "pu", "tp-publicidad");
       p = titulo ? "Necesitas el título, pero hoy no puedes con el tiempo o el costo. Termina tu maestría, avanza la ruta autodidacta y vuelve a evaluarlo en 2027, preguntando por convalidación para titulados." : "Sin tiempo ni presupuesto para 3 a 5 años, lo mejor es seguir tu ruta autodidacta y sumar certificaciones puntuales cuando las necesites.";
     } else if (titulo) {
       h = "Te conviene la UPN";
-      p = "Es la única de las dos que da el título de Ingeniero de Software, y además es más fuerte en datos y tiene un curso de UX. Antes de matricularte, confirma que puedes estudiarla a distancia desde Arequipa y pregunta por convalidación para acortarla.";
+      p = "Da el título de Ingeniero de Software, tiene la malla más actual de las tres, es 100% virtual y flexible, y cuesta menos que la UTP. La UTP solo le gana si te dan un descuento grande por ser alumno de su maestría o si el inglés incluido es decisivo para ti. En cualquiera de las dos, pregunta por convalidación para acortarla.";
     } else if (planilla || sola) {
       h = "Te conviene Cibertec";
       p = planilla ? "Para entrar a planilla te sirve el papel, y Cibertec te lo da en 3 años y 4 meses, 100% virtual y compatible con tu trabajo. Su bachiller es equivalente al universitario." : "Si te cuesta avanzar solo, la estructura de una carrera ayuda, y Cibertec es la más rápida y virtual. Pero prueba antes unos meses de la ruta con un horario fijo: a veces basta con eso.";
